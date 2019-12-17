@@ -1,6 +1,8 @@
 # 2019-Programs
 This is the repository that team member create the robot programs for RCJ 2019.
 
+アップロードするファイルには、必ずバージョンを付けること
+
 ブランチの命名規則　：　変更したフォルダ名　＋　バージョン
 
 このリポジトリにあるファイルを直接編集してもいいが、その場合必ずmasterブランチ以外のブランチを切ること
