@@ -1,4 +1,4 @@
-//version 3.4
+//version 3.5
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -122,6 +122,8 @@ void loop() {
       Serial.println(digitalRead(30));
     #endif
   #endif
+
+  angle_orange = get_angle_orange();
   
   if(angle_orange < -PI | PI < angle_orange){
     ball_caught();
@@ -147,7 +149,7 @@ void loop() {
   }
  
   ball_caught();
-
+  
   #ifdef program_for_game
     
   #endif
@@ -162,8 +164,6 @@ void ball_caught(){
       dist_yellow = get_dist_yellow();
       angle_blue = get_angle_blue();
       dist_blue = get_dist_blue();
-
-      
     }
   }
 }
