@@ -1,14 +1,5 @@
 //version 3.3
 
-///program for main game///
-//#define program_for_game //comment out this line when it is not real game
-
-///set debag options///
-#define DEBAG
-#define DEBAG_Gyro_sensor //use this when debag gyro sensor in this program
-#define DEBAG_color_angle //use this when debag pixy in this program
-#define DEBAG_White_line  //use this when debag whit line sensor programm
-
 ///library files///
 #include <FlexiTimer2.h>
 #include <avr/io.h>
@@ -93,44 +84,13 @@ void setup() {
   ///esc setup///
   esc_setup();
 
-  ///wait for start///
-  #ifdef program_for_game
-    while(digitalRead(start_button)==1);
-  #endif
 }
 
 void loop() {
 
-  #ifdef DEBAG
-    #ifdef DEBAG_Gyro_sensor
-      robot_angle = get_robot_angle();
-    #endif 
-
-    #ifdef DEBAG_color_angle 
-      angle_orange = get_angle_orange();
-    #endif
-  
-    #ifdef DEBAG_Gyro_sensor
-      Serial.println(robot_angle);
-    #endif 
-
-    #ifdef DEBAG_color_angle 
-      Serial.println(angle_orange);
-    #endif
-
-    #ifdef DEBAG_White_line
-      Serial.println(digitalRead(30));
-    #endif
-  #endif
-  
-  #ifdef program_for_game
-    
-  #endif
 }
 
 ///ball caught///
 void ball_caught(){
-  if(digitalRead(ball_sensor)==1){
-    
-  }
+  
 }
