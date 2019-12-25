@@ -90,7 +90,4 @@ void loop() {
 
 }
 
-///ball caught///
-void ball_caught(){
-  
-}
+
