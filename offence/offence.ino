@@ -7,7 +7,7 @@
 #define DEBAG
 #define DEBAG_Gyro_sensor //use this when debag gyro sensor in this program
 #define DEBAG_color_angle //use this when debag pixy in this program
-//#define DEBAG_White_line  //use this when debag whit line sensor programm
+#define DEBAG_White_line  //use this when debag whit line sensor programm
 
 ///library files///
 #include <FlexiTimer2.h>
