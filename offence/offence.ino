@@ -1,4 +1,4 @@
-//version 3.5
+//version 3.6
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -20,11 +20,14 @@
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
 
+///goal color///
+bool goal = true; //true : yellow , false : blue
+
 ///ball status///
 bool ball; //ball true or false
 
 ///angles///
-//in this program,all angle use RAD//
+//in this program,all angle defined as RAD//
 float angle_orange;
 float angle_blue;
 float angle_yellow;
@@ -111,11 +114,11 @@ void loop() {
     #endif
   
     #ifdef DEBAG_Gyro_sensor
-      Serial.println(robot_angle);
+      Serial.println(robot_angle*180/PI);
     #endif 
 
     #ifdef DEBAG_color_angle 
-      Serial.println(angle_orange);
+      Serial.println(angle_orange*180/PI);
     #endif
 
     #ifdef DEBAG_White_line
@@ -149,6 +152,8 @@ void loop() {
   }
  
   ball_caught();
+
+  VNH_pwm(angle,100);
   
   #ifdef program_for_game
     
