@@ -1,4 +1,4 @@
-//version 0.0
+//version 0.1
 
 #ifndef Motor_drive_VNH_h
 #define Motor_drive_VNH_h
@@ -26,5 +26,7 @@ void VNH3 (const int pwm_value);
 void VNH4 (const int pwm_value);
 
 void VNH_pwm (float angle1 , int percentage);
+
+void VNH_rotate (int speed);
 
 #endif

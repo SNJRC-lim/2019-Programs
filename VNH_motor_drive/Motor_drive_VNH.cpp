@@ -1,4 +1,4 @@
-//version 0.0
+//version 0.1
 
 #include "Motor_drive_VNH.h"
 #include "Arduino.h"
@@ -109,4 +109,12 @@ void VNH4 (const int pwm_value) {
     digitalWrite (B_4, 0);
     analogWrite  (PWM_4, 0);
   }
+}
+
+void VNH_rotate(int speed){
+	int pwm_value  = 255*speed/100;
+	VNH1(pwm_value);
+	VNH2(pwm_value);
+	VNH3(pwm_value);
+	VNH4(pwm_value);
 }

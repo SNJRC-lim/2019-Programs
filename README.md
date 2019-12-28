@@ -11,3 +11,4 @@ This is the repository that team member create the robot programs for RCJ 2019.
  - 2019/11/14 minor change "offence.ino" (up to date ver 1.0)  and new libraly for Arduinno "pixy2_get_color_info" was added.
  - 2019/11/16 add new library "esc_control.h" and update main programs.
  - 2019/12/14 almost completed making main programs framework.
+ - 2019/12/28 version up offence.ino : write about ball catch function. And update VNH_motor_driver libraly.
