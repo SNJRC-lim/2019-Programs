@@ -1,4 +1,4 @@
-//version 4.0
+//version 4.1
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -95,7 +95,7 @@ void setup() {
   ///esc setup///
   esc_setup();
 
-  ///wait for start///
+///wait for start///
 #ifdef program_for_game
   while (digitalRead(start_button) == 1);
 #endif
@@ -137,10 +137,10 @@ void loop() {
       angle = -3/4 * PI;
     }
     if (0 < angle_orange <= -1/4 * PI | -3/4 * PI <= angle_orange < -PI) {
-      angle = -1 / 2 * PI;
+      angle = -1/2 * PI;
     }
     if (-1/2 * PI <= angle_orange < -3/4 * PI) {
-      angle = -1 / 6 * PI;
+      angle = -1/6 * PI;
     }
     if (-1/4 * PI <= angle_orange < -1/2 * PI) {
       angle = -5/6 * PI;
@@ -164,7 +164,7 @@ void ball_catch() {
           robot_angle = get_robot_angle();
           angle_yellow = get_angle_yellow();
         }
-        while (2 * PI / 3 <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 2 * PI / 3 <= robot_angle < PI | -PI <= robot_angle < -PI / 2) {
+        while (2/3 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 2/3 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2) {
           VNH_rotate(50);
           robot_angle = get_robot_angle();
           angle_yellow = get_angle_yellow();
@@ -193,7 +193,7 @@ void ball_catch() {
           robot_angle = get_robot_angle();
           angle_blue = get_angle_blue();
         }
-        while (2 * PI / 3 <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | 2 * PI / 3 <= robot_angle < PI | -PI <= robot_angle < -PI / 2) {
+        while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | 2/3 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2) {
           VNH_rotate(50);
           robot_angle = get_robot_angle();
           angle_blue = get_angle_blue();
