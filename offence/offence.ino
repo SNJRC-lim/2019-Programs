@@ -1,4 +1,4 @@
-//version 4.1
+//version 4.2
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -102,7 +102,6 @@ void setup() {
 }
 
 void loop() {
-
 #ifdef DEBAG
   #ifdef DEBAG_Gyro_sensor
     robot_angle = get_robot_angle();
@@ -123,6 +122,126 @@ void loop() {
 
   angle_orange = get_angle_orange();
 
+  robot_go_angle();
+
+  if (-PI <= angle_orange <= PI) {
+    VNH_pwm(angle, 100);
+  }
+
+  ball_catch();
+   
+  ///Angle adjustment once in 10 routines///
+  int count = count + 1;
+  if(count = 10){
+    count = 0;
+    if (goal = true) {
+      robot_angle = get_robot_angle();
+      angle_yellow = get_angle_yellow();
+      while (0 <= angle_yellow < PI / 4 | -PI / 2 <= angle_yellow < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+        VNH_rotate(-50);
+        robot_angle = get_robot_angle();
+        angle_yellow = get_angle_yellow();
+      }
+      while (3/4 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+        VNH_rotate(50);
+        robot_angle = get_robot_angle();
+        angle_yellow = get_angle_yellow();
+      }
+    }
+    if (goal = false) {
+      robot_angle = get_robot_angle();
+      angle_blue = get_angle_blue();
+      while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+        VNH_rotate(-50);
+        robot_angle = get_robot_angle();
+        angle_blue = get_angle_blue();
+      }
+      while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+        VNH_rotate(50);
+        robot_angle = get_robot_angle();
+        angle_blue = get_angle_blue();
+      }
+    }
+  }
+}
+
+///ball caught///
+void ball_catch() {
+  if (digitalRead(ball_sensor) == 1) {
+    if (digitalRead(ball_sensor) == 1) {
+      if (goal = true) {
+        angle_yellow = get_angle_yellow();
+        while (0 <= angle_yellow < PI / 3 | -PI / 2 <= angle_yellow < 0) {
+          VNH_pwm(0,50);
+          angle_yellow = get_angle_yellow();
+        }
+        while (2/3 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2) {
+          VNH_pwm(PI,50);
+          angle_yellow = get_angle_yellow();
+        }
+
+        dist_yellow = get_dist_yellow();
+
+        if (dist_yellow <= 20) {
+          while (0 <= angle_yellow < 4/9 * PI | -PI / 2 <= angle_yellow < 0) {
+            VNH_pwm(0,40);
+            angle_yellow = get_angle_yellow();
+          }
+
+          while (5/9 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 ) {
+            VNH_pwm(PI,40);
+            angle_yellow = get_angle_yellow();
+          }
+          
+          angle_yellow = get_angle_yellow();
+
+          if (4/9 * PI <= angle_yellow <= 5/9 * PI) {
+            digitalWrite(sloenoid_FET, HIGH);
+            delay(100);
+            digitalWrite(sloenoid_FET, LOW);
+          }
+        } 
+      }
+      
+      if (goal = false) {
+        angle_blue = get_angle_blue();
+        while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0) {
+          VNH_pwm(0,50);
+          angle_blue = get_angle_blue();
+        }
+        while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2) {
+          VNH_pwm(PI,50);
+          angle_blue = get_angle_blue();
+        }
+
+        dist_blue = get_dist_blue();
+
+        if (dist_blue <= 20) {
+          while (0 <= angle_blue < 4/9 * PI | -PI / 2 <= angle_blue < 0) {
+            VNH_pwm(0,40);
+            angle_blue = get_angle_blue();
+          }
+
+          while (5/9 * PI  <= angle_blue < PI | -PI <= angle_blue < -PI / 2 ) {
+            VNH_pwm(PI,40);
+            angle_blue = get_angle_blue();
+          }
+
+          angle_blue = get_angle_blue();
+
+          if (4/9 * PI <= angle_blue <= 5/9 * PI) {
+            digitalWrite(sloenoid_FET, HIGH);
+            delay(100);
+            digitalWrite(sloenoid_FET, LOW);
+          }
+        }
+      }
+    }
+  }
+}
+
+///set where the robot have to go///
+void robot_go_angle(){
   if (angle_orange < -PI | PI < angle_orange) {
     ball_catch();
   }
@@ -145,82 +264,5 @@ void loop() {
     if (-1/4 * PI <= angle_orange < -1/2 * PI) {
       angle = -5/6 * PI;
     }
-    
-    VNH_pwm(angle, 100);
-  }
-
-  ball_catch();
-}
-
-///ball caught///
-void ball_catch() {
-  if (digitalRead(ball_sensor) == 1) {
-    if (digitalRead(ball_sensor) == 1) {
-      if (goal = true) {
-        robot_angle = get_robot_angle();
-        angle_yellow = get_angle_yellow();
-        while (0 <= angle_yellow < PI / 3 | -PI / 2 <= angle_yellow < 0 | 0 <= robot_angle < PI / 3 | -PI / 2 <= robot_angle < 0) {
-          VNH_rotate(-50);
-          robot_angle = get_robot_angle();
-          angle_yellow = get_angle_yellow();
-        }
-        while (2/3 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 2/3 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2) {
-          VNH_rotate(50);
-          robot_angle = get_robot_angle();
-          angle_yellow = get_angle_yellow();
-        }
-
-        dist_yellow = get_dist_yellow();
-
-        if (dist_yellow <= 20) {
-          while (0 <= angle_yellow < 4/9 * PI | -PI / 2 <= angle_yellow < 0) {
-            VNH_rotate(-40);
-            angle_yellow = get_angle_yellow();
-          }
-
-          while (5/9 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 ) {
-            VNH_rotate(40);
-            angle_yellow = get_angle_yellow();
-          }
-        }
-      }
-
-      if (goal = false) {
-        robot_angle = get_robot_angle();
-        angle_blue = get_angle_blue();
-        while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0 | 0 <= robot_angle < PI / 3 | -PI / 2 <= robot_angle < 0) {
-          VNH_rotate(-50);
-          robot_angle = get_robot_angle();
-          angle_blue = get_angle_blue();
-        }
-        while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | 2/3 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2) {
-          VNH_rotate(50);
-          robot_angle = get_robot_angle();
-          angle_blue = get_angle_blue();
-        }
-
-        dist_blue = get_dist_blue();
-
-        if (dist_blue <= 20) {
-          while (0 <= angle_blue < 4/9 * PI | -PI / 2 <= angle_blue < 0) {
-            VNH_rotate(-40);
-            angle_blue = get_angle_blue();
-          }
-
-          while (5/9 * PI  <= angle_blue < PI | -PI <= angle_blue < -PI / 2 ) {
-            VNH_rotate(40);
-            angle_blue = get_angle_blue();
-          }
-
-          angle_blue = get_angle_blue();
-
-          if (4/9 * PI <= angle_blue <= 5/9 * PI) {
-            digitalWrite(sloenoid_FET, HIGH);
-            delay(100);
-            digitalWrite(sloenoid_FET, LOW);
-          }
-        }
-      }
-    }
-  }
+  }  
 }
