@@ -1,4 +1,4 @@
-//version 0.1
+//version 0.2
 
 #include "Motor_drive_VNH.h"
 #include "Arduino.h"
@@ -35,7 +35,7 @@ void VNH_pwm(float angle1 , int percentage){
   VNH4(V4);
 }
 
-void VNH1 (const int pwm_value) {
+void VNH1 (int pwm_value) {
 
   if (pwm_value > 0) {
     digitalWrite (A_1, 1);
@@ -54,7 +54,7 @@ void VNH1 (const int pwm_value) {
   }
 }
 
-void VNH2 (const int pwm_value) {
+void VNH2 (int pwm_value) {
 
   if (pwm_value > 0) {
     digitalWrite (A_2, 1);
@@ -73,7 +73,7 @@ void VNH2 (const int pwm_value) {
   }
 }
 
-void VNH3 (const int pwm_value) {
+void VNH3 (int pwm_value) {
 
   if (pwm_value > 0) {
     digitalWrite (A_3, 1);
@@ -92,7 +92,7 @@ void VNH3 (const int pwm_value) {
   }
 }
 
-void VNH4 (const int pwm_value) {
+void VNH4 (int pwm_value) {
 
   if (pwm_value > 0) {
     digitalWrite (A_4, 1);
