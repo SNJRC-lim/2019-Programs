@@ -1,4 +1,4 @@
-//version 4.3
+//version 4.4
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -120,9 +120,14 @@ void loop() {
   #endif
 #endif
 
-  angle_orange = get_angle_orange();
+  angle_orange = get_angle_orange(); //get orange ball angle
 
-  robot_go_angle();
+  robot_go_angle(); //set whrer the robot go to
+
+  ///if robot lost ball position,jump to ball_catch()///
+  if(angle_orange == get_angle_orange() == get_angle_orange()){
+    ball_catch();
+  }
 
   if (-PI <= angle_orange <= PI) {
     VNH_pwm(angle, 100);
@@ -168,7 +173,7 @@ void loop() {
 ///ball caught///
 void ball_catch() {
   if (digitalRead(ball_sensor) == 1) {
-    bool kick;
+    bool kicked;
     if (digitalRead(ball_sensor) == 1) {
       esc_speed_up();
       if (goal = true) {
@@ -202,7 +207,7 @@ void ball_catch() {
             digitalWrite(sloenoid_FET, HIGH);
             delay(100);
             digitalWrite(sloenoid_FET, LOW);
-            kick = true;
+            kicked = true;
           }
         } 
       }
@@ -238,15 +243,15 @@ void ball_catch() {
             digitalWrite(sloenoid_FET, HIGH);
             delay(100);
             digitalWrite(sloenoid_FET, LOW);
-            kick = true;
+            kicked = true;
           }
         }
       }
-      if(digitalRead(ball_sensor) == 0 && kick == false){
+      if(digitalRead(ball_sensor) == 0 && kicked == false){
         esc_speed_down();
       }
     }
-    kick = false;
+    kicked = false;
   }
 }
 
