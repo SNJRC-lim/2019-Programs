@@ -1,12 +1,12 @@
-//version 4.4
+//version 4.5
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
 
-///set debag options///
-#define DEBAG
-#define DEBAG_Gyro_sensor //use this when debag gyro sensor in this program
-#define DEBAG_color_angle //use this when debag pixy in this program
+///set debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -102,20 +102,20 @@ void setup() {
 }
 
 void loop() {
-#ifdef DEBAG
-  #ifdef DEBAG_Gyro_sensor
+#ifdef DEBUG
+  #ifdef DEBUG_Gyro_sensor
     robot_angle = get_robot_angle();
   #endif
 
-  #ifdef DEBAG_color_angle
+  #ifdef DEBUG_color_angle
     angle_orange = get_angle_orange();
   #endif
 
-  #ifdef DEBAG_Gyro_sensor
+  #ifdef DEBUG_Gyro_sensor
     Serial.println(robot_angle * 180/PI);
   #endif
 
-  #ifdef DEBAG_color_angle
+  #ifdef DEBUG_color_angle
     Serial.println(angle_orange * 180/PI);
   #endif
 #endif
