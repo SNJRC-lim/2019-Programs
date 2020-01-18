@@ -6,7 +6,7 @@
 ///set debug options///
 #define DEBUG
 #define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
-#define DEBUG_color_angle //use this when debUg pixy in this program
+#define DEBUG_color_angle //use this when debug pixy in this program
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -122,7 +122,7 @@ void loop() {
 
   angle_orange = get_angle_orange(); //get orange ball angle
 
-  robot_go_angle(); //set whrer the robot go to
+  robot_go_angle(); //set where the robot go to
 
   ///if robot lost ball position,jump to ball_catch()///
   if(angle_orange == get_angle_orange() == get_angle_orange()){
