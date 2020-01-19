@@ -1,4 +1,4 @@
-//version 3.3
+//version 3.4
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -19,9 +19,6 @@
 #include "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
-
-///ball status///
-bool ball; //ball true or false
 
 ///angles///
 //in this program,all angle use RAD//
@@ -117,9 +114,10 @@ void loop() {
   #endif
 #endif
 
-angle_orange = get_angle_orange();
-defence_goal();
-
+  angle_orange = get_angle_orange();
+  defence_goal();
+}  
+  
 void defence_goal(){
 #ifdef goal_color_blue;
   angle_blue  = get_angle_blue();
@@ -129,5 +127,5 @@ void defence_goal(){
   angle_yellow = get_angle_yellow();
 #endif
 
-robot_angle = get_robot_angle();
+  robot_angle = get_robot_angle();
 }
