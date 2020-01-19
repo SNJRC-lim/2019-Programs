@@ -4,6 +4,15 @@
 #include <FlexiTimer2.h>
 #include <avr/io.h>
 
+///game options///
+#define start_soccer_game //activate this line when begin soccer game
+#define goal_color_yellow //activate this line when our team goal color is yellow
+#define goal_color_blue   //activate this line when our team goal colort is blue
+///debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program
+
 ///my header files///
 #include "Motor_drive_VNH.h" //set motor driver pin && VNH_pwm,VNH1,VNH2,VNH3.VNH4 function
 #include "White_line.h"      //use it by flexitimer2 (timer interrapt)
@@ -84,8 +93,41 @@ void setup() {
   ///esc setup///
   esc_setup();
 
+  #ifdef start_soccer_game
+    while (digitalRead(start_button) == 1);
+  #endif
 }
 
 void loop() {
+#ifdef DEBUG
+  #ifdef DEBUG_Gyro_sensor
+    robot_angle = get_robot_angle();
+  #endif
 
+  #ifdef DEBUG_color_angle
+    angle_orange = get_angle_orange();
+  #endif
+
+  #ifdef DEBUG_Gyro_sensor
+    Serial.println(robot_angle * 180/PI);
+  #endif
+
+  #ifdef DEBUG_color_angle
+    Serial.println(angle_orange * 180/PI);
+  #endif
+#endif
+
+angle_orange = get_angle_orange();
+defence_goal();
+
+void defence_goal(){
+#ifdef goal_color_blue;
+  angle_blue  = get_angle_blue();
+#endif
+
+#ifdef goal_color_yellow;
+  angle_yellow = get_angle_yellow();
+#endif
+
+robot_angle = get_robot_angle();
 }
