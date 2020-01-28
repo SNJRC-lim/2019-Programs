@@ -71,19 +71,18 @@ void setup()
    ピンがGNDにスイッチされた時にアクティブになります(Active Low)
    入力モードは回路により最適なものを設定してください
    */
-  
+
   Wire.begin();
   Wire.setClock(400000);
 
   #ifdef __DEBUG__
     Serial.begin(115200);
   #endif
-    
+
     mySerial.begin(115200);
 
   imu_init();
-  imu_attachSensorOfset(93, -26, 13, 1565);
-  // Your offsets:  -2841 313 1565  93  -26 13
+  imu_attachSensorOfset(68, -42, 5, 1078);
   /*
    Calibrationプログラムによって得られたオフセットを適用します
    コメントアウトされた"Your offsets"の後の並びとimu_attachSensorOfset()の引数を参照して
