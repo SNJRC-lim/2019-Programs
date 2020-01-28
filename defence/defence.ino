@@ -1,4 +1,4 @@
-//version 3.3
+//version 3.2
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -88,4 +88,9 @@ void setup() {
 
 void loop() {
 
+}
+
+///ball caught///
+void ball_caught(){
+  
 }
