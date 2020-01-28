@@ -1,4 +1,4 @@
-//version 4.5
+//version 4.6
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -51,6 +51,8 @@ const int sloenoid_FET = 47;
 ///ball caught sensor///
 const int ball_sensor = 49;
 
+///esc speed level///
+int level; //use it for esc_control
 //////
 
 void setup() {
@@ -176,6 +178,7 @@ void ball_catch() {
     bool kicked;
     if (digitalRead(ball_sensor) == 1) {
       esc_speed_up();
+      FlexiTimer2::stop();
       if (goal = true) {
         angle_yellow = get_angle_yellow();
         while (0 <= angle_yellow < PI / 3 | -PI / 2 <= angle_yellow < 0) {
@@ -250,6 +253,7 @@ void ball_catch() {
       if(digitalRead(ball_sensor) == 0 && kicked == false){
         esc_speed_down();
       }
+      FlexiTimer2::start();
     }
     kicked = false;
   }
