@@ -50,9 +50,6 @@ const int sloenoid_FET = 47;
 
 ///ball caught sensor///
 const int ball_sensor = 49;
-
-///esc speed level///
-int level; //use it for esc_control
 //////
 
 void setup() {
