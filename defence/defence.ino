@@ -1,4 +1,4 @@
-//version 3.3
+//version 3.4
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -7,9 +7,14 @@
 ///my header files///
 #include "Motor_drive_VNH.h" //set motor driver pin && VNH_pwm,VNH1,VNH2,VNH3.VNH4 function
 #include "White_line.h"      //use it by flexitimer2 (timer interrapt)
-#include "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
+#include  "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
+
+#define start_program
+#define DEBUG
+#define DEBUG_color_angle
+#define DEBUG_Gyro_sensor
 
 ///ball status///
 bool ball; //ball true or false
@@ -84,8 +89,51 @@ void setup() {
   ///esc setup///
   esc_setup();
 
+  #ifdef start_program
+   while(digitalRead(start_button)==1);
+  #endif 
 }
 
 void loop() {
+#ifdef DEBUG
+  #ifdef DEBUG_Gyro_sensor
+    robot_angle = get_robot_angle();
+  #endif
 
+  #ifdef DEBUG_color_angle
+    angle_orange = get_angle_orange();
+  #endif
+
+  #ifdef DEBUG_Gyro_sensor
+    Serial.println(robot_angle * 180/PI);
+  #endif
+
+  #ifdef DEBUG_color_angle
+    Serial.println(angle_orange * 180/PI);
+  #endif
+#endif
+
+  if ( -PI <= angle_orange <= PI ){ 
+   angle_robot();
+  }
+
+  if (angle_orange==get_angle_orange()==get_angle_orange()){//not find to boll position
+   
+  }
+}
+
+void angle_robot(){
+  if (PI/4 <= angle_orange <= 3/4*PI){//move until angle_orange is 90angle 
+   while (analogRead(angle_orange)== PI/2 ){
+     if (angle_orange < PI/2){
+       VNH_pwm(0,100);
+     }
+     else if (PI/2 <= angle_orange){
+       VNH_pwm(-PI,100);
+     }
+   }
+  }
+  if(3/4*PI < angle_orange < PI | 0 < ){
+
+  }
 }
