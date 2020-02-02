@@ -1,4 +1,4 @@
-//version 3.4
+//version 3.5
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -118,13 +118,13 @@ void loop() {
   }
 
   if (angle_orange==get_angle_orange()==get_angle_orange()){//not find to boll position
-   
+  VNH_pwm(PI/2,0);//do not move
   }
 }
 
 void angle_robot(){
-  if (PI/4 <= angle_orange <= 3/4*PI){//move until angle_orange is 90angle 
-   while (analogRead(angle_orange)== PI/2 ){
+  //move until angle_orange is 90angle 
+   while (angle_orange　< PI/2 | PI/2 < angle_orange){
      if (angle_orange < PI/2){
        VNH_pwm(0,100);
      }
@@ -132,8 +132,5 @@ void angle_robot(){
        VNH_pwm(-PI,100);
      }
    }
-  }
-  if(3/4*PI < angle_orange < PI | 0 < ){
-
-  }
 }
+  
