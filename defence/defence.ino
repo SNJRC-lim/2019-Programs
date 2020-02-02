@@ -1,4 +1,4 @@
-//version 3.3
+//version 3.4
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -11,8 +11,13 @@
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
 
-///ball status///
-bool ball; //ball true or false
+///game options///
+///goal color///
+bool goal = true; //true : yellow , false : blue
+///debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program
 
 ///angles///
 //in this program,all angle use RAD//
@@ -84,8 +89,72 @@ void setup() {
   ///esc setup///
   esc_setup();
 
+  ///wait start///
+  #ifdef start_soccer_game
+    while (digitalRead(start_button) == 1);
+  #endif
 }
 
 void loop() {
+#ifdef DEBUG
+  #ifdef DEBUG_Gyro_sensor
+    robot_angle = get_robot_angle();
+  #endif
+
+  #ifdef DEBUG_color_angle
+    angle_orange = get_angle_orange();
+  #endif
+
+  #ifdef DEBUG_Gyro_sensor
+    Serial.println(robot_angle * 180/PI);
+  #endif
+
+  #ifdef DEBUG_color_angle
+    Serial.println(angle_orange * 180/PI);
+  #endif
+#endif
+
+  robot_angle == get_robot_angle()
+
+  angle_orange == get_angle_orange()
+  
+  ///Angle adjustment once in 10 routines///
+  int count = count + 1;
+  if(count = 10){
+    count = 0;
+    if (goal = true) {
+      robot_angle = get_robot_angle();
+      angle_yellow = get_angle_yellow();
+      while (0 <= angle_yellow < PI / 4 | -PI / 2 <= angle_yellow < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+        VNH_rotate(-50);
+        robot_angle = get_robot_angle();
+        angle_yellow = get_angle_yellow();
+      }
+      while (3/4 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+        VNH_rotate(50);
+        robot_angle = get_robot_angle();
+        angle_yellow = get_angle_yellow();
+      }
+    }
+    if (goal = false) {
+      robot_angle = get_robot_angle();
+      angle_blue = get_angle_blue();
+      while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+        VNH_rotate(-50);
+        robot_angle = get_robot_angle();
+        angle_blue = get_angle_blue();
+      }
+      while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+        VNH_rotate(50);
+        robot_angle = get_robot_angle();
+        angle_blue = get_angle_blue();
+      }
+    }
+  }
+}
+
+void find_ball(){
 
 }
+
+void 
