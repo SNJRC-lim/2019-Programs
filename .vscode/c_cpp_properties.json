@@ -4,12 +4,25 @@
             "name": "Win32",
             "includePath": [
                 "C:\\Program Files (x86)\\Arduino\\tools\\**",
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**"
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "/home/shoki/ダウンロード/arduino-1.8.11/hardware/arduino/avr/**",
+                "/home/shoki/ダウンロード/arduino-1.8.11/tools/**"
             ],
             "forcedInclude": [
-                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h",
+                "/home/shoki/ダウンロード/arduino-1.8.11/hardware/arduino/avr/cores/arduino/Arduino.h"
             ],
             "intelliSenseMode": "msvc-x64"
+        },
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/shoki/ダウンロード/arduino-1.8.11/tools/**",
+                "/home/shoki/ダウンロード/arduino-1.8.11/hardware/arduino/avr/**"
+            ],
+            "forcedInclude": [
+                "/home/shoki/ダウンロード/arduino-1.8.11/hardware/arduino/avr/cores/arduino/Arduino.h"
+            ]
         }
     ],
     "version": 4

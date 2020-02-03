@@ -18,6 +18,10 @@ bool goal = true; //true : yellow , false : blue
 #define DEBUG
 #define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
 #define DEBUG_color_angle //use this when debUg pixy in this program
+t by flexitimer2 (timer interrapt)
+#include "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
+#include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
+#include "communication.h" //set function get_robot_angle
 
 ///angles///
 //in this program,all angle use RAD//
@@ -65,7 +69,7 @@ void setup() {
   pinMode(start_button, INPUT_PULLUP); //start button = pin 48
 
   pinMode(sloenoid_FET, OUTPUT); //sloenoid_FET = pin 47
-
+robot_go_angle
   pinMode(ball_sensor, INPUT); //ball caught sensor = pin 49
 
   //////
@@ -84,7 +88,7 @@ void setup() {
   FlexiTimer2::start();
 
   ///pixy setup///
-  start_pixy2();
+  start_pixy2();robot_go_angle
 
   ///esc setup///
   esc_setup();
@@ -96,6 +100,7 @@ void setup() {
 }
 
 void loop() {
+///Debug options///
 #ifdef DEBUG
   #ifdef DEBUG_Gyro_sensor
     robot_angle = get_robot_angle();
@@ -114,11 +119,16 @@ void loop() {
   #endif
 #endif
 
-  robot_angle == get_robot_angle()
+  robot_angle == get_robot_angle()   //set robot_angle
 
-  angle_orange == get_angle_orange()
-  
-  ///Angle adjustment once in 10 routines///
+  angle_orange == get_angle_orange() //set angle_orange
+
+///division into cases according to ball status///
+  if(-PI <= angle_orange <= PI){
+    defence_goal()
+  }
+
+   ///Angle adjustment once in 10 routines///
   int count = count + 1;
   if(count = 10){
     count = 0;
@@ -153,8 +163,8 @@ void loop() {
   }
 }
 
-void find_ball(){
+void defence_goal(){
 
 }
 
-void 
+void robo
