@@ -57,14 +57,13 @@ void setup() {
   pinMode(A_1, OUTPUT);   //pin 23
   pinMode(A_2, OUTPUT);   //pin 27
   pinMode(A_3, OUTPUT);   //pin 31
-  pinMode(A_4, OUTPUT);   
+  pinMode(A_4, OUTPUT);   //pin 35
   pinMode(B_1, OUTPUT);   //pin 25
   pinMode(B_2, OUTPUT);   //pin 29
   pinMode(B_3, OUTPUT);   //pin 33
   pinMode(B_4, OUTPUT);   //pin 37
  
   pinMode(start_button, INPUT_PULLUP); //start button = pin 48
-
   pinMode(sloenoid_FET, OUTPUT); //sloenoid_FET = pin 47
   pinMode(ball_sensor, INPUT); //ball caught sensor = pin 49
 
@@ -94,7 +93,7 @@ void setup() {
   #endif
 }
 
-void lot by flexitimer2 (timer interrapt)op() {
+void loop() {
 ///Debug options///
 #ifdef DEBUG
   #ifdef DEBUG_Gyro_sensor
