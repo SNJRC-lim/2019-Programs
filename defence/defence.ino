@@ -20,21 +20,10 @@ bool goal = true; //true : yellow , false : blue
 #define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
 
 ///game options///
-///goal color///
-bool goal = true; //true : yellow , false : blue
-///debug options///
-#define DEBUG
-#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
-#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
+
 ///angles///
 //in this program,all angle use RAD//
 float angle_orange;///game options///
-///goal color///
-bool goal = true; //true : yellow , false : blue
-///debug options///
-#define DEBUG
-#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
-#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
 float angle_blue;
 float angle_yellow;
 
@@ -64,23 +53,11 @@ void setup() {
   pinMode(PWM_1, OUTPUT); //pin 5
   pinMode(PWM_2, OUTPUT); //pin 6
   pinMode(PWM_3, OUTPUT); //pin 7
-  pinMode(PWM_4, OUTPUT); //pin 8///game options///
-///goal color///
-bool goal = true; //true : yellow , false : blue
-///debug options///
-#define DEBUG
-#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
-#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
+  pinMode(PWM_4, OUTPUT); //pin 8
   pinMode(A_1, OUTPUT);   //pin 23
   pinMode(A_2, OUTPUT);   //pin 27
   pinMode(A_3, OUTPUT);   //pin 31
-  pinMode(A_4, OUTPUT);   ////game options///
-///goal color///
-bool goal = true; //true : yellow , false : blue
-///debug options///
-#define DEBUG
-#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
-#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue/pin 35
+  pinMode(A_4, OUTPUT);   
   pinMode(B_1, OUTPUT);   //pin 25
   pinMode(B_2, OUTPUT);   //pin 29
   pinMode(B_3, OUTPUT);   //pin 33
@@ -91,13 +68,6 @@ bool goal = true; //true : yellow , false : blue
   pinMode(sloenoid_FET, OUTPUT); //sloenoid_FET = pin 47
   pinMode(ball_sensor, INPUT); //ball caught sensor = pin 49
 
-  /////////game options///
-///goal color///
-bool goal = true; //true : yellow , false : blue
-///debug options///
-#define DEBUG
-#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
-#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
 
   Serial.begin(115200);
   Serial1.begin(115200);
