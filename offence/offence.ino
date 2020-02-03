@@ -149,7 +149,8 @@ void loop() {
       while (3/4 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
         VNH_rotate(50);
         robot_angle = get_robot_angle();
-        angle_yellow = get_angle_yellow();
+        angl if (PI/4 <= angle_orange <= 3*PI/4){
+    robot_go_angle()e_yellow = get_angle_yellow();
       }
     }
     if (goal = false) {
@@ -165,12 +166,8 @@ void loop() {
         robot_angle = get_robot_angle();
         angle_blue = get_angle_blue();
       }
-    }
-  }
-}
-
-///ball caught///
-void ball_catch() {
+    } if (PI/4 <= angle_orange <= 3*PI/4){
+    robot_go_angle()tch() {
   if (digitalRead(ball_sensor) == 1) {
     bool kicked;
     if (digitalRead(ball_sensor) == 1) {
@@ -188,11 +185,8 @@ void ball_catch() {
         }
 
         dist_yellow = get_dist_yellow();
-
-        if (dist_yellow <= 20) {
-          while (0 <= angle_yellow < 4/9 * PI | -PI / 2 <= angle_yellow < 0) {
-            VNH_pwm(0,40);
-            angle_yellow = get_angle_yellow();
+ if (PI/4 <= angle_orange <= 3*PI/4){
+    robot_go_angle()angle_yellow = get_angle_yellow();
           }
 
           while (5/9 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 ) {
@@ -208,7 +202,8 @@ void ball_catch() {
             delay(100);
             digitalWrite(sloenoid_FET, LOW);
             kicked = true;
-          }
+          } if (PI/4 <= angle_orange <= 3*PI/4){
+    robot_go_angle()
         } 
       }
       
@@ -229,7 +224,8 @@ void ball_catch() {
           while (0 <= angle_blue < 4/9 * PI | -PI / 2 <= angle_blue < 0) {
             VNH_pwm(0,40);
             angle_blue = get_angle_blue();
-          }
+          } if (PI/4 <= angle_orange <= 3*PI/4){
+    robot_go_angle()
 
           while (5/9 * PI  <= angle_blue < PI | -PI <= angle_blue < -PI / 2 ) {
             VNH_pwm(PI,40);

@@ -1,4 +1,4 @@
-//version 3.5
+//version 3.6
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -10,6 +10,14 @@
 #include "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
+#include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
+#include "communication.h" //set functi///game options///
+///goal color///
+bool goal = true; //true : yellow , false : blue
+///debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
 
 ///game options///
 ///goal color///
@@ -17,15 +25,16 @@ bool goal = true; //true : yellow , false : blue
 ///debug options///
 #define DEBUG
 #define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
-#define DEBUG_color_angle //use this when debUg pixy in this program
-
-#include "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
-#include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
-#include "communication.h" //set function get_robot_angle
-
+#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
 ///angles///
 //in this program,all angle use RAD//
-float angle_orange;
+float angle_orange;///game options///
+///goal color///
+bool goal = true; //true : yellow , false : blue
+///debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
 float angle_blue;
 float angle_yellow;
 
@@ -34,7 +43,7 @@ float angle; //where you want to go
 float robot_angle;  //get from arduino pro mini , robots yaw degree
 
 ///distance///
-float dist_orange;
+float dist_orange;VNH_pwm
 float dist_blue;
 float dist_yellow;
 
@@ -49,18 +58,29 @@ const int sloenoid_FET = 47;
 ///ball caught sensor///
 const int ball_sensor = 49;
 
-//////
-
+//////VNH_pwm
 void setup() {
   ///pin setup here///
   pinMode(PWM_1, OUTPUT); //pin 5
   pinMode(PWM_2, OUTPUT); //pin 6
   pinMode(PWM_3, OUTPUT); //pin 7
-  pinMode(PWM_4, OUTPUT); //pin 8
+  pinMode(PWM_4, OUTPUT); //pin 8///game options///
+///goal color///
+bool goal = true; //true : yellow , false : blue
+///debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
   pinMode(A_1, OUTPUT);   //pin 23
   pinMode(A_2, OUTPUT);   //pin 27
   pinMode(A_3, OUTPUT);   //pin 31
-  pinMode(A_4, OUTPUT);   //pin 35
+  pinMode(A_4, OUTPUT);   ////game options///
+///goal color///
+bool goal = true; //true : yellow , false : blue
+///debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue/pin 35
   pinMode(B_1, OUTPUT);   //pin 25
   pinMode(B_2, OUTPUT);   //pin 29
   pinMode(B_3, OUTPUT);   //pin 33
@@ -69,10 +89,15 @@ void setup() {
   pinMode(start_button, INPUT_PULLUP); //start button = pin 48
 
   pinMode(sloenoid_FET, OUTPUT); //sloenoid_FET = pin 47
-robot_go_angle
   pinMode(ball_sensor, INPUT); //ball caught sensor = pin 49
 
-  //////
+  /////////game options///
+///goal color///
+bool goal = true; //true : yellow , false : blue
+///debug options///
+#define DEBUG
+#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+#define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blue
 
   Serial.begin(115200);
   Serial1.begin(115200);
@@ -88,7 +113,7 @@ robot_go_angle
   FlexiTimer2::start();
 
   ///pixy setup///
-  start_pixy2();robot_go_angle
+  start_pixy2();
 
   ///esc setup///
   esc_setup();
@@ -99,7 +124,7 @@ robot_go_angle
   #endif
 }
 
-void loop() {
+void lot by flexitimer2 (timer interrapt)op() {
 ///Debug options///
 #ifdef DEBUG
   #ifdef DEBUG_Gyro_sensor
@@ -164,7 +189,20 @@ void loop() {
 }
 
 void defence_goal(){
+  if(-PI > angle_orange | PI < angle_orange){
+    VNH_pwm(PI,0);
+}
+  
+  if(-PI <= angle_orange <= PI){
+    if(5*PI/12 <= angle_orange <= 7*PI/12){
+      if(digitalReadI(ball_sensor) = 0){
+        kick_ball()
+      }
+      }
+    }
+  }
 
+void kick_ball(){
+  
 }
 
-void robo
