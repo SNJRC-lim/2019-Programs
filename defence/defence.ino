@@ -160,18 +160,33 @@ void loop() {
 void defence_goal(){
   if(-PI > angle_orange | PI < angle_orange){
     VNH_pwm(PI,0);
-}
-  
+  }
   if(-PI <= angle_orange <= PI){
-    if(5*PI/12 <= angle_orange <= 7*PI/12){
+    if(5*PI/12 < angle_orange <= 7*PI/12){
       if(digitalReadI(ball_sensor) = 0){
         kick_ball()
       }
+      else if(PI <= angle_orange <= 5*PI/12){
+        while(PI <= angle_orange <= 5*PI/12){
+        VNH_pwm()
+        }
       }
     }
   }
-
-void kick_ball(){
-  
 }
 
+void kick_ball(){
+  ///if our goal color is yellow...///
+  if(goal == true){
+    if(5*PI/12 <= angle_yellow 7*PI/12){
+      digitalWrite(sloenoid_FET,HIGH)
+    }
+  }
+  ///if our goal color is blue...///
+  if(goal == false){
+    if(5*PI/12 <= angle_blue <= 7*PI/12){
+      digitalWrite(sloenoid_FET,HIGH)
+    }
+    
+  }
+}
