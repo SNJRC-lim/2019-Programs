@@ -18,7 +18,7 @@ bool goal = true; //true : yellow , false : blue
 #define DEBUG
 #define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
 #define DEBUG_color_angle //use this when debUg pixy in this program
-t by flexitimer2 (timer interrapt)
+
 #include "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
