@@ -1,4 +1,4 @@
-//version 3.8
+//version 3.8.2
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -171,7 +171,7 @@ void defence_goal(){
       if(digitalReadI(ball_sensor) = LOW){
         kick_ball();
       }
-      else if(-PI/4 <= angle_orange <= 5*PI/12){     //there is ball on the right of robot
+      else if(-PI/4 <= angle_orange <= 5*PI/12){  //there is ball on the right of robot
         while(-PI/4 <= angle_orange <= 5*PI/12){     
           VNH_rotate(50);                         //turn left until angle_orange comes in front
           kick_ball();
@@ -198,10 +198,12 @@ void defence_goal(){
 void kick_ball(){
   ///if our goal color is yellow...///
   if(goal == true){
-    if(5*PI/12 <= angle_yellow 7*PI/12){
+    if(5*PI/12 <= angle_yellow <= 7*PI/12){
       digitalWrite(sloenoid_FET,HIGH);
     }
+    if()
   }
+
   ///if our goal color is blue...///
   if(goal == false){
     if(5*PI/12 <= angle_blue <= 7*PI/12){
