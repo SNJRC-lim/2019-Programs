@@ -120,17 +120,58 @@ void loop() {
   if (angle_orange==get_angle_orange()==get_angle_orange()){//not find to boll position
   VNH_pwm(PI/2,0);//do not move
   }
+
+  ///Angle adjustment once in 10 routines///
+  int count = count + 1;
+  if(count = 10){
+    count = 0;
+    if (goal = true) {
+      robot_angle = get_robot_angle();
+      angle_yellow = get_angle_yellow();
+      while (0 <= angle_yellow < PI / 4 | -PI / 2 <= angle_yellow < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+        VNH_rotate(-50);
+        robot_angle = get_robot_angle();
+        angle_yellow = get_angle_yellow();
+      }
+      while (3/4 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+        VNH_rotate(50);
+        robot_angle = get_robot_angle();
+        angle_yellow = get_angle_yellow();
+      }
+    }
+    if (goal = false) {
+      robot_angle = get_robot_angle();
+      angle_blue = get_angle_blue();
+      while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+        VNH_rotate(-50);
+        robot_angle = get_robot_angle();
+        angle_blue = get_angle_blue();
+      }
+      while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+        VNH_rotate(50);
+        robot_angle = get_robot_angle();
+        angle_blue = get_angle_blue();
+      }
+    }
+  }
+}
 }
 
 void angle_robot(){
   //move until angle_orange is 90angle 
-   while (angle_orange　< PI/2 | PI/2 < angle_orange){
-     if (angle_orange < PI/2){
+   while (0 < angle_orange　< PI/2 | PI/2 < angle_orange < PI){
+     if (0 < angle_orange < PI/2){
        VNH_pwm(0,100);
      }
-     else if (PI/2 <= angle_orange){
+     else if (PI/2 < angle_orange　< PI){
        VNH_pwm(-PI,100);
      }
    }
+   if (-PI/2 <=  angle_orange <= 0){
+     VNH_pwm( -3/4*PI , 100 );
+  }
+  else if (-PI <= angle_orange < -PI/2){
+     VNH_pwm( -PI/4 , 100 );
+  }
 }
   
