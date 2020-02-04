@@ -113,13 +113,17 @@ void loop() {
   #endif
 #endif
 
-  robot_angle == get_robot_angle()   //set robot_angle
+  robot_angle =7*PI/12 <  angle_orange <= -PI= get_robot_angle()   //set robot_angle
 
   angle_orange == get_angle_orange() //set angle_orange
 
 ///division into cases according to ball status///
-  if(-PI <= angle_orange <= PI){
-    defence_goal()
+  if(-PI <= angle_orange <= PI){                  //robot find ball
+    defence_goal();
+  }
+
+  if(-PI > angle_orange | PI < angle_orange){   //robot doesn't find ball
+    VNH_pwm(PI,0);                               //don't move
   }
 
    ///Angle adjustment once in 10 routines///
@@ -158,17 +162,24 @@ void loop() {
 }
 
 void defence_goal(){
-  if(-PI > angle_orange | PI < angle_orange){
-    VNH_pwm(PI,0);
+  if(-PI > angle_orange | PI < angle_orange){     //not find ball
+    VNH_pwm(PI,0);                                //don't move
   }
-  if(-PI <= angle_orange <= PI){
-    if(5*PI/12 < angle_orange <= 7*PI/12){
+  if(-PI <= angle_orange <= PI){                  //robot recognize ball
+    if(5*PI/12 < angle_orange <= 7*PI/12){        //there is ball in front of robot
       if(digitalReadI(ball_sensor) = 0){
-        kick_ball()
+        kick_ball();
       }
-      else if(PI <= angle_orange <= 5*PI/12){
-        while(PI <= angle_orange <= 5*PI/12){
-        VNH_pwm()
+      else if(PI <= angle_orange <= 5*PI/12){     //there is ball on the right of robot
+        while(PI <= angle_orange <= 5*PI/12){     
+          VNH_rotate(50);                         //turn left until angle_orange comes in front
+          kick_ball();
+        }
+      }
+      else if(7*PI/12 <  angle_orange <= -PI){    //there is ball on the left of robot
+        while(7*PI/12 <  angle_orange <= -PI){
+          VNH_rotate(-50);                        //turn right until angle_orange comes in front    
+          kick_ball();
         }
       }
     }
@@ -179,14 +190,13 @@ void kick_ball(){
   ///if our goal color is yellow...///
   if(goal == true){
     if(5*PI/12 <= angle_yellow 7*PI/12){
-      digitalWrite(sloenoid_FET,HIGH)
+      digitalWrite(sloenoid_FET,HIGH);
     }
   }
   ///if our goal color is blue...///
   if(goal == false){
     if(5*PI/12 <= angle_blue <= 7*PI/12){
-      digitalWrite(sloenoid_FET,HIGH)
+      digitalWrite(sloenoid_FET,HIGH);
     }
-    
   }
 }
