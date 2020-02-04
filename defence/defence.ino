@@ -1,4 +1,4 @@
-//version 3.8.2
+//version 3.8.3
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -177,18 +177,20 @@ void defence_goal(){
           kick_ball();
         }
       }
-      else if(7*PI/12 <  angle_orange <= PI | 3*PI/4 <= angle_orange <= -PI){    //there is ball on the left of robot
-        while(7*PI/12 <  angle_orange <= PI | 3*PI/4 <= angle_orange <= -PI){
+      else if(7*PI/12 <  angle_orange <= PI | -PI <= angle_orange <= 3*PI/4){    //there is ball on the left of robot
+        while(7*PI/12 <  angle_orange <= PI | -PI <= angle_orange <= 3*PI/4){
           VNH_rotate(-50);                        //turn right until angle_orange comes in front    
           kick_ball();
         }
       }
-      else if(angle_orange == angle_orange == angle_orange){  
-        if(digitalRead(sloenoid_FET) == HIGH){
+      else if(angle_orange == angle_orange == angle_orange){  //the same value is returned three times
+        if(digitalRead(ball_sensor) == HIGH){     //robot doesn't have ball
           VNH_pwm(PI,0);
         }
-        if(digitalRdad(sloenoid_FET) == LOW){
-          kick_ball();
+        if(digitalRdad(ball_sensor) == LOW){      //robot has ball
+          if(digitalRead(ball_sensor) == LOW){    //check ball status twice
+            kick_ball();
+          }
         }
       }
     }
@@ -198,15 +200,16 @@ void defence_goal(){
 void kick_ball(){
   ///if our goal color is yellow...///
   if(goal == true){
-    if(5*PI/12 <= angle_yellow <= 7*PI/12){
+    if(5*PI/12 <= angle_yellow <= 7*PI/12){     //robot find enemy goal
       digitalWrite(sloenoid_FET,HIGH);
     }
-    if()
+    if(0 <= angle_yellow <=5*PI/12){
+    }
   }
 
   ///if our goal color is blue...///
   if(goal == false){
-    if(5*PI/12 <= angle_blue <= 7*PI/12){
+    if(5*PI/12 <= angle_blue <= 7*PI/12){     //robot find enemy goal
       digitalWrite(sloenoid_FET,HIGH);
     }
   }
