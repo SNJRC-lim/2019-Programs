@@ -1,4 +1,4 @@
-//version 3.5
+//version 3.6
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -116,6 +116,9 @@ void loop() {
   #endif
 #endif
 
+angle_yellow = get_angle_yellow();
+angle_blue = get_angle_blue();
+
   if ( -PI <= angle_orange <= PI ){ 
    angle_robot();
   }
@@ -124,8 +127,10 @@ void loop() {
   VNH_pwm(PI/2,0);//do not move
   }
 
-  if (digitalRead(ball_sensor)==1){
+  if (digitalRead(ball_sensor)==0){
+    if (digitalRead(ball_sensor)==0){　///double check
     ball_kick();
+    }
   }
 
   ///Angle adjustment once in 10 routines///
@@ -189,7 +194,7 @@ void ball_kick(){//if can look enemy goul,kick ball
    }
   }
   else if (goal == false){
-   if (4/9*PI  <=  angle_yellow  <=  5/9*PI){
+   if (4/9*PI  <=  angle_blue  <=  5/9*PI){
      digitalWrite( sloenoid_FET , HIGH );
   }
 }
