@@ -1,4 +1,4 @@
-//version 4.7
+//version 4.8
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -208,7 +208,8 @@ void ball_catch() {
           digitalWrite(sloenoid_FET, LOW);
           kicked = true;
         }
-      } 
+      }
+      else VNH_pwm(PI/2,70); 
     }
       
     if (goal = false) {
@@ -245,6 +246,7 @@ void ball_catch() {
           kicked = true;
         }
       }
+      else VNH_pwm(PI/2,70);
     }
     if(digitalRead(ball_sensor) == 0 && kicked == false){
       esc_speed_down();
