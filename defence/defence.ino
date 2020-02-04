@@ -1,4 +1,4 @@
-//version 3.7
+//version 3.71
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -170,14 +170,14 @@ void defence_goal(){
       if(digitalReadI(ball_sensor) = 0){
         kick_ball();
       }
-      else if(PI <= angle_orange <= 5*PI/12){     //there is ball on the right of robot
-        while(PI <= angle_orange <= 5*PI/12){     
+      else if(-PI <= angle_orange <= 5*PI/12){     //there is ball on the right of robot
+        while(-PI <= angle_orange <= 5*PI/12){     
           VNH_rotate(50);                         //turn left until angle_orange comes in front
           kick_ball();
         }
       }
-      else if(7*PI/12 <  angle_orange <= -PI){    //there is ball on the left of robot
-        while(7*PI/12 <  angle_orange <= -PI){
+      else if(7*PI/12 <  angle_orange <= PI){    //there is ball on the left of robot
+        while(7*PI/12 <  angle_orange <= PI){
           VNH_rotate(-50);                        //turn right until angle_orange comes in front    
           kick_ball();
         }
