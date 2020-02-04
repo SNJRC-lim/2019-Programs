@@ -19,6 +19,9 @@
 ///ball status///
 bool ball; //ball true or false
 
+///goal color///
+bool goal = true;//ball true or false
+
 ///angles///
 //in this program,all angle use RAD//
 float angle_orange;
@@ -121,6 +124,10 @@ void loop() {
   VNH_pwm(PI/2,0);//do not move
   }
 
+  if (digitalRead(ball_sensor)==1){
+    ball_kick();
+  }
+
   ///Angle adjustment once in 10 routines///
   int count = count + 1;
   if(count = 10){
@@ -175,3 +182,14 @@ void angle_robot(){
   }
 }
   
+void ball_kick(){//if can look enemy goul,kick ball
+  if (goal == true){
+   if (4/9*PI  <=  angle_yellow  <= 5/9*PI){
+    digitalWrite( sloenoid_FET , HIGH );
+   }
+  }
+  else if (goal == false){
+   if (4/9*PI  <=  angle_yellow  <=  5/9*PI){
+     digitalWrite( sloenoid_FET , HIGH );
+  }
+}
