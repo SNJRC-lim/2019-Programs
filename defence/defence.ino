@@ -11,7 +11,7 @@
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
-#include "communication.h" //set functi///game options///
+#include "communication.h" //set functi///game options
 ///goal color///
 bool goal = true; //true : yellow , false : blue
 ///debug options///
@@ -20,10 +20,11 @@ bool goal = true; //true : yellow , false : blue
 #define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
 
 ///game options///
+#define start_soccer_game //use this when real game
 
 ///angles///
 //in this program,all angle use RAD//
-float angle_orange;///game options///
+float angle_orange;
 float angle_blue;
 float angle_yellow;
 
