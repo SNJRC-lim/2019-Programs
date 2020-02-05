@@ -114,7 +114,7 @@ void loop() {
   #endif
 #endif
 
-  robot_angle =7*PI/12 <  angle_orange <= -PI= get_robot_angle()   //set robot_angle
+  robot_angle = get_robot_angle()   //set robot_angle
 
   angle_orange == get_angle_orange() //set angle_orange
 
