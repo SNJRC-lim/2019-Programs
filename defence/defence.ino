@@ -211,3 +211,15 @@ void kick_ball(){
     }
   }
 }
+
+void back_goal(){
+  FlexTimer2::stop();
+  if(digitalRead(ball_sensor) == LOW){  //check again 
+    if(goal == true){
+      angle_yellow == get_angle_yellow();
+      VNH_pwm(angle_yellow,100)
+    }
+    if(goal == false){
+      angle_blue == get_angle_blue();
+    }
+  }
