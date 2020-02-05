@@ -1,4 +1,4 @@
-//version 3.6
+//version 3.7
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -20,7 +20,7 @@
 bool ball; //ball true or false
 
 ///goal color///
-bool goal = true;//ball true or false
+bool goal = true;//true yellow : false blue
 
 ///angles///
 //in this program,all angle use RAD//
@@ -119,7 +119,7 @@ void loop() {
 angle_yellow = get_angle_yellow();
 angle_blue = get_angle_blue();
 
-  if ( -PI <= angle_orange <= PI ){ 
+  if ( -PI <= angle_orange <= PI ){ ///there is ball
    angle_robot();
   }
 
@@ -187,13 +187,13 @@ void angle_robot(){
   }
 }
   
-void ball_kick(){//if can look enemy goul,kick ball
-  if (goal == true){
+void ball_kick(){//if can look enemy goal,kick ball
+  if (goal == true){///enemy goal is yellow
    if (4/9*PI  <=  angle_yellow  <= 5/9*PI){
     digitalWrite( sloenoid_FET , HIGH );
    }
   }
-  else if (goal == false){
+  else if (goal == false){///enemy goal is blue
    if (4/9*PI  <=  angle_blue  <=  5/9*PI){
      digitalWrite( sloenoid_FET , HIGH );
   }
