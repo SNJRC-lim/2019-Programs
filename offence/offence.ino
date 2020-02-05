@@ -1,4 +1,4 @@
-//version 4.8
+//version 4.9
 
 ///program for main game///
 //#define program_for_game //comment out this line when it is not real game
@@ -141,12 +141,12 @@ void loop() {
     if (goal = true) {
       robot_angle = get_robot_angle();
       angle_yellow = get_angle_yellow();
-      while (0 <= angle_yellow < PI / 4 | -PI / 2 <= angle_yellow < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+      while (0 <= angle_yellow < PI / 3 | -PI / 2 <= angle_yellow < 0 | 1/18 * PI <= robot_angle < PI) {
         VNH_rotate(-50);
         robot_angle = get_robot_angle();
         angle_yellow = get_angle_yellow();
       }
-      while (3/4 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+      while (2/3 * PI <= angle_yellow < PI | -PI <= angle_yellow < -PI / 2 | -PI <= robot_angle < -1/18 * PI) {
         VNH_rotate(50);
         robot_angle = get_robot_angle();
         angle_yellow = get_angle_yellow();
@@ -155,12 +155,12 @@ void loop() {
     if (goal = false) {
       robot_angle = get_robot_angle();
       angle_blue = get_angle_blue();
-      while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0 | 0 <= robot_angle < 4/9 * PI | -PI / 2 <= robot_angle < 0) {
+      while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0 | 1/18 * PI <= robot_angle < PI) {
         VNH_rotate(-50);
         robot_angle = get_robot_angle();
         angle_blue = get_angle_blue();
       }
-      while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | 5/9 * PI <= robot_angle < PI | -PI <= robot_angle < -PI / 2 ) {
+      while (2/3 * PI <= angle_blue < PI | -PI <= angle_blue < -PI / 2 | -PI <= robot_angle < -1/18 * PI ) {
         VNH_rotate(50);
         robot_angle = get_robot_angle();
         angle_blue = get_angle_blue();
