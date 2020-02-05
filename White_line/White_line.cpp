@@ -4,10 +4,10 @@
 #include "Arduino.h"
 
 void White_line() {
-  volatile bool line1 = digitalRead(30); //white line forward
-  volatile bool line2 = digitalRead(31); //white line left side
-  volatile bool line3 = digitalRead(32); //white line back
-  volatile bool line4 = digitalRead(33); //white line right side
+  volatile bool line1 = digitalRead(A0); //white line forward
+  volatile bool line2 = digitalRead(A1); //white line left side
+  volatile bool line3 = digitalRead(A2); //white line back
+  volatile bool line4 = digitalRead(A3); //white line right side
  
    if (line1 == 1) {
       digitalWrite (22, HIGH);
@@ -26,10 +26,10 @@ void White_line() {
       digitalWrite (29, HIGH);
       analogWrite  (8, 255);
 
-      line1 = digitalRead(30);
-      line2 = digitalRead(31); 
-      line3 = digitalRead(32);
-      line4 = digitalRead(33);
+      line1 = digitalRead(A0);
+      line2 = digitalRead(A1); 
+      line3 = digitalRead(A2);
+      line4 = digitalRead(A3);
     }
 
    if (line2 == 1) {
@@ -49,10 +49,10 @@ void White_line() {
       digitalWrite (29, HIGH);
       analogWrite  (8, 255);
 
-      line1 = digitalRead(30);
-      line2 = digitalRead(31); 
-      line3 = digitalRead(32);
-      line4 = digitalRead(33);
+      line1 = digitalRead(A0);
+      line2 = digitalRead(A1); 
+      line3 = digitalRead(A2);
+      line4 = digitalRead(A3);
     }
 
     if (line3 == 1) {
@@ -72,10 +72,10 @@ void White_line() {
       digitalWrite (29, LOW);
       analogWrite  (8, 255);
 
-      line1 = digitalRead(30);
-      line2 = digitalRead(31);
-      line3 = digitalRead(32);
-      line4 = digitalRead(33);
+      line1 = digitalRead(A0);
+      line2 = digitalRead(A1);
+      line3 = digitalRead(A2);
+      line4 = digitalRead(A3);
     }
 
     if (line4 == 1) {
@@ -95,10 +95,10 @@ void White_line() {
       digitalWrite (29, LOW);
       analogWrite  (8, 255);
 
-      line1 = digitalRead(30);
-      line2 = digitalRead(31); 
-      line3 = digitalRead(32);
-      line4 = digitalRead(33);
+      line1 = digitalRead(A0);
+      line2 = digitalRead(A1); 
+      line3 = digitalRead(A2);
+      line4 = digitalRead(A3);
    }
    
  }
