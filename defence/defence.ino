@@ -1,4 +1,4 @@
-//version 3.8.6
+//version 3.8.7
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -222,6 +222,10 @@ void kick_ball(){
         VNH_rotate(-50);
       }
     }
+    
+    if(angle_yellow == angle_yellow == angle_yellow){   //robot doesn't find enemy goal
+      VNH_pwm(PI,0);
+    }
   }
 
   ///if enemy goal color is blue...///
@@ -240,6 +244,10 @@ void kick_ball(){
         VNH_rotate(-50);
       }
     }
+
+    if(angle_blue == angle_blue == angle_blue){ //robot doesn't find enemy goal
+      VNH_pwm(0,0);
+    }
   }
 }
 
@@ -250,14 +258,13 @@ void back_goal(){
   if(digitalRead(ball_sensor) == LOW){  //check again 
     if(goal == true){
       FlexTimer2::stop();
-      angle_blue == get_angle_blue();
+      angle_blue == get_angle_blue(); 
       VNH_pwm(angle_blue,100);
     }
     if(goal == false){
       FlexTimer2::stop();
       angle_yellow == get_angle_yellow();
       VNH_pwm(angle_yellow,100);
-      FlexTimer2::start();
     }
   }
 }
