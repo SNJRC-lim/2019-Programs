@@ -1,4 +1,4 @@
-//version 3.8.2
+//version 3.8.4
 
 ///library files///
 #include <FlexiTimer2.h>
