@@ -1,4 +1,4 @@
-//version 3.8.4
+//version 3.8.5
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -11,7 +11,7 @@
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
-#include "communication.h" //set functi///game options
+#include "communication.h" //get_robot_angle
 ///goal color///
 bool goal = true; //true : yellow , false : blue
 ///debug options///
@@ -20,7 +20,8 @@ bool goal = true; //true : yellow , false : blue
 #define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
 
 ///game options///
-#define start_soccer_game //use this when real game
+#define start_soccer_game   //use this when real game
+//#define developing_options  //use this if the function completed
 
 ///angles///
 //in this program,all angle use RAD//
@@ -95,7 +96,6 @@ void setup() {
 }
 
 void loop() {
-///Debug options///
 #ifdef DEBUG
   #ifdef DEBUG_Gyro_sensor
     robot_angle = get_robot_angle();
@@ -123,7 +123,7 @@ void loop() {
     defence_goal();
   }
 
-  if(-PI > angle_orange | PI < angle_orange){   //robot doesn't find ball
+  if(-PI > angle_orange | PI < angle_orange){    //robot doesn't find ball
     VNH_pwm(PI,0);                               //don't move
   }
 
@@ -169,19 +169,25 @@ void defence_goal(){
   if(-PI <= angle_orange <= PI){                  //robot recognize ball
     if(5*PI/12 < angle_orange <= 7*PI/12){        //there is ball in front of robot
       if(digitalReadI(ball_sensor) = LOW){
+        go_enemy_goal();
         kick_ball();
+        back_goal();
       }
       else if(-PI/4 <= angle_orange <= 5*PI/12){  //there is ball on the right of robot
         while(-PI/4 <= angle_orange <= 5*PI/12){     
           VNH_rotate(50);                         //turn left until angle_orange comes in front
-          kick_ball();
         }
+        go_enemy_goal();
+        kick_ball();
+        back_goal();
       }
       else if(7*PI/12 <  angle_orange <= PI | -PI <= angle_orange <= 3*PI/4){    //there is ball on the left of robot
         while(7*PI/12 <  angle_orange <= PI | -PI <= angle_orange <= 3*PI/4){
-          VNH_rotate(-50);                        //turn right until angle_orange comes in front    
-          kick_ball();
+          VNH_rotate(-50);                        //turn right until angle_orange comes in front
         }
+        go_enemy_goal();
+        kick_ball();
+        back_goal();
       }
       else if(angle_orange == angle_orange == angle_orange){  //the same value is returned three times
         if(digitalRead(ball_sensor) == HIGH){     //robot doesn't have ball
@@ -189,7 +195,9 @@ void defence_goal(){
         }
         if(digitalRdad(ball_sensor) == LOW){      //robot has ball
           if(digitalRead(ball_sensor) == LOW){    //check ball status twice
+            go_enemy_goal();
             kick_ball();
+            back_goal();
           }
         }
       }
@@ -198,31 +206,70 @@ void defence_goal(){
 }
 
 void kick_ball(){
-  ///if our goal color is yellow...///
+  ///if enemy goal color is yellow...///
   if(goal == true){
     if(5*PI/12 <= angle_yellow <= 7*PI/12){     //robot find enemy goal
       digitalWrite(sloenoid_FET,HIGH);
     }
-    if(0 <= angle_yellow <=5*PI/12){
+    if(0 <= angle_yellow <= 5*PI/12){           //there is enemy goal on the right of robot
+      while(0 <= angle_yellow <= 5*PI/12){
+        VNH_rotate(50);
+      }
+    }
+
+    if(7*PI/12 < angle_yellow <= PI){           //there is enemy goal on the left of robot
+      while(7*PI/12 < angle_yellow <= PI){
+        VNH_rotate(-50);
+      }
     }
   }
 
-  ///if our goal color is blue...///
+  ///if enemy goal color is blue...///
   if(goal == false){
     if(5*PI/12 <= angle_blue <= 7*PI/12){     //robot find enemy goal
       digitalWrite(sloenoid_FET,HIGH);
     }
+    if(0 <= angle_blue <= 5*PI/12){
+      while(0 <= angle_blue <= 5*PI/12){
+        VNH_rotate(50);
+      }
+    }
+    
+    if(7*PI/12 < angle_blue <= PI){
+      while(7*PI/12 < angle_blue <= PI){
+        VNH_rotate(-50);
+      }
+    }
   }
 }
 
+#ifdef developing_options
 void back_goal(){
-  FlexTimer2::stop();
+  dist_blue == get_dist_blue();       //set dist_blue
+  dist_yellow == get_dist_yellow();   //set dist_yellow
   if(digitalRead(ball_sensor) == LOW){  //check again 
     if(goal == true){
-      angle_yellow == get_angle_yellow();
-      VNH_pwm(angle_yellow,100)
+      FlexTimer2::stop();
+      angle_blue == get_angle_blue();
+      VNH_pwm(angle_blue,100);
     }
     if(goal == false){
-      angle_blue == get_angle_blue();
+      FlexTimer2::stop();
+      angle_yellow == get_angle_yellow();
+      VNH_pwm(angle_yellow,100);
+      FlexTimer2::start();
     }
   }
+}
+
+void go_enemy_goal(){
+  if(digitalRead(ball_sensor) == HIGH){
+    if(goal == true){
+        
+    }
+    if(goal == false){
+        
+    }
+  }
+}
+#endif
