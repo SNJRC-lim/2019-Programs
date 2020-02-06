@@ -1,4 +1,4 @@
-//version 3.8.7
+//version 3.8.8
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -134,7 +134,7 @@ void loop() {
     if (goal = true) {
       robot_angle = get_robot_angle();
       angle_yellow = get_angle_yellow();
-      while (0 <= angle_yellow < PI / 3 | -PI / 2 <= angle_yellow < 0 | 1/18 * PI <= robot_angle < PI) {
+      while (-PI / 2 <= angle_yellow < PI / 3 | 1/18 * PI <= robot_angle < PI) {
         VNH_rotate(-50);
         robot_angle = get_robot_angle();
         angle_yellow = get_angle_yellow();
@@ -148,7 +148,7 @@ void loop() {
     if (goal = false) {
       robot_angle = get_robot_angle();
       angle_blue = get_angle_blue();
-      while (0 <= angle_blue < PI / 3 | -PI / 2 <= angle_blue < 0 | 1/18 * PI <= robot_angle < PI) {
+      while (-PI / 2 <= angle_blue < PI / 3 | 1/18 * PI <= robot_angle < PI) {
         VNH_rotate(-50);
         robot_angle = get_robot_angle();
         angle_blue = get_angle_blue();
