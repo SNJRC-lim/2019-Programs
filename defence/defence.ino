@@ -1,4 +1,4 @@
-//version 3.7
+//version 3.8
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -123,7 +123,7 @@ angle_blue = get_angle_blue();
    angle_robot();
   }
 
-  if (angle_orange==get_angle_orange()==get_angle_orange()){//not find to boll position
+  if (angle_orange==get_angle_orange()==get_angle_orange()){//not find to ball position
   VNH_pwm(PI/2,0);//do not move
   }
 
@@ -189,12 +189,29 @@ void angle_robot(){
   
 void ball_kick(){//if can look enemy goal,kick ball
   if (goal == true){///enemy goal is yellow
-   if (4/9*PI  <=  angle_yellow  <= 5/9*PI){
-    digitalWrite( sloenoid_FET , HIGH );
+   while (angle_yellow < 4/9*PI | 5/9*PI < angle_yellow){
+     if (angle_yellow < 4/9*PI){
+      VNH_pwm(0,100);
+     }
+     else if (5/9*PI < angle_yellow){
+      VNH_pwm(-PI,100);
+     }
+   }
+   if (4/9*PI <= angle_yellow <= 5/9*PI){
+     digitalWrite(sloenoid_FET,HIGH);
    }
   }
   else if (goal == false){///enemy goal is blue
-   if (4/9*PI  <=  angle_blue  <=  5/9*PI){
-     digitalWrite( sloenoid_FET , HIGH );
+    while (angle_blue < 4/9*PI | 5/9*PI < angle_blue){
+     if (angle_blue < 4/9*PI){
+      VNH_pwm(0,100);
+     }
+     else if (5/9*PI < angle_blue){
+      VNH_pwm(-PI,100);
+     }
+   }
+   if (4/9*PI <= angle_blue <= 5/9*PI){
+     digitalWrite(sloenoid_FET,HIGH);
+   }
   }
 }
