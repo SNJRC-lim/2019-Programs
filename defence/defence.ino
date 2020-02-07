@@ -1,4 +1,4 @@
-//version 3.8.8
+//version 3.9.0
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -167,38 +167,50 @@ void defence_goal(){
     VNH_pwm(PI,0);                                //don't move
   }
   if(-PI <= angle_orange <= PI){                  //robot recognize ball
-    if(5*PI/12 < angle_orange <= 7*PI/12){        //there is ball in front of robot
-      if(digitalReadI(ball_sensor) = LOW){
-        go_enemy_goal();
-        kick_ball();
-        back_goal();
-      }
-      else if(-PI/4 <= angle_orange <= 5*PI/12){  //there is ball on the right of robot
-        while(-PI/4 <= angle_orange <= 5*PI/12){     
-          VNH_pwm(0,50);                         //turn left until angle_orange comes in front
-          }
-        go_enemy_goal();
-        kick_ball();
-        back_goal();
-      }
-      else if(7*PI/12 <  angle_orange <= PI | -PI <= angle_orange <= 3*PI/4){    //there is ball on the left of robot
-        while(7*PI/12 <  angle_orange <= PI | -PI <= angle_orange <= 3*PI/4){
-          VNH_pwm(PI,50);                        //turn right until angle_orange comes in front
+    if(0 <= angle_orange <= PI){                  //there is ball in 0~PI
+      if(4*PI/9 < angle_orange < 5*PI/9){         //there is ball in front of robot
+        if(digitalRead(ball_sensor) == 1){        //robot has alredy caught ball
+          go_enemy_goal();
+          kick_ball();
+          back_goal();
         }
-        go_enemy_goal();
-        kick_ball();
-        back_goal();
-      }
-      else if(angle_orange == angle_orange == angle_orange){  //the same value is returned three times
-        if(digitalRead(ball_sensor) == HIGH){     //robot doesn't have ball
-          VNH_pwm(PI,0);
+        else{
+          VNH_pwm(0,0)                            //don't move
         }
-        if(digitalRdad(ball_sensor) == LOW){      //robot has ball
-          if(digitalRead(ball_sensor) == LOW){    //check ball status twice
-            go_enemy_goal();
-            kick_ball();
-            back_goal();
+      }   
+      if(0 <= angle_orange <= 4*PI/9){            //there is ball on the right of robot
+        while(0 <= angle_orange <= 17*PI/36){
+          VNH_pwm(0,50);
+        }
+      }   
+      if(5*PI/ <= angle_orange < PI){             //there is ball on the left of robot
+        while(19*PI/36 <= angle_orange < PI){ 
+          VNH_pwm(PI,50);
+        }
+      }    
+      if(angle_orange == get_angle_orange() == get_angle_orange()){   //the same value is returned three times
+        if(digitalRead(ball_sensor) == 0){        //robot has alredy caught ball
+          if(digitalRead(ball_sensor) == 1){      //check again
+          go_enemy_goal();
+          kick_ball();  
+          back_goal();
           }
+        }            
+        if(digitalRead(ball_sensor) == 1){        //robot doesn't have ball
+          VNH_pwm(0,0);                           //don't move
+        }
+      }
+    } 
+    if(-PI <= angle_orange < 0){                  //there is ball -PI~0 
+      if(-PI <= angle_orange <= -PI/2){
+        while(-PI <= angle_orange <= -PI/2 | angle_orange <= 5*PI/9){
+          VNH_rotate(-50);
+        }
+      }
+    
+      if(-PI/2 < angle_orange < 0){
+        while(-PI/2 < angle_orange < 4*PI/9){
+          VNH_rotate(50);
         }
       }
     }
@@ -208,16 +220,16 @@ void defence_goal(){
 void kick_ball(){
   ///if enemy goal color is yellow...///
   if(goal == true){
-    if(5*PI/12 <= angle_yellow <= 7*PI/12){     //robot find enemy goal
+    if(5*PI/12 <= angle_yellow <= 7*PI/12){       //robot find enemy goal
       digitalWrite(sloenoid_FET,HIGH);
     }
-    if(0 <= angle_yellow <= 5*PI/12){           //there is enemy goal on the right of robot
+    if(0 <= angle_yellow <= 5*PI/12){             //there is enemy goal on the right of robot
       while(0 <= angle_yellow <= 5*PI/12){
         VNH_rotate(50);
       }
     }
 
-    if(7*PI/12 < angle_yellow <= PI){           //there is enemy goal on the left of robot
+    if(7*PI/12 < angle_yellow <= PI){             //there is enemy goal on the left of robot
       while(7*PI/12 < angle_yellow <= PI){
         VNH_rotate(-50);
       }
@@ -230,7 +242,7 @@ void kick_ball(){
 
   ///if enemy goal color is blue...///
   if(goal == false){
-    if(5*PI/12 <= angle_blue <= 7*PI/12){     //robot find enemy goal
+    if(5*PI/12 <= angle_blue <= 7*PI/12){         //robot find enemy goal
       digitalWrite(sloenoid_FET,HIGH);
     }
     if(0 <= angle_blue <= 5*PI/12){
@@ -245,7 +257,7 @@ void kick_ball(){
       }
     }
 
-    if(angle_blue == angle_blue == angle_blue){ //robot doesn't find enemy goal
+    if(angle_blue == angle_blue == angle_blue){   //robot doesn't find enemy goal
       VNH_pwm(0,0);
     }
   }
