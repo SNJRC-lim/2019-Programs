@@ -1,4 +1,4 @@
-//version 4.0.3
+//version 4.0.4
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -167,7 +167,9 @@ void defence_goal(){
     VNH_pwm(PI,0);                                //don't move
   }
   if(-PI <= angle_orange <= PI){                  //robot recognize ball
-    if(0 <= angle_orange <= PI){                  //there is ball in 0~PI
+    
+    ///there is ball in 0~PI///
+    if(0 <= angle_orange <= PI){                  
       if(4*PI/9 < angle_orange < 5*PI/9){         //there is ball in front of robot
         if(digitalRead(ball_sensor) == 1){        //robot has alredy caught ball
           go_enemy_goal();
@@ -201,14 +203,16 @@ void defence_goal(){
         }
       }
     } 
-    if(-PI <= angle_orange < 0){                  //there is ball -PI~0 
-      if(-PI <= angle_orange <= -PI/2){
+    
+    ///there is ball -PI~0///
+    if(-PI <= angle_orange < 0){                  
+      if(-PI <= angle_orange <= -PI/2){           //there is ball on the back left
         while(-PI <= angle_orange <= -PI/2 | angle_orange <= 5*PI/9){
           VNH_rotate(-50);
         }
       }
     
-      if(-PI/2 < angle_orange < 0){
+      if(-PI/2 < angle_orange < 0){               //there is ball on the back right
         while(-PI/2 < angle_orange < 4*PI/9){
           VNH_rotate(50);
         }
@@ -303,13 +307,27 @@ void kick_ball(){
     }
   }
 }
+
 #ifdef developing_options
-void back_goal(){
-  dist_blue == get_dist_blue();       //set dist_blue
-  dist_yellow == get_dist_yellow();   //set dist_yellow
-  if(digitalRead(ball_sensor) == LOW){  //check again 
+void go_enemy_goal(){
+  dist_blue == get_dist_blue();               //set dist_blue
+  dist_yellow == get_dist_yellow();           //set dist_yellow
+  
+  if(digitalRead(ball_sensor) == 0){          //robot has ball alredy
+    //enemy goal color is yellow 
     if(goal == true){
-      FlexTimer2::stop();
+        
+    }
+    if(goal == false){
+        
+    }
+  }
+}
+
+void back_goal(){
+  if(digitalRead(ball_sensor) == 1){          //check ball status 
+    if(goal == true){
+      FlexiTimer2::stop();                     //stop timer 
       angle_blue == get_angle_blue(); 
       VNH_pwm(angle_blue,100);
     }
@@ -317,17 +335,6 @@ void back_goal(){
       FlexTimer2::stop();
       angle_yellow == get_angle_yellow();
       VNH_pwm(angle_yellow,100);
-    }
-  }
-}
-
-void go_enemy_goal(){
-  if(digitalRead(ball_sensor) == HIGH){
-    if(goal == true){
-        
-    }
-    if(goal == false){
-        
     }
   }
 }
