@@ -92,7 +92,7 @@ void setup() {
   start_pixy2();
 
   ///esc setup///
-  esc_setup();
+  //esc_setup();
 
 ///wait for start///
 #ifdef program_for_game
