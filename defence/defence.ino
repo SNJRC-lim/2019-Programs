@@ -1,4 +1,4 @@
-//version 4.0
+//version 4.0.2
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -183,14 +183,14 @@ void defence_goal(){
           VNH_pwm(0,50);
         }
       }   
-      if(5*PI/ <= angle_orange < PI){             //there is ball on the left of robot
+      if(5*PI/9 <= angle_orange < PI){             //there is ball on the left of robot
         while(19*PI/36 <= angle_orange < PI){ 
           VNH_pwm(PI,50);
         }
       }    
       if(angle_orange == get_angle_orange() == get_angle_orange()){   //the same value is returned three times
         if(digitalRead(ball_sensor) == 0){        //robot has alredy caught ball
-          if(digitalRead(ball_sensor) == 1){      //check again
+          if(digitalRead(ball_sensor) == 0){      //check again
           go_enemy_goal();
           kick_ball();  
           back_goal();
