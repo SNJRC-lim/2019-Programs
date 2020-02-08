@@ -1,4 +1,4 @@
-//version 3.9
+//version 4.0
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -116,20 +116,21 @@ void loop() {
   #endif
  #endif
 
- angle_yellow = get_angle_yellow();
- angle_blue = get_angle_blue();
+ robot_angle = get_robot_angle();   //set robot_angle
+
+ angle_orange == get_angle_orange(); //set angle_orange
 
   if ( -PI <= angle_orange <= PI ){ ///there is ball
-   angle_robot();
+   defence_goal();
   }
 
-  if (angle_orange==get_angle_orange()==get_angle_orange()){//not find to ball position
-  VNH_pwm(PI/2,0);//do not move
+  if (angle_orange==get_angle_orange()==get_angle_orange()| angle_orange <= -PI | PI <= angle_orange){//not find to ball position
+   VNH_pwm(PI/2,0);//do not move
   }
 
   if (digitalRead(ball_sensor)==0){
     if (digitalRead(ball_sensor)==0){　///double check
-    ball_kick();
+     kick_ball();
     }
   }
 
@@ -168,49 +169,48 @@ void loop() {
   }
 }
 
-void angle_robot(){
-  //move until angle_orange is 90angle 
-   while (0 < angle_orange　< PI/2 | PI/2 < angle_orange < PI){
-     if (0 < angle_orange < PI/2){
-       VNH_pwm(0,100);
-     }
-     else if (PI/2 < angle_orange　< PI){
-       VNH_pwm(-PI,100);
-     }
-   }
-   if (-PI/2 <=  angle_orange <= 0){
-     VNH_pwm( -3/4*PI , 100 );
+void defence_goal(){
+  while (0 < angle_orange　< PI/2 | PI/2 < angle_orange < PI){ //move until angle_orange is 90angle 
+   if (0 < angle_orange < PI/2){
+      VNH_pwm(0,100);
+    }
+    else if (PI/2 < angle_orange　< PI){
+      VNH_pwm(-PI,100);
+    }
+  }
+  if (-PI/2 <=  angle_orange <= 0){
+    VNH_pwm( -3/4*PI , 100 );
   }
   else if (-PI <= angle_orange < -PI/2){
-     VNH_pwm( -PI/4 , 100 );
+    VNH_pwm( -PI/4 , 100 );
   }
 }
   
-void ball_kick(){//if can look enemy goal,kick ball
+void kick_ball(){//if can look enemy goal,kick ball
   if (goal == true){///enemy goal is yellow
    while (angle_yellow < 4/9*PI | 5/9*PI < angle_yellow){
      if (angle_yellow < 4/9*PI){
-      VNH_pwm(0,100);
-     }
+        VNH_rotate(-50);
+      }
      else if (5/9*PI < angle_yellow){
-      VNH_pwm(-PI,100);
-     }
-   }
+        VNH_rotate(50);
+      }
+    }
    if (4/9*PI <= angle_yellow <= 5/9*PI){
      digitalWrite(sloenoid_FET,HIGH);
-   }
+    }
   }
   else if (goal == false){///enemy goal is blue
-    while (angle_blue < 4/9*PI | 5/9*PI < angle_blue){
+    while (angle_blue < 4/9*PI | 5/9*PI < angle_blue){///until 4/9*PI <= angle_blue <= 5/9*PI
      if (angle_blue < 4/9*PI){
-      VNH_pwm(0,100);
-     }
+       VNH_rotate(-50);
+      }
      else if (5/9*PI < angle_blue){
-      VNH_pwm(-PI,100);
-     }
-   }
+       VNH_rotate(50);
+      }
+    }
    if (4/9*PI <= angle_blue <= 5/9*PI){
      digitalWrite(sloenoid_FET,HIGH);
-   }
+    }
   }
 }
