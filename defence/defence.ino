@@ -1,4 +1,4 @@
-//version 3.8
+//version 3.9
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -98,7 +98,7 @@ void setup() {
 }
 
 void loop() {
-#ifdef DEBUG
+ #ifdef DEBUG
   #ifdef DEBUG_Gyro_sensor
     robot_angle = get_robot_angle();
   #endif
@@ -114,10 +114,10 @@ void loop() {
   #ifdef DEBUG_color_angle
     Serial.println(angle_orange * 180/PI);
   #endif
-#endif
+ #endif
 
-angle_yellow = get_angle_yellow();
-angle_blue = get_angle_blue();
+ angle_yellow = get_angle_yellow();
+ angle_blue = get_angle_blue();
 
   if ( -PI <= angle_orange <= PI ){ ///there is ball
    angle_robot();
@@ -166,7 +166,6 @@ angle_blue = get_angle_blue();
       }
     }
   }
-}
 }
 
 void angle_robot(){
