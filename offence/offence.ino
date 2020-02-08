@@ -209,7 +209,7 @@ void ball_catch() {
           kicked = true;
         }
       }
-      else VNH_pwm(PI/2,70); 
+      else VNH_pwm(angle,70); 
     }
       
     if (goal = false) {
@@ -246,7 +246,7 @@ void ball_catch() {
           kicked = true;
         }
       }
-      else VNH_pwm(PI/2,70);
+      else VNH_pwm(angle,70);
     }
     if(digitalRead(ball_sensor) == 0 && kicked == false){
       //esc_speed_down();

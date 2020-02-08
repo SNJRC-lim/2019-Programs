@@ -27,8 +27,8 @@ float get_angle_orange() {
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float rad = atan2(y , x);
     return rad;
@@ -51,8 +51,8 @@ float get_angle_yellow() {
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float rad = atan2(y , x);
     return rad;
@@ -74,8 +74,8 @@ float get_angle_blue() {
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float rad = atan2(y , x);
     return rad;
@@ -96,8 +96,8 @@ float get_dist_orange(){
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float dist = sqrt(x*x + y*y);
     return dist;
@@ -118,8 +118,8 @@ float get_dist_yellow(){
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float dist = sqrt(x*x + y*y);
     return dist;
@@ -140,8 +140,8 @@ float get_dist_blue(){
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float dist = sqrt(x*x + y*y);
     return dist;
