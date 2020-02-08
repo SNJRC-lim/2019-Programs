@@ -1,4 +1,4 @@
-//version 3.9.0
+//version 3.9.1
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -220,49 +220,83 @@ void defence_goal(){
 void kick_ball(){
   ///if enemy goal color is yellow...///
   if(goal == true){
-    if(5*PI/12 <= angle_yellow <= 7*PI/12){       //robot find enemy goal
-      digitalWrite(sloenoid_FET,HIGH);
-    }
-    if(0 <= angle_yellow <= 5*PI/12){             //there is enemy goal on the right of robot
-      while(0 <= angle_yellow <= 5*PI/12){
-        VNH_rotate(50);
+    if(0 <= angle_yellow <= PI){                  //there is yellow goal in 0~PI
+      if(4*PI/9 < angle_yellow < 5*PI/9){
+        digitalWrite(sloenoid_FET,HIGH);
+      }
+      if(0 <=  angle_yellow <= 4*PI/9){           //there is yellow goal on the right 
+        while(4*PI/9 < angle_yellow <= 17*PI/36){
+          VNH_rotate(-50);
+        }
+      }
+      if(5*PI < angle_yellow < PI){
+        while(19*PI/36 < angle_yellow < PI){
+          VNH_rotate(50);
+        }
+      }
+      if(get_angle_yellow == get_angle_yellow() == get_angle_yellow()){
+        VNH_pwm(0,0);
       }
     }
-
-    if(7*PI/12 < angle_yellow <= PI){             //there is enemy goal on the left of robot
-      while(7*PI/12 < angle_yellow <= PI){
-        VNH_rotate(-50);
+  
+    if(-PI <= angle_yellow < 0){
+      if(-4*PI/9 < angle_yellow < 0){
+        while(-4*PI/9 < angle_yellow <=17*PI/36){
+          VNH_rotate(-50);
+        }
       }
-    }
-    
-    if(angle_yellow == angle_yellow == angle_yellow){   //robot doesn't find enemy goal
-      VNH_pwm(PI,0);
+      if(-PI < angle_yellow < -5*PI/9){
+        while(-PI < angle_yellow < -5*PI/9 | angle_orange > 19*PI/36){
+          VNH_rotate(-50);
+        }
+      }
+      if(-5*PI/9 < angle_yellow < -4*PI/9){
+        while(-5*PI/9 < angle_yellow < -4*PI/9){
+          VNH_pwm(-50);
+        }
+      }
     }
   }
 
-  ///if enemy goal color is blue...///
-  if(goal == false){
-    if(5*PI/12 <= angle_blue <= 7*PI/12){         //robot find enemy goal
-      digitalWrite(sloenoid_FET,HIGH);
-    }
-    if(0 <= angle_blue <= 5*PI/12){
-      while(0 <= angle_blue <= 5*PI/12){
-        VNH_rotate(50);
+  if(goal ==false)[
+    if(0 <= angle_blue <= PI){                  //there is yellow goal in 0~PI
+      if(4*PI/9 < angle_yellow < 5*PI/9){
+        digitalWrite(sloenoid_FET,HIGH);
+      }
+      if(0 <=  angle_blue <= 4*PI/9){           //there is yellow goal on the right 
+        while(4*PI/9 < angle_yellow <= 17*PI/36){
+          VNH_rotate(-50);
+        }
+      }
+      if(5*PI < angle_blue < PI){
+        while(19*PI/36 < angle_blue < PI){
+          VNH_rotate(50);
+        }
+      }
+      if(get_angle_blue == get_angle_blue() == get_angle_blue()){
+        VNH_pwm(0,0);
       }
     }
-    
-    if(7*PI/12 < angle_blue <= PI){
-      while(7*PI/12 < angle_blue <= PI){
-        VNH_rotate(-50);
+  
+    if(-PI <= angle_blue < 0){
+      if(-4*PI/9 < angle_blue < 0){
+        while(-4*PI/9 < angle_blue <=17*PI/36){
+          VNH_rotate(-50);
+        }
+      }
+      if(-PI < angle_blue < -5*PI/9){
+        while(-PI < angle_blue < -5*PI/9 | angle_blue > 19*PI/36){
+          VNH_rotate(-50);
+        }
+      }
+      if(-5*PI/9 < angle_blue < -4*PI/9){
+        while(-5*PI/9 < angle_blue < -4*PI/9){
+          VNH_pwm(-50);
+        }
       }
     }
-
-    if(angle_blue == angle_blue == angle_blue){   //robot doesn't find enemy goal
-      VNH_pwm(0,0);
-    }
-  }
+  ]
 }
-
 #ifdef developing_options
 void back_goal(){
   dist_blue == get_dist_blue();       //set dist_blue
