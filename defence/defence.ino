@@ -229,7 +229,7 @@ void kick_ball(){
           VNH_rotate(-50);
         }
       }
-      if(5*PI < angle_yellow < PI){
+      if(5*PI/9 < angle_yellow < PI){
         while(19*PI/36 < angle_yellow < PI){
           VNH_rotate(50);
         }
@@ -268,7 +268,7 @@ void kick_ball(){
           VNH_rotate(-50);
         }
       }
-      if(5*PI < angle_blue < PI){
+      if(5*PI/9 < angle_blue < PI){
         while(19*PI/36 < angle_blue < PI){
           VNH_rotate(50);
         }
