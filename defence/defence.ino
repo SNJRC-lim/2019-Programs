@@ -1,4 +1,4 @@
-//version 4.0.2
+//version 4.0.3
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -220,37 +220,40 @@ void defence_goal(){
 void kick_ball(){
   ///if enemy goal color is yellow...///
   if(goal == true){
-    if(0 <= angle_yellow <= PI){                  //there is yellow goal in 0~PI
-      if(4*PI/9 < angle_yellow < 5*PI/9){
+    
+    ///there is yellow goal in 0~PI///
+    if(0 <= angle_yellow <= PI){                  
+      if(4*PI/9 < angle_yellow < 5*PI/9){         //there is yellow goal in front of robot
         digitalWrite(sloenoid_FET,HIGH);
       }
-      if(0 <=  angle_yellow <= 4*PI/9){           //there is yellow goal on the right 
+      if(0 <=  angle_yellow <= 4*PI/9){           //there is yellow goal on the right robot 
         while(4*PI/9 < angle_yellow <= 17*PI/36){
           VNH_rotate(-50);
         }
       }
-      if(5*PI/9 < angle_yellow < PI){
+      if(5*PI/9 < angle_yellow < PI){             //there is yellow goal on the left of robot 
         while(19*PI/36 < angle_yellow < PI){
           VNH_rotate(50);
         }
       }
-      if(get_angle_yellow == get_angle_yellow() == get_angle_yellow()){
+      if(get_angle_yellow == get_angle_yellow() == get_angle_yellow()){   //the same value is returned three times
         VNH_pwm(0,0);
       }
     }
   
-    if(-PI <= angle_yellow < 0){
-      if(-4*PI/9 < angle_yellow < 0){
+    ///there is yellow goal in -PI~0///
+    if(-PI <= angle_yellow < 0){                  
+      if(-4*PI/9 < angle_yellow < 0){                //there is yellow goal on the back right        
         while(-4*PI/9 < angle_yellow <=17*PI/36){
           VNH_rotate(-50);
         }
       }
-      if(-PI < angle_yellow < -5*PI/9){
+      if(-PI < angle_yellow < -5*PI/9){               //there is yellow goal on the bak left
         while(-PI < angle_yellow < -5*PI/9 | angle_orange > 19*PI/36){
           VNH_rotate(-50);
         }
       }
-      if(-5*PI/9 < angle_yellow < -4*PI/9){
+      if(-5*PI/9 < angle_yellow < -4*PI/9){           //there is yellow goal right behind
         while(-5*PI/9 < angle_yellow < -4*PI/9){
           VNH_pwm(-50);
         }
@@ -258,44 +261,47 @@ void kick_ball(){
     }
   }
 
-  if(goal ==false)[
-    if(0 <= angle_blue <= PI){                  //there is yellow goal in 0~PI
-      if(4*PI/9 < angle_yellow < 5*PI/9){
+  ///if enemy goal color is blue...///
+  if(goal ==false){
+    ///there is blue goal in 0~PI
+    if(0 <= angle_blue <= PI){                  
+      if(4*PI/9 < angle_yellow < 5*PI/9){       //there is blue goal in front of goal 
         digitalWrite(sloenoid_FET,HIGH);
       }
-      if(0 <=  angle_blue <= 4*PI/9){           //there is yellow goal on the right 
+      if(0 <=  angle_blue <= 4*PI/9){           //there is blue goal on the right 
         while(4*PI/9 < angle_yellow <= 17*PI/36){
           VNH_rotate(-50);
         }
       }
-      if(5*PI/9 < angle_blue < PI){
+      if(5*PI/9 < angle_blue < PI){             //there is blue goal on the left
         while(19*PI/36 < angle_blue < PI){
           VNH_rotate(50);
         }
       }
-      if(get_angle_blue == get_angle_blue() == get_angle_blue()){
+      if(get_angle_blue == get_angle_blue() == get_angle_blue()){   //the same value is returned three times
         VNH_pwm(0,0);
       }
     }
   
+    ///there is blue goal in -PI~0///
     if(-PI <= angle_blue < 0){
-      if(-4*PI/9 < angle_blue < 0){
+      if(-4*PI/9 < angle_blue < 0){             //there is blue goal on the back right
         while(-4*PI/9 < angle_blue <=17*PI/36){
           VNH_rotate(-50);
         }
       }
-      if(-PI < angle_blue < -5*PI/9){
+      if(-PI < angle_blue < -5*PI/9){           //there is blue goal on the back left 
         while(-PI < angle_blue < -5*PI/9 | angle_blue > 19*PI/36){
           VNH_rotate(-50);
         }
       }
-      if(-5*PI/9 < angle_blue < -4*PI/9){
+      if(-5*PI/9 < angle_blue < -4*PI/9){       //there is blue goal right behind 
         while(-5*PI/9 < angle_blue < -4*PI/9){
           VNH_pwm(-50);
         }
       }
     }
-  ]
+  }
 }
 #ifdef developing_options
 void back_goal(){
