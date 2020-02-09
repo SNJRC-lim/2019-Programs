@@ -271,13 +271,13 @@ void robot_go_angle(){
     if (3/4 * PI < angle_orange <= PI) {
       angle = -3/4 * PI;
     }
-    if (0 < angle_orange <= -1/4 * PI | -3/4 * PI <= angle_orange < -PI) {
+    if (-1/4 * PI <= angle_orange < 0 | -PI < angle_orange <= -3/4 * PI) {
       angle = -1/2 * PI;
     }
-    if (-1/2 * PI <= angle_orange < -3/4 * PI) {
+    if (-3/4 * PI < angle_orange <= -1/2 * PI) {
       angle = -1/6 * PI;
     }
-    if (-1/4 * PI <= angle_orange < -1/2 * PI) {
+    if (-1/2 * PI < angle_orange <= -1/4 * PI) {
       angle = -5/6 * PI;
     }
   }  
