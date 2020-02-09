@@ -1,4 +1,4 @@
-//version 4.0.4
+//version 4.0.5
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -105,7 +105,9 @@ void loop() {
     angle_orange = get_angle_orange();
   #endif
 
-  #ifdef DEBUG_Gyro_sensor
+  #ifdef DEBUG_Gyro_sensorsensor) == 0){        //robot has alredy caught ball
+          if(digitalRead(ball_sensor) == 0){      //check again
+          go_enemy_goal();
     Serial.println(robot_angle * 180/PI);
   #endif
 
@@ -147,7 +149,9 @@ void loop() {
     }
     if (goal = false) {
       robot_angle = get_robot_angle();
-      angle_blue = get_angle_blue();
+      angle_blue = get_anglesensor) == 0){        //robot has alredy caught ball
+          if(digitalRead(ball_sensor) == 0){      //check again
+          go_enemy_goal();_blue();
       while (-PI / 2 <= angle_blue < PI / 3 | 1/18 * PI <= robot_angle < PI) {
         VNH_rotate(-50);
         robot_angle = get_robot_angle();
@@ -269,11 +273,11 @@ void kick_ball(){
   if(goal ==false){
     ///there is blue goal in 0~PI
     if(0 <= angle_blue <= PI){                  
-      if(4*PI/9 < angle_yellow < 5*PI/9){       //there is blue goal in front of goal 
+      if(4*PI/9 < angle_blue < 5*PI/9){       //there is blue goal in front of goal 
         digitalWrite(sloenoid_FET,HIGH);
       }
       if(0 <=  angle_blue <= 4*PI/9){           //there is blue goal on the right 
-        while(4*PI/9 < angle_yellow <= 17*PI/36){
+        while(4*PI/9 < angle_blue <= 17*PI/36){
           VNH_rotate(-50);
         }
       }
