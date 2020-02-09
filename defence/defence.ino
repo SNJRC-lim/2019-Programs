@@ -1,4 +1,4 @@
-//version 4.1
+//version 4.2
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -207,10 +207,20 @@ void kick_ball(){//if can look enemy goal,kick ball
   if (goal == true){///enemy goal is yellow
    while (angle_yellow < 4/9*PI | 5/9*PI < angle_yellow){
      if (angle_yellow < 4/9*PI){/// there is enemy goal in front of robot and right 
-        VNH_rotate(-50);///right rotation
+       if (0 <= angle_blue <= PI){///there is my goal (blue goal)
+         VNH_rotate(-50);///right rotation
+        }
+       else if (0 < angle_blue < -PI){///there is not my goal (blue goal)
+         VNH_pwm(0,100);
+        }
       }
      else if (5/9*PI < angle_yellow){/// there is enemy goal in front of robot and left
-        VNH_rotate(50);///left rotation
+       if (0 <= angle_blue <= PI){///there is my goal (blue goal)
+         VNH_rotate(50);///left rotation
+        }
+        else if (0 < angle_blue < -PI){
+          VNH_pwm(PI,100);
+        }
       }
     }
    if (4/9*PI <= angle_yellow <= 5/9*PI){///there is enemy goal in front of robot
@@ -218,12 +228,22 @@ void kick_ball(){//if can look enemy goal,kick ball
     }
   }
   else if (goal == false){///enemy goal is blue
-    while (angle_blue < 4/9*PI | 5/9*PI < angle_blue){///until 4/9*PI <= angle_blue <= 5/9*PI
+    while (angle_blue < 4/9*PI | 5/9*PI < angle_blue){
      if (angle_blue < 4/9*PI){/// there is enemy goal in front of robot and right 
-       VNH_rotate(-50);///right rotation
+       if (0 <= angle_yellow <= PI){///there is my goal (blue goal)
+         VNH_rotate(-50);///right rotation
+        }
+       else if (0 < angle_yellow < -PI){///there is not my goal (blue goal)
+         VNH_pwm(0,100);
+        }
       }
-     else if (5/9*PI < angle_blue){/// there is enemy goal in front of robot and left 
-       VNH_rotate(50);///left rotation
+     else if (5/9*PI < angle_blue){/// there is enemy goal in front of robot and left
+       if (0 <= angle_yellow <= PI){///there is my goal (blue goal)
+         VNH_rotate(50);///left rotation
+        }
+        else if (0 < angle_yellow < -PI){
+          VNH_pwm(PI,100);
+        }
       }
     }
    if (4/9*PI <= angle_blue <= 5/9*PI){///there is enemy goal in front of robot
