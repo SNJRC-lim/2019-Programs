@@ -332,7 +332,7 @@ void back_goal(){
       VNH_pwm(angle_blue,100);
     }
     if(goal == false){
-      FlexTimer2::stop();
+      FlexiTimer2::stop();
       angle_yellow == get_angle_yellow();
       VNH_pwm(angle_yellow,100);
     }
