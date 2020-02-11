@@ -1,7 +1,7 @@
-//version 6.0
+//version 6.1
 
 ///program for main game///
-//#define program_for_game //comment out this line when it is not real game
+#define program_for_game //comment out this line when it is not real game
 
 ///set debug options///
 #define DEBUG
@@ -167,6 +167,11 @@ void loop() {
       }
     }
   }
+  //control robot program start and stop
+  if(digitalRead(start_button) == 0){
+    VNH_pwm(0,0);
+    while(start_button == 1);
+  }
 }
 
 ///ball caught///
@@ -263,20 +268,20 @@ void robot_go_angle(){
   }
   else if ((PI / 4 <= angle_orange) && (angle_orange <= 3 * PI / 4)) {
       angle = angle_orange;
-    }
+  }
   else if ((0 <= angle_orange) && (angle_orange < PI / 4)) {
       angle = -PI / 4;
-    }
+  }
   else if ((3 * PI / 4< angle_orange) && (angle_orange <= PI)) {
       angle = -3 * PI / 4;
-    }
+  }
   else if (((-PI / 4 <= angle_orange) && (angle_orange < 0)) || ((-PI < angle_orange) && (angle_orange <= -3 * PI / 4))) {
       angle = -PI / 2;
-    }
+  }
   else if ((-3 * PI / 4 < angle_orange) && (angle_orange <= -PI / 2)) {
       angle = -PI / 6;
-    }
+  }
   else if ((-PI / 2 < angle_orange) && (angle_orange <= -PI / 4)) {
       angle = -5 * PI / 6;
-    }
+  }
 }
