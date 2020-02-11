@@ -123,7 +123,7 @@ void loop() {
     defence_goal();
   }
 
-  if(-PI > angle_orange | PI < angle_orange){     //robot doesn't find ball
+  if(-PI > angle_orange || PI < angle_orange){     //robot doesn't find ball
     VNH_pwm(PI,0);                                //don't move
   }
 
@@ -163,7 +163,7 @@ void loop() {
 }
 
 void defence_goal(){
-  if((-PI > angle_orange) | (PI < angle_orange)){     //not find ball
+  if((-PI > angle_orange) || (PI < angle_orange)){     //not find ball
     VNH_pwm(PI,0);                                    //don't move
   }
   if((-PI <= angle_orange) && (angle_orange <= PI)){  //robot recognize ball
@@ -253,7 +253,7 @@ void kick_ball(){
         }
       }
       if((-PI < angle_yellow) && (angle_yellow < -5*PI/9)){               //there is yellow goal on the bak left
-        while(((-PI < angle_yellow) && (angle_yellow < -5*PI/9)) | (angle_orange > 19*PI/36)){
+        while(((-PI < angle_yellow) && (angle_yellow < -5*PI/9)) || (angle_orange > 19*PI/36)){
           VNH_rotate(-50);
         }
       }
@@ -295,7 +295,7 @@ void kick_ball(){
         }
       }
       if((-PI < angle_blue) && (angle_blue < -5*PI/9)){           //there is blue goal on the back left 
-        while((-PI < angle_blue) && (angle_blue < -5*PI/9) | (angle_blue > 19*PI/36)){
+        while((-PI < angle_blue) && (angle_blue < -5*PI/9) || (angle_blue > 19*PI/36)){
           VNH_rotate(-50);
         }
       }
