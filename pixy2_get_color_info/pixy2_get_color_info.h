@@ -5,6 +5,7 @@
 
 #include "Arduino.h"
 #include "Pixy2.h"
+
 const int sig_orange = 1;
 const int sig_yellow = 2;
 const int sig_blue = 3;
