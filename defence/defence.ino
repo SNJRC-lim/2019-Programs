@@ -7,7 +7,7 @@
 ///my header files///
 #include "Motor_drive_VNH.h" //set motor driver pin && VNH_pwm,VNH1,VNH2,VNH3.VNH4 function
 #include "White_line.h"      //use it by flexitimer2 (timer interrapt)
-#include "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
+#include  "pixy2_get_color_info.h" //set start_pixy2 , get angle orange , get angle yellow , get angle blue
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
 #include "communication.h" //set function get_robot_angle
 #include "esc_control.h"   //operating esc(brushless motor) , speed up or speed down
@@ -19,9 +19,8 @@ bool goal = true; //true : yellow , false : blue
 #define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
 #define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
 
-///game options///
-#define start_soccer_game   //use this when real game
-//#define developing_options  //use this if the function completed
+///goal color///
+bool goal = true;//true yellow : false blue
 
 ///angles///
 //in this program,all angle use RAD//
@@ -89,11 +88,7 @@ void setup() {
   ///esc setup///
   esc_setup();
 
-  ///wait start///
-  #ifdef start_soccer_game
-    while (digitalRead(start_button) == 1);
-  #endif
-}
+
 
 void loop() {
 
