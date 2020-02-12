@@ -1,4 +1,4 @@
-//version 6.1
+//version 6.2
 
 ///program for main game///
 #define program_for_game //comment out this line when it is not real game
