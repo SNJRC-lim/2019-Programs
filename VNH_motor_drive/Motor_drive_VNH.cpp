@@ -1,14 +1,9 @@
-//version 0.2
+//version 0.3
 
 #include "Motor_drive_VNH.h"
 #include "Arduino.h"
 
 void VNH_pwm(float angle1 , int percentage){
-  //float rad_x = (angle1 - 45) / (180 / PI);
-  //float X = cos(rad_x);
-
-  //float rad_y = (angle1 - 45) / (180 / PI);
-  //float Y = sin(rad_y);
   float angle2;
   
   if((-3/4)*PI<angle1<=-PI){
