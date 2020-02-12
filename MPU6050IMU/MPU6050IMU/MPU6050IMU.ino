@@ -82,7 +82,7 @@ void setup()
     mySerial.begin(115200);
 
   imu_init();
-  imu_attachSensorOfset(69, -38, 100, 1382);
+  imu_attachSensorOfset(68, -42, 5, 1078);
   /*
    Calibrationプログラムによって得られたオフセットを適用します
    コメントアウトされた"Your offsets"の後の並びとimu_attachSensorOfset()の引数を参照して
