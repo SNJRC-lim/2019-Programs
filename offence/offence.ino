@@ -140,37 +140,27 @@ void loop() {
     count = 0;
     if (goal = true) {
       robot_angle = get_robot_angle();
-      angle_yellow = get_angle_yellow();
-      while (((-PI / 2 <= angle_yellow) && (angle_yellow < PI / 3)) || ((PI / 18<= robot_angle) && (robot_angle < PI))) {
+      while (((PI / 18<= robot_angle) && (robot_angle < PI))) {
         VNH_rotate(-50);
         robot_angle = get_robot_angle();
-        angle_yellow = get_angle_yellow();
       }
-      while (((2 * PI / 3 <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2)) || ((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
+      while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
         VNH_rotate(50);
         robot_angle = get_robot_angle();
-        angle_yellow = get_angle_yellow();
       }
     }
     if (goal = false) {
       robot_angle = get_robot_angle();
-      angle_blue = get_angle_blue();
-      while (((-PI / 2 <= angle_blue) && (angle_blue < PI / 3)) || ((1/18 * PI <= robot_angle) && (robot_angle < PI))) {
+      while (((1/18 * PI <= robot_angle) && (robot_angle < PI))) {
         VNH_rotate(-50);
         robot_angle = get_robot_angle();
         angle_blue = get_angle_blue();
       }
-      while (((2/3 * PI <= angle_blue) && (angle_blue < PI)) || ((-PI <= angle_blue) && (angle_blue < -PI / 2)) || ((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
+      while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
         VNH_rotate(50);
         robot_angle = get_robot_angle();
-        angle_blue = get_angle_blue();
       }
     }
-  }
-  //control robot program start and stop
-  if(digitalRead(start_button) == 0){
-    VNH_pwm(0,0);
-    while(start_button == 1);
   }
 }
 
@@ -268,7 +258,6 @@ void robot_go_angle(){
   }
   else if ((PI / 4 <= angle_orange) && (angle_orange <= 3 * PI / 4)) {
       angle = angle_orange;
-<<<<<<< HEAD
   }
   else if ((0 <= angle_orange) && (angle_orange < PI / 4)) {
       angle = -PI / 4;
