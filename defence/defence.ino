@@ -1,4 +1,4 @@
-//version 4.0.4
+//version 4.0.5
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -180,7 +180,7 @@ void defence_goal(){
           VNH_pwm(0,0)                            //don't move
         }
       }   
-      if((0 <= angle_orange) %% (angle_orange <= 4*PI/9)){            //there is ball on the right of robot
+      if((0 <= angle_orange) && (angle_orange <= 4*PI/9)){            //there is ball on the right of robot
         while((0 <= angle_orange) && (angle_orange <= 17*PI/36)){
           VNH_pwm(0,50);
         }
