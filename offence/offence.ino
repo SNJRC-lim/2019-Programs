@@ -1,4 +1,4 @@
-//version 6.2
+//version 6.3
 
 ///program for main game///
 #define program_for_game //comment out this line when it is not real game
@@ -134,33 +134,15 @@ void loop() {
 
   ball_catch();
    
-  ///Angle adjustment once in 10 routines///
-  int count = count + 1;
-  if(count = 10){
-    count = 0;
-    if (goal = true) {
-      robot_angle = get_robot_angle();
-      while (((PI / 18<= robot_angle) && (robot_angle < PI))) {
-        VNH_rotate(-50);
-        robot_angle = get_robot_angle();
-      }
-      while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
-        VNH_rotate(50);
-        robot_angle = get_robot_angle();
-      }
-    }
-    if (goal = false) {
-      robot_angle = get_robot_angle();
-      while (((1/18 * PI <= robot_angle) && (robot_angle < PI))) {
-        VNH_rotate(-50);
-        robot_angle = get_robot_angle();
-        angle_blue = get_angle_blue();
-      }
-      while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
-        VNH_rotate(50);
-        robot_angle = get_robot_angle();
-      }
-    }
+  ///Angle adjustment///
+  robot_angle = get_robot_angle();
+  while (((PI / 18<= robot_angle) && (robot_angle < PI))) {
+    VNH_rotate(-40);
+    robot_angle = get_robot_angle();
+  }
+  while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
+    VNH_rotate(40);
+    robot_angle = get_robot_angle();
   }
 }
 
