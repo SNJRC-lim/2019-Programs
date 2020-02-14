@@ -114,9 +114,9 @@ void loop() {
   #endif
 #endif
 
-  robot_angle = get_robot_angle()   //set robot_angle
+  robot_angle = get_robot_angle();   //set robot_angle
 
-  angle_orange == get_angle_orange() //set angle_orange
+  angle_orange == get_angle_orange(); //set angle_orange
 
 ///division into cases according to ball status///
   if(-PI <= angle_orange <= PI){                  //robot find ball
