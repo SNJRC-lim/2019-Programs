@@ -34,7 +34,7 @@ float angle; //where you want to go
 float robot_angle;  //get from arduino pro mini , robots yaw degree
 
 ///distance///
-float dist_orange;VNH_pwm
+float dist_orange;
 float dist_blue;
 float dist_yellow;
 
