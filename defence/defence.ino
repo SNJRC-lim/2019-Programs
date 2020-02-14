@@ -264,6 +264,7 @@ void kick_ball(){
       }
     }
   }
+}
 
   ///if enemy goal color is blue...///
   if(goal ==false){
