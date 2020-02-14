@@ -16,7 +16,7 @@
 bool goal = true; //true : yellow , false : blue
 ///debug options///
 #define DEBUG
-#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
+//#define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
 #define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
 
 ///game options///
