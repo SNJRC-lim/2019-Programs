@@ -1,4 +1,4 @@
-//version 0.3
+//version 0.4
 
 #include "Motor_drive_VNH.h"
 #include "Arduino.h"
@@ -6,7 +6,7 @@
 void VNH_pwm(float angle1 , int percentage){
   float angle2;
   
-  if((-3/4)*PI<angle1<=-PI){
+  if(((-3/4)*PI<angle1) && (angle1<=-PI)){
 	  angle2 = PI/4 - angle1;
   }
   else angle2 = angle1 - PI/4;
