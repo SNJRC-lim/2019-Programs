@@ -137,11 +137,11 @@ void loop() {
   ///Angle adjustment///
   robot_angle = get_robot_angle();
   while (((PI / 18<= robot_angle) && (robot_angle < PI))) {
-    VNH_rotate(-40);
+    VNH_rotate(-30);
     robot_angle = get_robot_angle();
   }
   while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
-    VNH_rotate(40);
+    VNH_rotate(30);
     robot_angle = get_robot_angle();
   }
 }
