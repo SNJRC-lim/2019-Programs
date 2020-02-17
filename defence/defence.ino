@@ -156,7 +156,7 @@ void loop() {
   }
 }
 
-void defence_goal(){///真ん前を８５〜１０５
+void defence_goal(){///midle angle == 85 - 105 degree
   angle_orange == get_angle_orange();
   while ((0 < angle_orange) && (angle_orange < 17/36*PI) || (7/12*PI < angle_orange) && (angle_orange < PI)){ //move until angle_orange is 17/36*PI-7/12*PI 
    if ((0 < angle_orange )&& (angle_orange < 17/36*PI)){
