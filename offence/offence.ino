@@ -1,4 +1,4 @@
-//version 6.3
+//version 6.4
 
 ///program for main game///
 #define program_for_game //comment out this line when it is not real game
@@ -120,6 +120,7 @@ void loop() {
 #endif
 
   angle_orange = get_angle_orange(); //get orange ball angle
+  dist_orange = get_dist_orange(); //get distance to orange ball
 
   robot_go_angle(); //set where the robot go to
 
@@ -242,22 +243,24 @@ void robot_go_angle(){
   if ((angle_orange < -PI) || (PI < angle_orange)) {
     ball_catch();
   }
-  else if ((PI / 4 <= angle_orange) && (angle_orange <= 3 * PI / 4)) {
-      angle = angle_orange;
+  else if ((PI / 3 <= angle_orange) && (angle_orange <= 2 * PI / 3)) {
+     angle = angle_orange;
   }
-  else if ((0 <= angle_orange) && (angle_orange < PI / 4)) {
-      angle = -PI / 4;
+  
+  else if ((dist_orange * sin(angle_orange) > 12) && ((0 <= angle_orange) && (angle_orange < PI / 3))){
+    angle = 0;
   }
-  else if ((3 * PI / 4< angle_orange) && (angle_orange <= PI)) {
-      angle = -3 * PI / 4;
+  else if ((dist_orange * sin(angle_orange) > 12) && ((2 * PI / 3 < angle_orange) && (angle_orange < PI))){
+    angle = PI;
   }
-  else if (((-PI / 4 <= angle_orange) && (angle_orange < 0)) || ((-PI < angle_orange) && (angle_orange <= -3 * PI / 4))) {
-      angle = -PI / 2;
+  else if ((get_dist_orange() * sin(angle_orange) <= 12) && (((0 <= angle_orange) && (angle_orange < PI / 3)) || ((2 * PI / 3 < angle_orange) && (angle_orange < PI)))){
+    angle = -PI / 2;
   }
-  else if ((-3 * PI / 4 < angle_orange) && (angle_orange <= -PI / 2)) {
-      angle = -PI / 6;
+  
+  else if ((-PI / 2 <= angle_orange) && (angle_orange < 0)){
+    angle = -PI / 2 - angle_orange;
   }
-  else if ((-PI / 2 < angle_orange) && (angle_orange <= -PI / 4)) {
-      angle = -5 * PI / 6;
+  else if ((-PI <= angle_orange) && (angle_orange < -PI / 2 )){
+    angle = PI / 2 + angle_orange; 
   }
 }
