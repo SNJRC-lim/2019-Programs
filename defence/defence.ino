@@ -18,6 +18,7 @@ bool goal = true; //true : yellow , false : blue
 #define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
 #define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
 #define DEBUG_Serial
+//#define developing_options
 
 ///game options///
 #define start_soccer_game   //use this when real game
@@ -279,6 +280,7 @@ void kick_ball(){
       if(get_angle_blue() == get_angle_blue() == get_angle_blue()){ //the same value is returned three times
         VNH_pwm(0,0);
       }
+    }
   
     ///there is blue goal in -PI~0///
     if((-PI <= angle_blue) && (angle_blue < 0)){
@@ -302,5 +304,25 @@ void kick_ball(){
       }
     }
   }
- }
 }
+
+#ifdef developing_options
+void go_enemy_goal(){
+  ///if enemy goal color is yellow...///
+  if(goal = true){
+    float fixed_yellow_length;
+    fixed_yellow_length == 
+    
+    dist_yellow == get_dist_yellow();
+    if(dist_yellow)
+  }
+  ///if enemy goal color is blue...///
+  if(goal = false){
+    float fixed_blue_length;
+    fixed_blue_length == 
+    
+    dist_blue == get_dist_blue();
+    if()
+  }
+}
+#endif
