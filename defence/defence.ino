@@ -1,4 +1,4 @@
-//version 4.5
+//version 4.6
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -146,44 +146,50 @@ void loop() {
 
  ///Angle adjustment///
   robot_angle = get_robot_angle();
-  while (((PI / 18<= robot_angle) && (robot_angle < PI))) {
+  while (((PI/18 <= robot_angle) && (robot_angle < PI))) {
     VNH_rotate(-40);
     robot_angle = get_robot_angle();
   }
-  while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
+  while (((-PI <= robot_angle) && (robot_angle < -PI/18))) {
     VNH_rotate(40);
     robot_angle = get_robot_angle();
   }
 }
 
-void defence_goal(){///真ん前を８５〜１０５
-  angle_orange == get_angle_orange();
-  while ((0 < angle_orange) && (angle_orange < 17/36*PI) || (7/12*PI < angle_orange) && (angle_orange < PI)){ //move until angle_orange is 17/36*PI-7/12*PI 
-   if ((0 < angle_orange )&& (angle_orange < 17/36*PI)){
-      VNH_pwm(0,100);
-      angle_orange = get_angle_orange();
-    }
-    else if ((7/12*PI < angle_orange) && (angle_orange < PI)){
-      VNH_pwm(-PI,100);
-      angle_orange = get_angle_orange();
-    }
+void defence_goal(){
+  angle_orange = -1 * get_angle_orange();
+   //move until angle_orange is 17/36*PI-7/12*PI 
+  if ((0 <= angle_orange ) && (angle_orange < 17 * PI / 36)){
+    angle = 0;
   }
-  if ( ((-PI/4 <= angle_orange) && (angle_orange <=0)) || ((-PI <= angle_orange) && (angle_orange <= -3*PI/4)) ){
-    VNH_pwm( -PI/2 , 100 );
-    angle_orange = get_angle_orange();
+  else if ((7 * PI / 12 < angle_orange) && (angle_orange <= PI)){
+    angle = PI;
   }
+  
+  else if (((-PI / 4 <= angle_orange) && (angle_orange <= 0))){
+    angle = angle_orange - PI / 2;
+  }
+
+  else if (((-PI <= angle_orange) && (angle_orange <= -3 * PI / 4))){
+    angle = angle_orange + PI / 2;
+  }
+ 
+  VNH_pwm(angle,100);
 }
 
-void kick_ball(){//if can look enemy goal,kick ball
+void kick_ball(){//if can look enemy goal,kick ball     use flexitimer2_stop_proguram
+
+  //FlexiTimer2::stop()
+
   if (goal == true){///enemy goal is yellow
    while ((angle_yellow < 4/9*PI) || (5/9*PI < angle_yellow)){
      if (angle_yellow < 4/9*PI){/// there is enemy goal in front of robot and right 
        VNH_pwm(0,100);///move left
-       angle_yellow == get_angle_yellow();
+       angle_yellow = get_angle_yellow();
       }
      else if (5/9*PI < angle_yellow){/// there is enemy goal in front of robot and left
         VNH_pwm(PI,100);///move right
-        angle_yellow == get_angle_yellow();
+        angle_yellow = get_angle_yellow();
       }
     }
    if ((4/9*PI <= angle_yellow) && (angle_yellow <= 5/9*PI)){///there is enemy goal in front of robot
@@ -196,11 +202,11 @@ void kick_ball(){//if can look enemy goal,kick ball
     while (angle_blue < 4/9*PI || 5/9*PI < angle_blue){
      if (angle_blue < 4/9*PI){/// there is enemy goal in front of robot and right 
        VNH_pwm(0,100);///move right 
-       angle_blue == get_angle_blue();
+       angle_blue = get_angle_blue();
       }
      else if (5/9*PI < angle_blue){/// there is enemy goal in front of robot and left
        VNH_pwm(PI,100);///move left
-       angle_blue == get_angle_blue();
+       angle_blue = get_angle_blue();
       }
     }
    if ((4/9*PI <= angle_blue) && (angle_blue <= 5/9*PI)){///there is enemy goal in front of robot
