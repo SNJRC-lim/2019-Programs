@@ -15,7 +15,7 @@ float get_robot_angle(){
 	  angle2 = angle1;
 	  }
     if(angle1>=3.14){
-      angle2 = angle1 -2*PI;
+      angle2 = angle1 - 2*PI;
     }
     else;
     return angle2;   

@@ -16,6 +16,7 @@ float get_angle_blue();
 float get_dist_orange();
 float get_dist_yellow();
 float get_dist_blue();
+float dist_from_robot();
 
 void start_pixy2();
 

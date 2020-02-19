@@ -120,16 +120,15 @@ void loop() {
 #endif
 
   angle_orange = get_angle_orange(); //get orange ball angle
-  dist_orange = get_dist_orange(); //get distance to orange ball
 
   robot_go_angle(); //set where the robot go to
 
   ///if robot lost ball position,jump to ball_catch()///
-  if(angle_orange == get_angle_orange() == get_angle_orange()){
+  if(angle_orange == get_angle_orange()){
     ball_catch();
   }
 
-  if (-PI <= angle_orange <= PI) {
+  else if (-PI <= angle_orange <= PI) {
     VNH_pwm(angle, 100);
   }
 
@@ -137,11 +136,11 @@ void loop() {
    
   ///Angle adjustment///
   robot_angle = get_robot_angle();
-  while (((PI / 18<= robot_angle) && (robot_angle < PI))) {
-    VNH_rotate(-30);
-    robot_angle = get_robot_angle();
-  }
-  while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
+  while (((PI / 18<= robot_angle) && (robot_angle < 4 * PI / 5))) {
+     VNH_rotate(-30);
+     robot_angle = get_robot_angle();
+   }
+  while (((-4 * PI / 5 < robot_angle) && (robot_angle <= -PI / 18))){
     VNH_rotate(30);
     robot_angle = get_robot_angle();
   }
@@ -247,18 +246,22 @@ void robot_go_angle(){
      angle = angle_orange;
   }
   
-  else if ((dist_orange * sin(angle_orange) > 12) && ((0 <= angle_orange) && (angle_orange < PI / 3))){
-    angle = 0;
+  float dist = -1 * dist_from_robot();
+  
+  if (dist > 20){
+    if ((0 <= angle_orange) && (angle_orange < PI / 3)){
+      angle = 0;
+    }
+    else if((2 * PI / 3 < angle_orange) && (angle_orange < PI)){
+      angle = PI;
+    }
   }
-  else if ((dist_orange * sin(angle_orange) > 12) && ((2 * PI / 3 < angle_orange) && (angle_orange < PI))){
-    angle = PI;
-  }
-  else if ((get_dist_orange() * sin(angle_orange) <= 12) && (((0 <= angle_orange) && (angle_orange < PI / 3)) || ((2 * PI / 3 < angle_orange) && (angle_orange < PI)))){
+  else if ((dist <= 20) && (((0 <= angle_orange) && (angle_orange < PI / 3)) || ((2 * PI / 3 < angle_orange) && (angle_orange < PI)))){
     angle = -PI / 2;
   }
   
   else if ((-PI / 2 <= angle_orange) && (angle_orange < 0)){
-    angle = -PI / 2 - angle_orange;
+    angle = -PI / 2 + angle_orange;
   }
   else if ((-PI <= angle_orange) && (angle_orange < -PI / 2 )){
     angle = PI / 2 + angle_orange; 
