@@ -25,7 +25,7 @@ float get_angle_orange() {
 
   if (pixy.ccc.blocks[0].m_signature == sig_orange) {
 
-    int x1 = pixy.ccc.blocks[0].m_x;
+    float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
     float x = x1 - 144.6;
     float y = (y1 - 127.8) * (-1);
@@ -49,7 +49,7 @@ float get_angle_yellow() {
 
   if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
 
-    int x1 = pixy.ccc.blocks[0].m_x;
+    float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
     float x = x1 - 144.6;
     float y = (y1 - 127.8) * (-1);
@@ -72,7 +72,7 @@ float get_angle_blue() {
 
   if (pixy.ccc.blocks[0].m_signature == sig_blue) {
 
-    int x1 = pixy.ccc.blocks[0].m_x;
+    float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
     float x = x1 - 144.6;
     float y = (y1 - 127.8) * (-1);
@@ -94,7 +94,7 @@ float get_dist_orange(){
 
   if (pixy.ccc.blocks[0].m_signature == sig_orange) {
 
-    int x1 = pixy.ccc.blocks[0].m_x;
+    float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
     float x = x1 - 144.6;
     float y = (y1 - 127.8) * (-1);
@@ -126,7 +126,7 @@ float get_dist_yellow(){
 
   if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
 
-    int x1 = pixy.ccc.blocks[0].m_x;
+    float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
     float x = x1 - 144.6;
     float y = (y1 - 127.8) * (-1);
@@ -157,7 +157,7 @@ float get_dist_blue(){
 
   if (pixy.ccc.blocks[0].m_signature == sig_blue) {
 
-    int x1 = pixy.ccc.blocks[0].m_x;
+    float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
     float x = x1 - 144.6;
     float y = (y1 - 127.8) * (-1);
@@ -176,7 +176,7 @@ float get_dist_blue(){
   }
 }  
 
-float dist_from_robot(){
+float x_orange(){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -187,11 +187,102 @@ float dist_from_robot(){
 
   if (pixy.ccc.blocks[0].m_signature == sig_orange) {
 
-    int x1 = pixy.ccc.blocks[0].m_x;
+    float x1 = pixy.ccc.blocks[0].m_x;
+    float x = x1 - 144.6;
+   
+	return x;
+  }
+}
+
+float y_orange(){
+  static int i = 0;
+  int j;
+  uint16_t blocks;
+  char buf[32];
+
+
+  blocks = pixy.ccc.getBlocks();
+
+  if (pixy.ccc.blocks[0].m_signature == sig_orange) {
+
+  
     float y1 = pixy.ccc.blocks[0].m_y;
-    //float x = x1 - 144.6;
     float y = (y1 - 127.8) * (-1);
    
 	return y;
   }
 }	
+
+float x_yellow(){
+  static int i = 0;
+  int j;
+  uint16_t blocks;
+  char buf[32];
+
+
+  blocks = pixy.ccc.getBlocks();
+
+  if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
+
+    float x1 = pixy.ccc.blocks[0].m_x;
+    float x = x1 - 144.6;
+   
+	return x;
+  }
+}
+
+float y_yellow(){
+  static int i = 0;
+  int j;
+  uint16_t blocks;
+  char buf[32];
+
+
+  blocks = pixy.ccc.getBlocks();
+
+  if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
+
+  
+    float y1 = pixy.ccc.blocks[0].m_y;
+    float y = (y1 - 127.8) * (-1);
+   
+	return y;
+  }
+}
+
+float x_blue(){
+  static int i = 0;
+  int j;
+  uint16_t blocks;
+  char buf[32];
+
+
+  blocks = pixy.ccc.getBlocks();
+
+  if (pixy.ccc.blocks[0].m_signature == sig_blue) {
+
+    float x1 = pixy.ccc.blocks[0].m_x;
+    float x = x1 - 144.6;
+   
+	return x;
+  }
+}
+
+float y_blue(){
+  static int i = 0;
+  int j;
+  uint16_t blocks;
+  char buf[32];
+
+
+  blocks = pixy.ccc.getBlocks();
+
+  if (pixy.ccc.blocks[0].m_signature == sig_blue) {
+
+  
+    float y1 = pixy.ccc.blocks[0].m_y;
+    float y = (y1 - 127.8) * (-1);
+   
+	return y;
+  }
+}

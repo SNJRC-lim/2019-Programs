@@ -1,4 +1,4 @@
-//version 0.0
+//version 2.0
 
 #ifndef pixy2_get_color_info_h
 #define pixy2_get_color_info_h
@@ -16,7 +16,12 @@ float get_angle_blue();
 float get_dist_orange();
 float get_dist_yellow();
 float get_dist_blue();
-float dist_from_robot();
+float x_orange();
+float y_orange();
+float x_yellow();
+float y_yellow();
+float x_blue();
+float y_blue();
 
 void start_pixy2();
 

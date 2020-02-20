@@ -1,4 +1,4 @@
-//version 6.4
+//version 6.5
 
 ///program for main game///
 #define program_for_game //comment out this line when it is not real game
@@ -151,7 +151,6 @@ void ball_catch() {
   if (digitalRead(ball_sensor) == digitalRead(ball_sensor) == digitalRead(ball_sensor) == 1) {
     bool kicked;
     //esc_speed_up();
-    FlexiTimer2::stop();
     if (goal = true) {
       angle_yellow = get_angle_yellow();
       while ((-PI / 2 <= angle_yellow) && (angle_yellow < PI / 3)) {
@@ -166,6 +165,7 @@ void ball_catch() {
       dist_yellow = get_dist_yellow();
 
       if (dist_yellow <= 20) {
+        FlexiTimer2::stop();
         while (((0 <= angle_yellow) && (angle_yellow < 4/9 * PI)) || ((-PI / 2 <= angle_yellow) && (angle_yellow < 0))) {
           VNH_pwm(0,40);
           angle_yellow = get_angle_yellow();
@@ -205,6 +205,7 @@ void ball_catch() {
       dist_blue = get_dist_blue();
 
       if (dist_blue <= 20) {
+        FlexiTimer2::stop();
         while (((0 <= angle_yellow) && (angle_yellow < 4/9 * PI)) || ((-PI / 2 <= angle_yellow) && (angle_yellow < 0))) {
           VNH_pwm(0,40);
           angle_blue = get_angle_blue();
@@ -229,7 +230,7 @@ void ball_catch() {
 
       else VNH_pwm(angle_blue,70);
     }
-    if(digitalRead(ball_sensor) == 0 && kicked == false){
+    if((digitalRead(ball_sensor) == 0) && (kicked == false)){
       //esc_speed_down();
     }
   FlexiTimer2::start();
