@@ -1,4 +1,4 @@
-//version 4.6
+//version 4.7
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -156,7 +156,7 @@ void loop() {
   }
 }
 
-void defence_goal(){
+void defence_goal(){//()
   angle_orange = -1 * get_angle_orange();
    //move until angle_orange is 17/36*PI-7/12*PI 
   if ((0 <= angle_orange ) && (angle_orange < 17 * PI / 36)){
@@ -177,11 +177,20 @@ void defence_goal(){
   VNH_pwm(angle,100);
 }
 
-void kick_ball(){//if can look enemy goal,kick ball     use flexitimer2_stop_proguram
+void kick_ball(){//if can look enemy goal,kick ball 
 
-  //FlexiTimer2::stop()
+  FlexiTimer2::stop();
 
   if (goal == true){///enemy goal is yellow
+   dist_blue = get_dist_blue();
+
+   while(dist_blue < 40){
+     VNH_pwm(PI/2,100);
+     dist_blue = get_dist_blue();
+    }
+    FlexiTimer2::start();
+    VNH_pwm(PI/2,100);
+
    while ((angle_yellow < 4/9*PI) || (5/9*PI < angle_yellow)){
      if (angle_yellow < 4/9*PI){/// there is enemy goal in front of robot and right 
        VNH_pwm(0,100);///move left
@@ -192,13 +201,33 @@ void kick_ball(){//if can look enemy goal,kick ball     use flexitimer2_stop_pro
         angle_yellow = get_angle_yellow();
       }
     }
+
    if ((4/9*PI <= angle_yellow) && (angle_yellow <= 5/9*PI)){///there is enemy goal in front of robot
      digitalWrite(sloenoid_FET,HIGH);///kick ball
      delay(100);
      digitalWrite(sloenoid_FET,LOW);
     }
+
+    VNH_pwm(-PI/2,100);
+    FlexiTimer2::stop();
+    dist_blue = get_dist_blue();
+
+    while(dist_blue > 20){
+      VNH_pwm(-PI/2,100);
+      dist_blue = get_dist_blue();
+    }
+    FlexiTimer2::start();
   }
   else if (goal == false){///enemy goal is blue
+   dist_yellow = get_angle_yellow();
+
+   while(dist_yellow < 40){
+     VNH_pwm(PI/2,100);
+     dist_yellow = get_dist_yellow();
+    }
+    FlexiTimer2::start();
+    VNH_pwm(PI/2,100);
+
     while (angle_blue < 4/9*PI || 5/9*PI < angle_blue){
      if (angle_blue < 4/9*PI){/// there is enemy goal in front of robot and right 
        VNH_pwm(0,100);///move right 
@@ -209,10 +238,21 @@ void kick_ball(){//if can look enemy goal,kick ball     use flexitimer2_stop_pro
        angle_blue = get_angle_blue();
       }
     }
+
    if ((4/9*PI <= angle_blue) && (angle_blue <= 5/9*PI)){///there is enemy goal in front of robot
      digitalWrite(sloenoid_FET,HIGH);///kick ball
      delay(100);
      digitalWrite(sloenoid_FET,LOW);
     }
+
+    VNH_pwm(-PI/2,100);
+    FlexiTimer2::stop();
+    dist_yellow = get_dist_yellow();
+
+    while(dist_yellow > 20){
+      VNH_pwm(-PI/2,100);
+      dist_yellow = get_dist_yellow();
+    }
+    FlexiTimer2::start();
   }
 }
