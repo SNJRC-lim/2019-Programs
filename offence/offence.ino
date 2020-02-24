@@ -49,7 +49,13 @@ const int start_button = 48;
 const int sloenoid_FET = 47;
 
 ///ball caught sensor///
-const int ball_sensor = 49;
+const int ball_sensor = 41;
+
+///set pixy2 x & y offset///
+/*const float x_offset = 144.6;
+const float y_offset = 127.8;*/
+const float x_offset = 151;
+const float y_offset = 130;
 //////
 
 void setup() {
@@ -107,7 +113,7 @@ void loop() {
   #endif
 
   #ifdef DEBUG_color_angle
-    angle_orange = get_angle_orange();
+    angle_orange = get_angle_orange(x_offset,y_offset);
   #endif
 
   #ifdef DEBUG_Gyro_sensor
@@ -119,12 +125,16 @@ void loop() {
   #endif
 #endif
 
-  angle_orange = get_angle_orange(); //get orange ball angle
+  angle_orange = get_angle_orange(x_offset,y_offset); //get orange ball angle
 
   robot_go_angle(); //set where the robot go to
 
   ///if robot lost ball position,jump to ball_catch()///
-  if(angle_orange == get_angle_orange()){
+  if(angle_orange == get_angle_orange(x_offset,y_offset)){
+    ball_catch();
+  }
+
+  if ((angle_orange < -PI) || (PI < angle_orange)) {
     ball_catch();
   }
 
@@ -151,32 +161,32 @@ void ball_catch() {
   if (digitalRead(ball_sensor) == digitalRead(ball_sensor) == digitalRead(ball_sensor) == 1) {
     bool kicked;
     //esc_speed_up();
-    if (goal = true) {
-      angle_yellow = get_angle_yellow();
+    if (goal == true) {
+      angle_yellow = get_angle_yellow(x_offset,y_offset);
       while ((-PI / 2 <= angle_yellow) && (angle_yellow < PI / 3)) {
         VNH_pwm(0,50);
-        angle_yellow = get_angle_yellow();
+        angle_yellow = get_angle_yellow(x_offset,y_offset);
       }
       while (((2/3 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
         VNH_pwm(PI,50);
-        angle_yellow = get_angle_yellow();
+        angle_yellow = get_angle_yellow(x_offset,y_offset);
       }
 
-      dist_yellow = get_dist_yellow();
+      dist_yellow = get_dist_yellow(x_offset,y_offset);
 
       if (dist_yellow <= 20) {
         FlexiTimer2::stop();
         while (((0 <= angle_yellow) && (angle_yellow < 4/9 * PI)) || ((-PI / 2 <= angle_yellow) && (angle_yellow < 0))) {
           VNH_pwm(0,40);
-          angle_yellow = get_angle_yellow();
+          angle_yellow = get_angle_yellow(x_offset,y_offset);
         }
 
         while (((5/9 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
           VNH_pwm(PI,40);
-          angle_yellow = get_angle_yellow();
+          angle_yellow = get_angle_yellow(x_offset,y_offset);
         }
           
-        angle_yellow = get_angle_yellow();
+        angle_yellow = get_angle_yellow(x_offset,y_offset);
 
         if ((4/9 * PI <= angle_yellow) && (angle_yellow <= 5/9 * PI)) {
           //esc_speed_down();
@@ -186,37 +196,39 @@ void ball_catch() {
           kicked = true;
         }
       }
-      angle_yellow = get get_angle_yellow();
 
-      else VNH_pwm(angle_yellow,70); 
+      else { 
+        angle_yellow = get_angle_yellow(x_offset,y_offset);
+        VNH_pwm(angle_yellow,70); 
+      }
     }
       
-    if (goal = false) {
-      angle_blue = get_angle_blue();
+    if (goal == false) {
+      angle_blue = get_angle_blue(x_offset,y_offset);
       while ((-PI / 2 <= angle_yellow) && (angle_yellow < PI / 3)) {
         VNH_pwm(0,50);
-        angle_blue = get_angle_blue();
+        angle_blue = get_angle_blue(x_offset,y_offset);
       }
       while (((2/3 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
         VNH_pwm(PI,50);
-        angle_blue = get_angle_blue();
+        angle_blue = get_angle_blue(x_offset,y_offset);
       }
 
-      dist_blue = get_dist_blue();
+      dist_blue = get_dist_blue(x_offset,y_offset);
 
       if (dist_blue <= 20) {
         FlexiTimer2::stop();
         while (((0 <= angle_yellow) && (angle_yellow < 4/9 * PI)) || ((-PI / 2 <= angle_yellow) && (angle_yellow < 0))) {
           VNH_pwm(0,40);
-          angle_blue = get_angle_blue();
+          angle_blue = get_angle_blue(x_offset,y_offset);
         }
 
         while (((5/9 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
           VNH_pwm(PI,40);
-          angle_blue = get_angle_blue();
+          angle_blue = get_angle_blue(x_offset,y_offset);
         }
 
-        angle_blue = get_angle_blue();
+        angle_blue = get_angle_blue(x_offset,y_offset);
 
         if ((4/9 * PI <= angle_yellow) && (angle_yellow <= 5/9 * PI)) {
           //esc_speed_down();
@@ -226,9 +238,11 @@ void ball_catch() {
           kicked = true;
         }
       }
-      angle_blue = get_angle_blue();
-
-      else VNH_pwm(angle_blue,70);
+      
+      else { 
+        angle_blue = get_angle_blue(x_offset,y_offset);
+        VNH_pwm(angle_blue,70);
+      }
     }
     if((digitalRead(ball_sensor) == 0) && (kicked == false)){
       //esc_speed_down();
@@ -240,16 +254,13 @@ void ball_catch() {
 
 ///set where the robot have to go///
 void robot_go_angle(){
-  if ((angle_orange < -PI) || (PI < angle_orange)) {
-    ball_catch();
-  }
-  else if ((PI / 3 <= angle_orange) && (angle_orange <= 2 * PI / 3)) {
+  if ((PI / 3 <= angle_orange) && (angle_orange <= 2 * PI / 3)) {
      angle = angle_orange;
   }
+
+  float dist = y_orange(x_offset,y_offset);
   
-  float dist = -1 * dist_from_robot();
-  
-  if (dist > 20){
+  if (dist > 40){
     if ((0 <= angle_orange) && (angle_orange < PI / 3)){
       angle = 0;
     }
@@ -257,7 +268,7 @@ void robot_go_angle(){
       angle = PI;
     }
   }
-  else if ((dist <= 20) && (((0 <= angle_orange) && (angle_orange < PI / 3)) || ((2 * PI / 3 < angle_orange) && (angle_orange < PI)))){
+  else if ((dist <= 40) && (((0 <= angle_orange) && (angle_orange < PI / 3)) || ((2 * PI / 3 < angle_orange) && (angle_orange < PI)))){
     angle = -PI / 2;
   }
   

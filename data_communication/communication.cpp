@@ -4,6 +4,7 @@
 #include "communication.h"
 
 float get_robot_angle(){
+  digitalWrite(43,LOW);
   digitalWrite(43,HIGH);
   while(Serial1.available()<=0);
   int angle = Serial1.read();

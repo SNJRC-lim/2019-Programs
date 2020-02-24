@@ -13,7 +13,7 @@ void start_pixy2(){
 }
 
 ///orange angle///
-float get_angle_orange() {
+float get_angle_orange(float x_offset,float y_offset) {
 
   static int i = 0;
   int j;
@@ -27,17 +27,17 @@ float get_angle_orange() {
 
     float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 144.6;
-    float y = (y1 - 127.8) * (-1);
+    float x = x1 - x_offset;
+    float y = (y1 - y_offset) * (-1);
 
     float rad = atan2(y , x);
-    return rad;
+    return -1 * rad;
   }
 }
 
 
 ///yellow angle///
-float get_angle_yellow() {
+float get_angle_yellow(float x_offset,float y_offset) {
 
   static int i = 0;
   int j;
@@ -51,16 +51,16 @@ float get_angle_yellow() {
 
     float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 144.6;
-    float y = (y1 - 127.8) * (-1);
+    float x = x1 - x_offset;
+    float y = (y1 - y_offset) * (-1);
 
     float rad = atan2(y , x);
-    return rad;
+    return -1 * rad;
   }
 }
 
 ///blue angle///
-float get_angle_blue() {
+float get_angle_blue(float x_offset,float y_offset) {
 
   static int i = 0;
   int j;
@@ -74,16 +74,16 @@ float get_angle_blue() {
 
     float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 144.6;
-    float y = (y1 - 127.8) * (-1);
+    float x = x1 - x_offset;
+    float y = (y1 - y_offset) * (-1);
 
     float rad = atan2(y , x);
-    return rad;
+    return -1 * rad;
   }
 }
 
 ///orange distance///
-float get_dist_orange(){
+float get_dist_orange(float x_offset,float y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -96,8 +96,8 @@ float get_dist_orange(){
 
     float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 144.6;
-    float y = (y1 - 127.8) * (-1);
+    float x = x1 - x_offset;
+    float y = (y1 - y_offset) * (-1);
     
     float dist0 = 2 *  sqrt(x*x + y*y);
     float dist5 = 151- dist0;
@@ -115,7 +115,7 @@ float get_dist_orange(){
 }  
 
 ///yellow distance///
-float get_dist_yellow(){
+float get_dist_yellow(float x_offset,float y_offset){
 	static int i = 0;
   int j;
   uint16_t blocks;
@@ -128,8 +128,8 @@ float get_dist_yellow(){
 
     float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 144.6;
-    float y = (y1 - 127.8) * (-1);
+    float x = x1 - x_offset;
+    float y = (y1 - y_offset) * (-1);
 
     float dist0 = 2 *  sqrt(x*x + y*y);
     float dist5 = 151- dist0;
@@ -146,7 +146,7 @@ float get_dist_yellow(){
 }  
 
 ///blue distance///
-float get_dist_blue(){
+float get_dist_blue(float x_offset,float y_offset){
 	static int i = 0;
   int j;
   uint16_t blocks;
@@ -159,8 +159,8 @@ float get_dist_blue(){
 
     float x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 144.6;
-    float y = (y1 - 127.8) * (-1);
+    float x = x1 - x_offset;
+    float y = (y1 - y_offset) * (-1);
 
     float dist0 = 2 *  sqrt(x*x + y*y);
     float dist5 = 151- dist0;
@@ -176,7 +176,7 @@ float get_dist_blue(){
   }
 }  
 
-float x_orange(){
+float x_orange(float x_offset,float y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -188,13 +188,13 @@ float x_orange(){
   if (pixy.ccc.blocks[0].m_signature == sig_orange) {
 
     float x1 = pixy.ccc.blocks[0].m_x;
-    float x = x1 - 144.6;
+    float x = x1 - x_offset;
    
-	return x;
+	return -1 * x;
   }
 }
 
-float y_orange(){
+float y_orange(float x_offset,float y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -207,13 +207,13 @@ float y_orange(){
 
   
     float y1 = pixy.ccc.blocks[0].m_y;
-    float y = (y1 - 127.8) * (-1);
+    float y = (y1 - y_offset) * (-1);
    
-	return y;
+	return -1 * y;
   }
 }	
 
-float x_yellow(){
+float x_yellow(float x_offset,float y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -225,13 +225,13 @@ float x_yellow(){
   if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
 
     float x1 = pixy.ccc.blocks[0].m_x;
-    float x = x1 - 144.6;
+    float x = x1 - x_offset;
    
-	return x;
+	return -1 * x;
   }
 }
 
-float y_yellow(){
+float y_yellow(float x_offset,float y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -244,13 +244,13 @@ float y_yellow(){
 
   
     float y1 = pixy.ccc.blocks[0].m_y;
-    float y = (y1 - 127.8) * (-1);
+    float y = (y1 - y_offset) * (-1);
    
-	return y;
+	return -1 * y;
   }
 }
 
-float x_blue(){
+float x_blue(float x_offset,float y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -262,13 +262,13 @@ float x_blue(){
   if (pixy.ccc.blocks[0].m_signature == sig_blue) {
 
     float x1 = pixy.ccc.blocks[0].m_x;
-    float x = x1 - 144.6;
+    float x = x1 - x_offset;
    
-	return x;
+	return -1 * x;
   }
 }
 
-float y_blue(){
+float y_blue(float x_offset,float y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -281,8 +281,8 @@ float y_blue(){
 
   
     float y1 = pixy.ccc.blocks[0].m_y;
-    float y = (y1 - 127.8) * (-1);
+    float y = (y1 - y_offset) * (-1);
    
-	return y;
+	return -1 * y;
   }
 }
