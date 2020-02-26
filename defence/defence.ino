@@ -14,10 +14,9 @@
 ///goal color///
 bool goal = true; //true : yellow , false : blue
 ///debug options///
-#define DEBUG
+//#define DEBUG
 #define DEBUG_Gyro_sensor //use this when debug gyro sensor in this program
 #define DEBUG_color_angle //use this when debUg pixy in this program VNH_pwmellow , get angle blueon get_robot_angle
-#define DEBUG_Serial
 //#define developing_options
 
 ///game options///
@@ -80,8 +79,8 @@ void setup() {
   TCCR4B = (TCCR4B & 0b11111000) | 1;
 
   ///set timer interrupt///
-  FlexiTimer2::set(1, 1.0 / 7500, White_line);
-  FlexiTimer2::start();
+  //FlexiTimer2::set(1, 1.0 / 7500, White_line);
+  //FlexiTimer2::start();
 
   ///pixy setup///
   start_pixy2();
@@ -114,41 +113,28 @@ void loop() {
   #endif
 #endif
 
-  angle_orange == get_angle_orange(); //set angle_orange
+  angle_orange == -1*get_angle_orange(); //set angle_orange
 
 ///division into cases according to ball status///
   if(-PI <= angle_orange <= PI){                  //robot find ball
     defence_goal();
-    #ifdef Serial
-      Serial.plintln("find ball");
-    #endif
   }
 
   if(-PI > angle_orange || PI < angle_orange){    //robot doesn't find ball
     VNH_pwm(PI,0);                                //don't move
-    #ifdef Serial
-      Serial.plintln("don't find ball");
-    #endif
   }
 
   ///Angle adjustment///
   robot_angle = get_robot_angle();
-  while (((PI / 18<= robot_angle) && (robot_angle < PI))) {
-    VNH_rotate(-40);
-    robot_angle = get_robot_angle();  
-  }
-  while (((-PI <= robot_angle) && (robot_angle < -PI / 18))) {
-    VNH_rotate(40);
-    robot_angle = get_robot_angle();
+  while (((PI / 18 <= robot_angle) && (robot_angle <= PI)) || ((-PI <= robot_angle) && (robot_angle <= PI / 18))) {
+        VNH_rotate(-30);
+        robot_angle = get_robot_angle();
   }
 }
 
 void defence_goal(){
   if((-PI > angle_orange) || (PI < angle_orange)){     //not find ball
     VNH_pwm(PI,0);                                    //don't move
-    #ifdef Serial
-      Serial.plintln("don't move");
-    #endif
   }
   if((-PI <= angle_orange) && (angle_orange <= PI)){  //robot recognize ball
     
@@ -165,16 +151,16 @@ void defence_goal(){
       if((0 <= angle_orange) && (angle_orange <= 4*PI/9)){            //there is ball on the right of robot
         while((0 <= angle_orange) && (angle_orange <= 17*PI/36)){
           VNH_pwm(0,50);
-          get_angle_orange();
+          angle_orange = -1*get_angle_orange();
         }
       }   
       if((5*PI/9 <= angle_orange) && (angle_orange < PI)){            //there is ball on the left of robot
         while((19*PI/36 <= angle_orange) && (angle_orange < PI)){ 
           VNH_pwm(PI,50);
-          get_angle_orange();
+          angle_orange = -1*get_angle_orange();
         }
       }    
-      if(angle_orange == get_angle_orange() == get_angle_orange()){   //the same value is returned three times
+      if(get_angle_orange() == get_angle_orange() == get_angle_orange()){   //the same value is returned three times
         if(digitalRead(ball_sensor) == 0){        //robot has alredy caught ball
           if(digitalRead(ball_sensor) == 0){      //check again
           kick_ball();  
@@ -191,14 +177,14 @@ void defence_goal(){
       if((-PI <= angle_orange)&& (angle_orange <= -PI/2)){           //there is ball on the back left
         while(((-PI <= angle_orange) && (angle_orange <= -PI/2)) | (angle_orange <= 5*PI/9)){
           VNH_rotate(-50);
-          angle_orange == get_angle_orange();
+          angle_orange = -1*get_angle_orange();
         }
       }
     
       if((-PI/2 < angle_orange) && (angle_orange < 0)){              //there is ball on the back right
         while((-PI/2 < angle_orange) && (angle_orange < 4*PI/9)){
           VNH_rotate(50);
-          get_angle_orange();
+          angle_orange = -1*get_angle_orange();
         }
       }
     }
@@ -208,7 +194,7 @@ void defence_goal(){
 void kick_ball(){
   ///if enemy goal color is yellow...///
   if(goal == true){
-    angle_yellow == get_angle_yellow();
+    angle_yellow == -1*get_angle_yellow();
     ///there is yellow goal in 0~PI///
     if((0 <= angle_yellow) && (angle_yellow <= PI)){                  
       if((4*PI/9 < angle_yellow) && (angle_yellow < 5*PI/9)){         //there is yellow goal in front of robot
@@ -218,13 +204,13 @@ void kick_ball(){
       if((0 <= angle_yellow) && (angle_yellow <= 4*PI/9)){            //there is yellow goal on the right robot 
         while((4*PI/9 < angle_yellow) && (angle_yellow <= 17*PI/36)){
           VNH_rotate(-50);
-          angle_yellow == get_angle_yellow();
+          angle_yellow == -1*get_angle_yellow();
         }
       }
       if((5*PI/9 < angle_yellow) && (angle_yellow < PI)){            //there is yellow goal on the left of robot 
         while((19*PI/36 < angle_yellow) && (angle_yellow < PI)){
           VNH_rotate(50);
-          angle_yellow == get_angle_yellow();
+          angle_yellow == -1*get_angle_yellow();
         }
       }
       if(get_angle_yellow() == get_angle_yellow() == get_angle_yellow()){   //the same value is returned three times
@@ -237,19 +223,19 @@ void kick_ball(){
       if((-4*PI/9 < angle_yellow) && (angle_yellow < 0)){                 //there is yellow goal on the back right        
         while((-4*PI/9 < angle_yellow) && (angle_yellow <= 17*PI/36)){
           VNH_rotate(-50);
-          angle_yellow == get_angle_yellow();
+          angle_yellow == -1*get_angle_yellow();
         }
       }
       if((-PI < angle_yellow) && (angle_yellow < -5*PI/9)){               //there is yellow goal on the bak left
         while(((-PI < angle_yellow) && (angle_yellow < -5*PI/9)) || (angle_orange > 19*PI/36)){
           VNH_rotate(-50);
-          angle_yellow == get_angle_yellow();
+          angle_yellow == -1*get_angle_yellow();
         }
       }
       if((-5*PI/9 < angle_yellow) && (angle_yellow < -4*PI/9)){           //there is yellow goal right behind
         while((-5*PI/9 < angle_yellow) && (angle_yellow < -4*PI/9)){
           VNH_rotate(-50);
-          angle_yellow == get_angle_yellow();
+          angle_yellow == -1*get_angle_yellow();
         }
       }
     }
@@ -258,7 +244,7 @@ void kick_ball(){
 
   ///if enemy goal color is blue...///
   if(goal ==false){
-    angle_blue == get_angle_blue();
+    angle_blue == -1*get_angle_blue();
     ///there is blue goal in 0~PI
     if((0 <= angle_blue) && (angle_blue <= PI)){                  
       if((4*PI/9 < angle_yellow) && (angle_yellow < 5*PI/9)){     //there is blue goal in front of goal 
@@ -268,13 +254,13 @@ void kick_ball(){
       if((0 <= angle_blue) && (angle_blue <= 4*PI/9)){            //there is blue goal on the right 
         while((4*PI/9 < angle_yellow) && (angle_yellow <= 17*PI/36)){
           VNH_rotate(-50);
-          angle_blue == get_angle_blue();
+          angle_blue == -1*get_angle_blue();
         }
       }
       if((5*PI/9 < angle_blue) && (angle_blue < PI)){             //there is blue goal on the left
         while((19*PI/36 < angle_blue) && (angle_blue < PI)){
           VNH_rotate(50);
-          angle_blue == get_angle_blue();
+          angle_blue == -1*get_angle_blue();
         }
       }
       if(get_angle_blue() == get_angle_blue() == get_angle_blue()){ //the same value is returned three times
@@ -287,19 +273,19 @@ void kick_ball(){
       if((-4*PI/9 < angle_blue) && (angle_blue < 0)){             //there is blue goal on the back right
         while((-4*PI/9 < angle_blue) && ( angle_blue <= 17*PI/36)){
           VNH_rotate(-50);
-          angle_blue == get_angle_blue();
+          angle_blue == -1*get_angle_blue();
         }
       }
       if((-PI < angle_blue) && (angle_blue < -5*PI/9)){           //there is blue goal on the back left 
         while((-PI < angle_blue) && (angle_blue < -5*PI/9) || (angle_blue > 19*PI/36)){
           VNH_rotate(-50);
-          angle_blue == get_angle_blue();
+          angle_blue == -1*get_angle_blue();
         }
       }
       if((-5*PI/9 < angle_blue) && (angle_blue < -4*PI/9)){       //there is blue goal right behind 
         while((-5*PI/9 < angle_blue) && (angle_blue < -4*PI/9)){
           VNH_rotate(-50);
-          angle_blue == get_angle_blue();
+          angle_blue == -1*get_angle_blue();
         }
       }
     }
