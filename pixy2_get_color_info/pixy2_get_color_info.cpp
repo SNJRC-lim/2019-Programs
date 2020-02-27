@@ -13,77 +13,50 @@ void start_pixy2(){
 }
 
 ///orange angle///
-float get_angle_orange(float x_offset,float y_offset) {
+int get_angle_orange(int x_offset,int y_offset) {
+	
+  pixy.ccc.getBlocks();
+  
+  int x1 = pixy.ccc.blocks[1].m_x;
+  int y1 = pixy.ccc.blocks[1].m_y;
+  int x = x1 - x_offset;
+  int y = (y1 - y_offset) * (-1);
 
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
-
-
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_orange) {
-
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - x_offset;
-    float y = (y1 - y_offset) * (-1);
-
-    float rad = atan2(y , x);
-    return -1 * rad;
-  }
+  int rad = atan2(y , x) * 100;
+  return -1 * rad;
 }
 
 
 ///yellow angle///
-float get_angle_yellow(float x_offset,float y_offset) {
+int get_angle_yellow(int x_offset,int y_offset) {
 
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
+  pixy.ccc.getBlocks();
 
+  int x1 = pixy.ccc.blocks[0].m_x;
+  int y1 = pixy.ccc.blocks[0].m_y;
+  int x = x1 - x_offset;
+  int y = (y1 - y_offset) * (-1);
 
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
-
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - x_offset;
-    float y = (y1 - y_offset) * (-1);
-
-    float rad = atan2(y , x);
-    return -1 * rad;
-  }
+  int rad = atan2(y , x) * 100;
+  return -1 * rad;
 }
 
 ///blue angle///
-float get_angle_blue(float x_offset,float y_offset) {
+int get_angle_blue(int x_offset,int y_offset) {
 
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
+  pixy.ccc.getBlocks();
 
+  int x1 = pixy.ccc.blocks[2].m_x;
+  int y1 = pixy.ccc.blocks[2].m_y;
+  int x = x1 - x_offset;
+  int y = (y1 - y_offset) * (-1);
 
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_blue) {
-
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - x_offset;
-    float y = (y1 - y_offset) * (-1);
-
-    float rad = atan2(y , x);
-    return -1 * rad;
-  }
+  int rad = atan2(y , x) * 100;
+  return -1 * rad;
 }
 
 ///orange distance///
-float get_dist_orange(float x_offset,float y_offset){
+/*int get_dist_orange(int x_offset,int y_offset){
   static int i = 0;
   int j;
   uint16_t blocks;
@@ -94,17 +67,17 @@ float get_dist_orange(float x_offset,float y_offset){
 
   if (pixy.ccc.blocks[0].m_signature == sig_orange) {
 
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - x_offset;
-    float y = (y1 - y_offset) * (-1);
+    int x1 = pixy.ccc.blocks[0].m_x;
+    int y1 = pixy.ccc.blocks[0].m_y;
+    int x = x1 - x_offset;
+    int y = (y1 - y_offset) * (-1);
     
-    float dist0 = 2 *  sqrt(x*x + y*y);
-    float dist5 = 151- dist0;
-    float dist1 = sqrt(dist5);
-    float dist2 = 306.1862 * dist1;
-    float dist3 = 3159 - dist2;
-    float dist = dist3 /45;
+    int dist0 = 2 *  sqrt(x*x + y*y);
+    int dist5 = 151- dist0;
+    int dist1 = sqrt(dist5);
+    int dist2 = 306.1862 * dist1;
+    int dist3 = 3159 - dist2;
+    int dist = dist3 /45;
     
     if(dist0 > 151){
 		dist = 65;
@@ -115,7 +88,7 @@ float get_dist_orange(float x_offset,float y_offset){
 }  
 
 ///yellow distance///
-float get_dist_yellow(float x_offset,float y_offset){
+int get_dist_yellow(int x_offset,int y_offset){
 	static int i = 0;
   int j;
   uint16_t blocks;
@@ -126,17 +99,17 @@ float get_dist_yellow(float x_offset,float y_offset){
 
   if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
 
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - x_offset;
-    float y = (y1 - y_offset) * (-1);
+    int x1 = pixy.ccc.blocks[0].m_x;
+    int y1 = pixy.ccc.blocks[0].m_y;
+    int x = x1 - x_offset;
+    int y = (y1 - y_offset) * (-1);
 
-    float dist0 = 2 *  sqrt(x*x + y*y);
-    float dist5 = 151- dist0;
-    float dist1 = sqrt(dist5);
-    float dist2 = 306.1862 * dist1;
-    float dist3 = 3159 - dist2;
-    float dist = dist3 /45;
+    int dist0 = 2 *  sqrt(x*x + y*y);
+    int dist5 = 151- dist0;
+    int dist1 = sqrt(dist5);
+    int dist2 = 306.1862 * dist1;
+    int dist3 = 3159 - dist2;
+    int dist = dist3 /45;
     
     if(dist0 > 151){
 		dist = 65;
@@ -146,7 +119,7 @@ float get_dist_yellow(float x_offset,float y_offset){
 }  
 
 ///blue distance///
-float get_dist_blue(float x_offset,float y_offset){
+int get_dist_blue(int x_offset,int y_offset){
 	static int i = 0;
   int j;
   uint16_t blocks;
@@ -157,17 +130,17 @@ float get_dist_blue(float x_offset,float y_offset){
 
   if (pixy.ccc.blocks[0].m_signature == sig_blue) {
 
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - x_offset;
-    float y = (y1 - y_offset) * (-1);
+    int x1 = pixy.ccc.blocks[0].m_x;
+    int y1 = pixy.ccc.blocks[0].m_y;
+    int x = x1 - x_offset;
+    int y = (y1 - y_offset) * (-1);
 
-    float dist0 = 2 *  sqrt(x*x + y*y);
-    float dist5 = 151- dist0;
-    float dist1 = sqrt(dist5);
-    float dist2 = 306.1862 * dist1;
-    float dist3 = 3159 - dist2;
-    float dist = dist3 /45;
+    int dist0 = 2 *  sqrt(x*x + y*y);
+    int dist5 = 151- dist0;
+    int dist1 = sqrt(dist5);
+    int dist2 = 306.1862 * dist1;
+    int dist3 = 3159 - dist2;
+    int dist = dist3 /45;
     
     if(dist0 > 151){
 		dist = 65;
@@ -175,114 +148,63 @@ float get_dist_blue(float x_offset,float y_offset){
     return dist;
   }
 }  
+*/
+int get_x_orange(int x_offset,int y_offset){
 
-float x_orange(float x_offset,float y_offset){
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
-
-
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_orange) {
-
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float x = x1 - x_offset;
-   
-	return -1 * x;
-  }
+  pixy.ccc.getBlocks();
+  
+  int x1 = pixy.ccc.blocks[1].m_x;
+  int x = x1 - x_offset;
+  
+  return -1 * x;
 }
 
-float y_orange(float x_offset,float y_offset){
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
+int get_y_orange(int x_offset,int y_offset){
 
+  pixy.ccc.getBlocks();
 
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_orange) {
-
-  
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float y = (y1 - y_offset) * (-1);
+  int y1 = pixy.ccc.blocks[1].m_y;
+  int y = (y1 - y_offset) * (-1);
    
-	return -1 * y;
-  }
+  return y;
 }	
 
-float x_yellow(float x_offset,float y_offset){
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
+int get_x_yellow(int x_offset,int y_offset){
 
+  pixy.ccc.getBlocks();
 
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
-
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float x = x1 - x_offset;
+  int x1 = pixy.ccc.blocks[0].m_x;
+  int x = x1 - x_offset;
    
-	return -1 * x;
-  }
+  return x;
 }
 
-float y_yellow(float x_offset,float y_offset){
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
+int get_y_yellow(int x_offset,int y_offset){
 
+  pixy.ccc.getBlocks();
 
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_yellow) {
-
-  
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float y = (y1 - y_offset) * (-1);
+  int y1 = pixy.ccc.blocks[0].m_y;
+  int y = (y1 - y_offset) * (-1);
    
-	return -1 * y;
-  }
+  return y;
 }
 
-float x_blue(float x_offset,float y_offset){
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
+int get_x_blue(int x_offset,int y_offset){
 
+  pixy.ccc.getBlocks();
 
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_blue) {
-
-    float x1 = pixy.ccc.blocks[0].m_x;
-    float x = x1 - x_offset;
+  int x1 = pixy.ccc.blocks[2].m_x;
+  int x = x1 - x_offset;
    
-	return -1 * x;
-  }
+  return x;
 }
 
-float y_blue(float x_offset,float y_offset){
-  static int i = 0;
-  int j;
-  uint16_t blocks;
-  char buf[32];
+int get_y_blue(int x_offset,int y_offset){
 
+  pixy.ccc.getBlocks();
 
-  blocks = pixy.ccc.getBlocks();
-
-  if (pixy.ccc.blocks[0].m_signature == sig_blue) {
-
-  
-    float y1 = pixy.ccc.blocks[0].m_y;
-    float y = (y1 - y_offset) * (-1);
+  int y1 = pixy.ccc.blocks[2].m_y;
+  int y = y1 - y_offset;
    
-	return -1 * y;
-  }
+  return y;
 }

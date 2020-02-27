@@ -5,6 +5,6 @@
 
 #include "Arduino.h"
 
-float get_robot_angle();
+int get_robot_angle();
 
 #endif

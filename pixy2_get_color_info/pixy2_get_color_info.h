@@ -10,18 +10,18 @@ const int sig_orange = 1;
 const int sig_yellow = 2;
 const int sig_blue = 3;
 
-float get_angle_orange(float x_offset,float y_offset);
-float get_angle_yellow(float x_offset,float y_offset);
-float get_angle_blue(float x_offset,float y_offset);
-float get_dist_orange(float x_offset,float y_offset);
-float get_dist_yellow(float x_offset,float y_offset);
-float get_dist_blue(float x_offset,float y_offset);
-float x_orange(float x_offset,float y_offset);
-float y_orange(float x_offset,float y_offset);
-float x_yellow(float x_offset,float y_offset);
-float y_yellow(float x_offset,float y_offset);
-float x_blue(float x_offset,float y_offset);
-float y_blue(float x_offset,float y_offset);
+int get_angle_orange(int x_offset,int y_offset);
+int get_angle_yellow(int x_offset,int y_offset);
+int get_angle_blue(int x_offset,int y_offset);
+/*int get_dist_orange(int x_offset,int y_offset);
+int get_dist_yellow(int x_offset,int y_offset);
+int get_dist_blue(int x_offset,int y_offset);*/
+int get_x_orange(int x_offset,int y_offset);
+int get_y_orange(int x_offset,int y_offset);
+int get_x_yellow(int x_offset,int y_offset);
+int get_y_yellow(int x_offset,int y_offset);
+int get_x_blue(int x_offset,int y_offset);
+int get_y_blue(int x_offset,int y_offset);
 
 void start_pixy2();
 

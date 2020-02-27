@@ -124,158 +124,232 @@ void loop() {
     Serial.println(angle_orange * 180/PI);
   #endif
 #endif
-
-  angle_orange = get_angle_orange(x_offset,y_offset); //get orange ball angle
-
   robot_go_angle(); //set where the robot go to
 
   ///if robot lost ball position,jump to ball_catch()///
-  if(angle_orange == get_angle_orange(x_offset,y_offset)){
+  if ((angle_orange < -314) || (314 < angle_orange)) {
     ball_catch();
   }
 
-  if ((angle_orange < -PI) || (PI < angle_orange)) {
-    ball_catch();
+  int angle_orange_tmp1 = get_angle_orange(x_offset, y_offset);
+  int angle_orange_tmp2 = get_angle_orange(x_offset, y_offset);
+  int angle_orange_tmp3 = get_angle_orange(x_offset, y_offset);
+  int angle_orange_tmp4 = get_angle_orange(x_offset, y_offset);
+
+  if (angle_orange_tmp1 == angle_orange_tmp2) {
+    if (angle_orange_tmp2 == angle_orange_tmp3) {
+      if (angle_orange_tmp3 == angle_orange_tmp4) {
+        ball_catch();
+      }
+    }
   }
 
-  else if (-PI <= angle_orange <= PI) {
-    VNH_pwm(angle, 100);
+  else {
+    angle2 = angle / 100;
+    VNH_pwm(angle2, 40);
   }
-
-  ball_catch();
    
   ///Angle adjustment///
-  robot_angle = get_robot_angle();
-  while (((PI / 18<= robot_angle) && (robot_angle < 4 * PI / 5))) {
-     VNH_rotate(-30);
-     robot_angle = get_robot_angle();
-   }
-  while (((-4 * PI / 5 < robot_angle) && (robot_angle <= -PI / 18))){
-    VNH_rotate(30);
-    robot_angle = get_robot_angle();
-  }
+  angle_adjustment();
 }
 
 ///ball caught///
 void ball_catch() {
-  if (digitalRead(ball_sensor) == digitalRead(ball_sensor) == digitalRead(ball_sensor) == 1) {
-    bool kicked;
-    //esc_speed_up();
-    if (goal == true) {
-      angle_yellow = get_angle_yellow(x_offset,y_offset);
-      while ((-PI / 2 <= angle_yellow) && (angle_yellow < PI / 3)) {
-        VNH_pwm(0,50);
-        angle_yellow = get_angle_yellow(x_offset,y_offset);
-      }
-      while (((2/3 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
-        VNH_pwm(PI,50);
-        angle_yellow = get_angle_yellow(x_offset,y_offset);
-      }
+  if (digitalRead(ball_sensor) == 0) {
+    if (digitalRead(ball_sensor) == 0) {
+      if (digitalRead(ball_sensor) == 0) {
+        if (digitalRead(ball_sensor) == 0) {
+          bool kicked;
+          //esc_speed_up();
+          if (goal == true) {
+            angle_yellow = get_angle_yellow(x_offset, y_offset);
 
-      dist_yellow = get_dist_yellow(x_offset,y_offset);
+            if (angle_yellow <= 0) {
+              angle_yellow = angle_yellow + 314;
+            }
+            else if (0 < angle_yellow) {
+              angle_yellow = angle_yellow - 314;
+            }
 
-      if (dist_yellow <= 20) {
-        FlexiTimer2::stop();
-        while (((0 <= angle_yellow) && (angle_yellow < 4/9 * PI)) || ((-PI / 2 <= angle_yellow) && (angle_yellow < 0))) {
-          VNH_pwm(0,40);
-          angle_yellow = get_angle_yellow(x_offset,y_offset);
+            while ((-314 / 2 <= angle_yellow) && (angle_yellow < 314 / 3)) {
+              VNH_pwm(PI / 6, 30);
+              angle_yellow = get_angle_yellow(x_offset, y_offset);
+
+              if (angle_yellow <= 0) {
+                angle_yellow = angle_yellow + 314;
+              }
+              else if (0 < angle_yellow) {
+                angle_yellow = angle_yellow - 314;
+              }
+
+              angle_adjustment();
+            }
+            while (((2 * 314 / 3 <= angle_yellow) && (angle_yellow < 314)) || ((-314 <= angle_yellow) && (angle_yellow < -314 / 2))) {
+              VNH_pwm(5 * PI / 6, 30);
+              angle_yellow = get_angle_yellow(x_offset, y_offset);
+
+              if (angle_yellow <= 0) {
+                angle_yellow = angle_yellow + 314;
+              }
+              else if (0 < angle_yellow) {
+                angle_yellow = angle_yellow - 314;
+              }
+
+              angle_adjustment();
+            }
+
+            angle_yellow = get_angle_yellow(x_offset,y_offset);
+
+              if ((4/9 * PI <= angle_yellow) && (angle_yellow <= 5/9 * PI)) {
+              //esc_speed_down();
+              digitalWrite(sloenoid_FET, HIGH);
+              delay(10);
+              digitalWrite(sloenoid_FET, LOW);
+              kicked = true;
+              }
+
+              else {
+              angle_yellow = get_angle_yellow(x_offset,y_offset);
+              VNH_pwm(angle_yellow,70);
+              }
+            angle_yellow = get_angle_yellow(x_offset, y_offset);
+
+            if (angle_yellow <= 0) {
+              angle_yellow = angle_yellow + 314;
+            }
+            else if (0 < angle_yellow) {
+              angle_yellow = angle_yellow - 314;
+            }
+
+            if ((314 / 3 <= angle_yellow) && (angle_yellow < 2 * 314 / 3)) {
+              VNH_pwm(angle_yellow, 60);
+            }
+          }
+
+          if (goal == false) {
+            angle_blue = get_angle_blue(x_offset, y_offset);
+
+            if (angle_blue <= 0) {
+              angle_blue = angle_blue + 314;
+            }
+            else if (0 < angle_yellow) {
+              angle_blue = angle_blue - 314;
+            }
+
+            while ((-314 / 2 <= angle_blue) && (angle_blue < 314 / 3)) {
+              VNH_pwm(PI / 6, 30);
+              angle_blue = get_angle_blue(x_offset, y_offset);
+
+              if (angle_blue <= 0) {
+                angle_blue = angle_blue + 314;
+              }
+              else if (0 < angle_yellow) {
+                angle_blue = angle_blue - 314;
+              }
+
+              angle_adjustment();
+            }
+            while (((2 * 314 / 3 <= angle_blue) && (angle_blue < 314)) || ((-314 <= angle_blue) && (angle_blue < -314 / 2))) {
+              VNH_pwm(5 * PI / 6, 30);
+              angle_blue = get_angle_blue(x_offset, y_offset);
+
+              if (angle_blue <= 0) {
+                angle_blue = angle_blue + 314;
+              }
+              else if (0 < angle_yellow) {
+                angle_blue = angle_blue - 314;
+              }
+
+              angle_adjustment();
+            }
+
+             angle_blue = get_angle_blue(x_offset,y_offset);
+
+              if ((4/9 * PI <= angle_blue) && (angle_blue <= 5/9 * PI)) {
+               //esc_speed_down();
+               digitalWrite(sloenoid_FET, HIGH);
+               delay(10);
+               digitalWrite(sloenoid_FET, LOW);
+               kicked = true;
+              }
+
+
+              else {
+              angle_blue = get_angle_blue(x_offset,y_offset);
+              VNH_pwm(angle_blue,70);
+              }
+            angle_yellow = get_angle_yellow(x_offset, y_offset);
+
+            if (angle_blue <= 0) {
+              angle_blue = angle_blue + 314;
+            }
+            else if (0 < angle_yellow) {
+              angle_blue = angle_blue - 314;
+            }
+
+            if ((314 / 3 <= angle_blue) && (angle_blue < 2 * 314 / 3)) {
+              VNH_pwm(angle_yellow, 60);
+            }
+
+          }
+          if ((digitalRead(ball_sensor) == 0) && (kicked == false)) {
+            //esc_speed_down();
+          }
+          //FlexiTimer2::start();
+          kicked = false;
         }
-
-        while (((5/9 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
-          VNH_pwm(PI,40);
-          angle_yellow = get_angle_yellow(x_offset,y_offset);
-        }
-          
-        angle_yellow = get_angle_yellow(x_offset,y_offset);
-
-        if ((4/9 * PI <= angle_yellow) && (angle_yellow <= 5/9 * PI)) {
-          //esc_speed_down();
-          digitalWrite(sloenoid_FET, HIGH);
-          delay(10);
-          digitalWrite(sloenoid_FET, LOW);
-          kicked = true;
-        }
-      }
-
-      else { 
-        angle_yellow = get_angle_yellow(x_offset,y_offset);
-        VNH_pwm(angle_yellow,70); 
       }
     }
-      
-    if (goal == false) {
-      angle_blue = get_angle_blue(x_offset,y_offset);
-      while ((-PI / 2 <= angle_yellow) && (angle_yellow < PI / 3)) {
-        VNH_pwm(0,50);
-        angle_blue = get_angle_blue(x_offset,y_offset);
-      }
-      while (((2/3 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
-        VNH_pwm(PI,50);
-        angle_blue = get_angle_blue(x_offset,y_offset);
-      }
-
-      dist_blue = get_dist_blue(x_offset,y_offset);
-
-      if (dist_blue <= 20) {
-        FlexiTimer2::stop();
-        while (((0 <= angle_yellow) && (angle_yellow < 4/9 * PI)) || ((-PI / 2 <= angle_yellow) && (angle_yellow < 0))) {
-          VNH_pwm(0,40);
-          angle_blue = get_angle_blue(x_offset,y_offset);
-        }
-
-        while (((5/9 * PI <= angle_yellow) && (angle_yellow < PI)) || ((-PI <= angle_yellow) && (angle_yellow < -PI / 2))) {
-          VNH_pwm(PI,40);
-          angle_blue = get_angle_blue(x_offset,y_offset);
-        }
-
-        angle_blue = get_angle_blue(x_offset,y_offset);
-
-        if ((4/9 * PI <= angle_yellow) && (angle_yellow <= 5/9 * PI)) {
-          //esc_speed_down();
-          digitalWrite(sloenoid_FET, HIGH);
-          delay(10);
-          digitalWrite(sloenoid_FET, LOW);
-          kicked = true;
-        }
-      }
-      
-      else { 
-        angle_blue = get_angle_blue(x_offset,y_offset);
-        VNH_pwm(angle_blue,70);
-      }
-    }
-    if((digitalRead(ball_sensor) == 0) && (kicked == false)){
-      //esc_speed_down();
-    }
-  FlexiTimer2::start();
-  kicked = false;
+  }
+  else {
+  VNH_pwm(PI / 2, 40);
   }
 }
 
 ///set where the robot have to go///
 void robot_go_angle(){
-  if ((PI / 3 <= angle_orange) && (angle_orange <= 2 * PI / 3)) {
-     angle = angle_orange;
+  angle_orange = get_angle_orange(x_offset, y_offset);
+
+  if (angle_orange <= 0) {
+    angle_orange = angle_orange + 314;
+  }
+  else if (0 < angle_orange) {
+    angle_orange = angle_orange - 314;
   }
 
-  float dist = y_orange(x_offset,y_offset);
-  
-  if (dist > 40){
-    if ((0 <= angle_orange) && (angle_orange < PI / 3)){
-      angle = 0;
-    }
-    else if((2 * PI / 3 < angle_orange) && (angle_orange < PI)){
-      angle = PI;
-    }
+  if ((314 / 3 <= angle_orange) && (angle_orange <= 2 * 314 / 3)) {
+    angle = angle_orange;
   }
-  else if ((dist <= 40) && (((0 <= angle_orange) && (angle_orange < PI / 3)) || ((2 * PI / 3 < angle_orange) && (angle_orange < PI)))){
-    angle = -PI / 2;
+
+
+  if (((0 <= angle_orange) && (angle_orange < 314 / 12)) || ((11 * 314 / 12 < angle_orange) && (angle_orange <= 314))) {
+    angle = -157;
   }
-  
-  else if ((-PI / 2 <= angle_orange) && (angle_orange < 0)){
-    angle = -PI / 2 + angle_orange;
+
+  else if ((314 / 12 <= angle_orange) && (angle_orange < 314 / 3)) {
+    angle = angle_orange - 314 / 2;
   }
-  else if ((-PI <= angle_orange) && (angle_orange < -PI / 2 )){
-    angle = PI / 2 + angle_orange; 
+
+  else if ((2 * 314 / 3 < angle_orange) && (angle_orange <= 11 * 314 / 12)) {
+    angle = angle_orange - 3 * 314 / 2;
+  }
+
+  else if ((-314 / 2 <= angle_orange) && (angle_orange < 0)) {
+    angle = -314 / 2 + angle_orange;
+  }
+  else if ((-314 <= angle_orange) && (angle_orange < -314 / 2 )) {
+    angle = 314 / 2 + angle_orange;
+  }
+}
+
+void angle_adjustment(){
+  robot_angle = -1 * get_robot_angle();
+  while (((314 / 18 <= robot_angle) && (robot_angle < 4 * 314 / 5))) {
+    VNH_rotate(-30);
+    robot_angle = -1 * get_robot_angle();
+  }
+  while (((-4 * 314 / 5 < robot_angle) && (robot_angle <= -314 / 18))) {
+    VNH_rotate(30);
+    robot_angle = -1 * get_robot_angle();
   }
 }

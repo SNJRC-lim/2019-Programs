@@ -3,20 +3,20 @@
 #include "Arduino.h"
 #include "communication.h"
 
-float get_robot_angle(){
+int get_robot_angle(){
   digitalWrite(43,LOW);
   digitalWrite(43,HIGH);
   while(Serial1.available()<=0);
   int angle = Serial1.read();
   digitalWrite(43,LOW);
-  float angle1 = angle / 128.0 * PI;
-  float angle2;
+  int angle1 = angle / 128.0 * 314;
+  int angle2;
     
-  if(angle1<3.14){
+  if(angle1<314){
    angle2 = angle1;
   }
-  if(angle1>=3.14){
-    angle2 = angle1 - 2*PI;
+  if(angle1>=314){
+    angle2 = angle1 - 628;
   }
   else;
   return angle2;   
