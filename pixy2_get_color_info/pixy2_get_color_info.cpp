@@ -23,7 +23,15 @@ int get_angle_orange(int x_offset,int y_offset) {
   int y = (y1 - y_offset) * (-1);
 
   int rad = atan2(y , x) * 100;
-  return -1 * rad;
+  
+  if (rad >= 0) {
+    rad = 314 - rad;
+  }
+  else if (0 > rad) {
+    rad = -1 * rad - 314;
+  }
+  
+  return rad;
 }
 
 
@@ -38,7 +46,15 @@ int get_angle_yellow(int x_offset,int y_offset) {
   int y = (y1 - y_offset) * (-1);
 
   int rad = atan2(y , x) * 100;
-  return -1 * rad;
+  
+  if (rad >= 0) {
+    rad = 314 - rad;
+  }
+  else if (0 > rad) {
+    rad = -1 * rad - 314;
+  }
+  
+  return rad;
 }
 
 ///blue angle///
@@ -52,7 +68,15 @@ int get_angle_blue(int x_offset,int y_offset) {
   int y = (y1 - y_offset) * (-1);
 
   int rad = atan2(y , x) * 100;
-  return -1 * rad;
+  
+  if (rad >= 0) {
+    rad = 314 - rad;
+  }
+  else if (0 > rad) {
+    rad = -1 * rad - 314;
+  }
+  
+  return rad;
 }
 
 ///orange distance///
