@@ -1,4 +1,4 @@
-//version 4.1.1
+//version 4.2.0
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -125,11 +125,7 @@ void loop() {
   }
 
   ///Angle adjustment///
-  robot_angle = get_robot_angle();
-  while (((PI / 18 <= robot_angle) && (robot_angle <= PI)) || ((-PI <= robot_angle) && (robot_angle <= PI / 18))) {
-        VNH_rotate(-30);
-        robot_angle = get_robot_angle();
-  }
+  angle_adjustment();
 }
 
 void defence_goal(){
@@ -289,6 +285,18 @@ void kick_ball(){
         }
       }
     }
+  }
+}
+
+void angle_adjustment(){
+  robot_angle = -1 * get_robot_angle();
+  while (((314 / 18 <= robot_angle) && (robot_angle < 4 * 314 / 5))) {
+    VNH_rotate(-30);
+    robot_angle = -1 * get_robot_angle();
+  }
+  while (((-4 * 314 / 5 < robot_angle) && (robot_angle <= -314 / 18))) {
+    VNH_rotate(30);
+    robot_angle = -1 * get_robot_angle();
   }
 }
 
