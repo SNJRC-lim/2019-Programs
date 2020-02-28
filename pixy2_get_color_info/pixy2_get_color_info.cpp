@@ -1,4 +1,4 @@
-//version 1.0
+//version 2.0
 
 #include "Arduino.h"
 #include "Pixy2.h"
@@ -27,8 +27,8 @@ float get_angle_orange() {
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float rad = atan2(y , x);
     return rad;
@@ -51,8 +51,8 @@ float get_angle_yellow() {
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float rad = atan2(y , x);
     return rad;
@@ -74,8 +74,8 @@ float get_angle_blue() {
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
     float rad = atan2(y , x);
     return rad;
@@ -96,10 +96,20 @@ float get_dist_orange(){
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
-
-    float dist = sqrt(x*x + y*y);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
+    
+    float dist0 = 2 *  sqrt(x*x + y*y);
+    float dist5 = 151- dist0;
+    float dist1 = sqrt(dist5);
+    float dist2 = 306.1862 * dist1;
+    float dist3 = 3159 - dist2;
+    float dist = dist3 /45;
+    
+    if(dist0 > 151){
+		dist = 65;
+	}
+    
     return dist;
   }
 }  
@@ -118,10 +128,19 @@ float get_dist_yellow(){
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
-    float dist = sqrt(x*x + y*y);
+    float dist0 = 2 *  sqrt(x*x + y*y);
+    float dist5 = 151- dist0;
+    float dist1 = sqrt(dist5);
+    float dist2 = 306.1862 * dist1;
+    float dist3 = 3159 - dist2;
+    float dist = dist3 /45;
+    
+    if(dist0 > 151){
+		dist = 65;
+	}
     return dist;
   }
 }  
@@ -140,10 +159,19 @@ float get_dist_blue(){
 
     int x1 = pixy.ccc.blocks[0].m_x;
     float y1 = pixy.ccc.blocks[0].m_y;
-    float x = x1 - 158.5;
-    float y = (y1 - 104.5) * (-1);
+    float x = x1 - 144.6;
+    float y = (y1 - 127.8) * (-1);
 
-    float dist = sqrt(x*x + y*y);
+    float dist0 = 2 *  sqrt(x*x + y*y);
+    float dist5 = 151- dist0;
+    float dist1 = sqrt(dist5);
+    float dist2 = 306.1862 * dist1;
+    float dist3 = 3159 - dist2;
+    float dist = dist3 /45;
+    
+    if(dist0 > 151){
+		dist = 65;
+	}
     return dist;
   }
 }  
