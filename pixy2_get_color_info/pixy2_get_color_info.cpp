@@ -17,21 +17,25 @@ int get_angle_orange(int x_offset,int y_offset) {
 	
   pixy.ccc.getBlocks();
   
-  int x1 = pixy.ccc.blocks[1].m_x;
-  int y1 = pixy.ccc.blocks[1].m_y;
-  int x = x1 - x_offset;
-  int y = (y1 - y_offset) * (-1);
+  if (pixy.ccc.numBlocks>=2){
+	int x1 = pixy.ccc.blocks[1].m_x;
+    int y1 = pixy.ccc.blocks[1].m_y;
+    int x = x1 - x_offset;
+    int y = (y1 - y_offset) * (-1);
 
-  int rad = atan2(y , x) * 100;
+    int rad = atan2(y , x) * 100;
   
-  if (rad >= 0) {
-    rad = 314 - rad;
+    if (rad >= 0) {
+      rad = 314 - rad;
+    }
+    else if (0 > rad) {
+      rad = -1 * rad - 314;
+    }
+    return rad;
   }
-  else if (0 > rad) {
-    rad = -1 * rad - 314;
-  }
-  
-  return rad;
+  else {
+	return 810;
+  }	
 }
 
 
@@ -40,21 +44,25 @@ int get_angle_yellow(int x_offset,int y_offset) {
 
   pixy.ccc.getBlocks();
 
-  int x1 = pixy.ccc.blocks[0].m_x;
-  int y1 = pixy.ccc.blocks[0].m_y;
-  int x = x1 - x_offset;
-  int y = (y1 - y_offset) * (-1);
+  if (pixy.ccc.numBlocks){
+	int x1 = pixy.ccc.blocks[0].m_x;
+    int y1 = pixy.ccc.blocks[0].m_y;
+    int x = x1 - x_offset;
+    int y = (y1 - y_offset) * (-1);
 
-  int rad = atan2(y , x) * 100;
+    int rad = atan2(y , x) * 100;
   
-  if (rad >= 0) {
-    rad = 314 - rad;
+    if (rad >= 0) {
+      rad = 314 - rad;
+    }
+    else if (0 > rad) {
+      rad = -1 * rad - 314;
+    }
+    return rad;
   }
-  else if (0 > rad) {
-    rad = -1 * rad - 314;
-  }
-  
-  return rad;
+  else {
+	return 810;
+  }	
 }
 
 ///blue angle///
@@ -62,21 +70,25 @@ int get_angle_blue(int x_offset,int y_offset) {
 
   pixy.ccc.getBlocks();
 
-  int x1 = pixy.ccc.blocks[2].m_x;
-  int y1 = pixy.ccc.blocks[2].m_y;
-  int x = x1 - x_offset;
-  int y = (y1 - y_offset) * (-1);
+  if (pixy.ccc.numBlocks){
+	int x1 = pixy.ccc.blocks[2].m_x;
+    int y1 = pixy.ccc.blocks[2].m_y;
+    int x = x1 - x_offset;
+    int y = (y1 - y_offset) * (-1);
 
-  int rad = atan2(y , x) * 100;
+    int rad = atan2(y , x) * 100;
   
-  if (rad >= 0) {
-    rad = 314 - rad;
+    if (rad >= 0) {
+      rad = 314 - rad;
+    }
+    else if (0 > rad) {
+      rad = -1 * rad - 314;
+    }
+    return rad;
   }
-  else if (0 > rad) {
-    rad = -1 * rad - 314;
-  }
-  
-  return rad;
+  else {
+	return 810;
+  }	
 }
 
 ///orange distance///
@@ -176,59 +188,77 @@ int get_dist_blue(int x_offset,int y_offset){
 int get_x_orange(int x_offset,int y_offset){
 
   pixy.ccc.getBlocks();
-  
-  int x1 = pixy.ccc.blocks[1].m_x;
-  int x = x1 - x_offset;
-  
-  return -1 * x;
+  if (pixy.ccc.numBlocks){
+	int x1 = pixy.ccc.blocks[1].m_x;
+    int x = x1 - x_offset;
+    return -1 * x;
+  }
+  else {
+	return 810;
+  }
 }
 
 int get_y_orange(int x_offset,int y_offset){
 
   pixy.ccc.getBlocks();
-
-  int y1 = pixy.ccc.blocks[1].m_y;
-  int y = (y1 - y_offset) * (-1);
-   
-  return y;
+  if (pixy.ccc.numBlocks){
+	int y1 = pixy.ccc.blocks[1].m_y;
+    int y = y1 - y_offset;
+    return -1 * y;
+  }
+  else {
+	return 810;
+  }
 }	
 
 int get_x_yellow(int x_offset,int y_offset){
 
   pixy.ccc.getBlocks();
-
-  int x1 = pixy.ccc.blocks[0].m_x;
-  int x = x1 - x_offset;
-   
-  return x;
+  if (pixy.ccc.numBlocks){
+	int x1 = pixy.ccc.blocks[0].m_x;
+    int x = x1 - x_offset;
+    return -1 * x;
+  }
+  else {
+	return 810;
+  }
 }
 
 int get_y_yellow(int x_offset,int y_offset){
 
   pixy.ccc.getBlocks();
-
-  int y1 = pixy.ccc.blocks[0].m_y;
-  int y = (y1 - y_offset) * (-1);
-   
-  return y;
+  if (pixy.ccc.numBlocks){
+	int y1 = pixy.ccc.blocks[0].m_y;
+    int y = y1 - y_offset;
+    return -1 * y;
+  }
+  else {
+	return 810;
+  }
 }
 
 int get_x_blue(int x_offset,int y_offset){
 
   pixy.ccc.getBlocks();
-
-  int x1 = pixy.ccc.blocks[2].m_x;
-  int x = x1 - x_offset;
-   
-  return x;
+  if (pixy.ccc.numBlocks){
+	int x1 = pixy.ccc.blocks[2].m_x;
+    int x = x1 - x_offset;
+    return -1 * x;
+  }
+  else {
+	return 810;
+  }
 }
 
 int get_y_blue(int x_offset,int y_offset){
 
   pixy.ccc.getBlocks();
-
-  int y1 = pixy.ccc.blocks[2].m_y;
-  int y = y1 - y_offset;
-   
-  return y;
+  if (pixy.ccc.numBlocks){
+	int y1 = pixy.ccc.blocks[2].m_y;
+    int y = y1 - y_offset;
+    return -1 * y;
+  }
+  else {
+	return 810;
+  }
 }
