@@ -44,7 +44,7 @@ SoftwareSerial mySerial(10, 11); // RX, TX
  SW_PIN は正面設定用タクトスイッチのデジタルピン番号を指定します
  */
 
-//#define __DEBUG__
+#define __DEBUG__
 /*
  シリアルプリントによるデモを有効にします
  コメントアウトで無効化します
@@ -67,6 +67,7 @@ void setup()
 {
   pinMode(SW_PIN, INPUT_PULLUP);
   pinMode(LED, OUTPUT);
+  pinMode(5,INPUT);
   /*
    ピンがGNDにスイッチされた時にアクティブになります(Active Low)
    入力モードは回路により最適なものを設定してください
@@ -82,7 +83,7 @@ void setup()
     mySerial.begin(115200);
 
   imu_init();
-  imu_attachSensorOfset(-152, -47, 125, 1522);
+  imu_attachSensorOfset(-152, -51, 131, 1511);
   /*
    Calibrationプログラムによって得られたオフセットを適用します
    コメントアウトされた"Your offsets"の後の並びとimu_attachSensorOfset()の引数を参照して
@@ -112,10 +113,11 @@ void loop()
   #ifdef __DEBUG__
     Serial.print( RAD_TO_DEG * ypr[0] );
     Serial.print( "\n" );
+    Serial.println("test");
   #endif
-  if (digitalRead(5) == 1){
+  //if (digitalRead(5) == 1){
     mySerial.write((uint8_t)(ypr[0] / PI * 128.0));
-  }
+  //}
 }
 
 void imu_init()

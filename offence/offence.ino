@@ -27,20 +27,28 @@ bool ball; //ball true or false
 
 ///angles///
 //in this program,all angle defined as RAD//
-float angle_orange;
-float angle_blue;
-float angle_yellow;
+int angle_orange;
+int angle_blue;
+int angle_yellow;
 
-float angle; //where you want to go
+int angle; //where you want to go
 
-float robot_angle;  //get from arduino pro mini , robots yaw degree
+int robot_angle;  //get from arduino pro mini , robots yaw degree
 
 ///distance///
-float dist_orange;
-float dist_blue;
-float dist_yellow;
+int dist_orange;
+int dist_blue;
+int dist_yellow;
 
-float dist_IR [4]; //get from arduino pro mini , [forward,back,right,left]
+///color info x and y axis///
+int x_orange;
+int y_orange;
+int x_yellow;
+int y_yellow;
+int x_blue;
+int y_blue;
+
+int dist_IR [4]; //get from arduino pro mini , [forward,back,right,left]
 
 ///start button///
 const int start_button = 48;
@@ -49,13 +57,13 @@ const int start_button = 48;
 const int sloenoid_FET = 47;
 
 ///ball caught sensor///
-const int ball_sensor = 41;
+const int ball_sensor = 49;
 
 ///set pixy2 x & y offset///
-/*const float x_offset = 144.6;
-const float y_offset = 127.8;*/
-const float x_offset = 151;
-const float y_offset = 130;
+/*const int x_offset = 145;
+const int y_offset = 128;*/
+const int x_offset = 151;
+const int y_offset = 130;
 //////
 
 void setup() {
@@ -131,17 +139,8 @@ void loop() {
     ball_catch();
   }
 
-  int angle_orange_tmp1 = get_angle_orange(x_offset, y_offset);
-  int angle_orange_tmp2 = get_angle_orange(x_offset, y_offset);
-  int angle_orange_tmp3 = get_angle_orange(x_offset, y_offset);
-  int angle_orange_tmp4 = get_angle_orange(x_offset, y_offset);
-
-  if (angle_orange_tmp1 == angle_orange_tmp2) {
-    if (angle_orange_tmp2 == angle_orange_tmp3) {
-      if (angle_orange_tmp3 == angle_orange_tmp4) {
-        ball_catch();
-      }
-    }
+  if (get_angle_orange() == 810) {
+    ball_catch();
   }
 
   else {

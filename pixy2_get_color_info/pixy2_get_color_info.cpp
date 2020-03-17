@@ -34,7 +34,7 @@ int get_angle_orange(int x_offset,int y_offset) {
     return rad;
   }
   else {
-	return 810;
+	  return 810;
   }	
 }
 
@@ -61,7 +61,7 @@ int get_angle_yellow(int x_offset,int y_offset) {
     return rad;
   }
   else {
-	return 810;
+	  return 810;
   }	
 }
 
@@ -87,7 +87,7 @@ int get_angle_blue(int x_offset,int y_offset) {
     return rad;
   }
   else {
-	return 810;
+	  return 810;
   }	
 }
 
@@ -194,7 +194,7 @@ int get_x_orange(int x_offset,int y_offset){
     return -1 * x;
   }
   else {
-	return 810;
+	  return 810;
   }
 }
 
@@ -207,7 +207,7 @@ int get_y_orange(int x_offset,int y_offset){
     return -1 * y;
   }
   else {
-	return 810;
+	  return 810;
   }
 }	
 
@@ -220,7 +220,7 @@ int get_x_yellow(int x_offset,int y_offset){
     return -1 * x;
   }
   else {
-	return 810;
+	  return 810;
   }
 }
 
@@ -233,7 +233,7 @@ int get_y_yellow(int x_offset,int y_offset){
     return -1 * y;
   }
   else {
-	return 810;
+	  return 810;
   }
 }
 
@@ -246,7 +246,7 @@ int get_x_blue(int x_offset,int y_offset){
     return -1 * x;
   }
   else {
-	return 810;
+	  return 810;
   }
 }
 
@@ -259,6 +259,6 @@ int get_y_blue(int x_offset,int y_offset){
     return -1 * y;
   }
   else {
-	return 810;
+	  return 810;
   }
 }
