@@ -1,28 +1,39 @@
-//version 2.0
+//version 3.0
 
 #ifndef pixy2_get_color_info_h
 #define pixy2_get_color_info_h
 
-#include "Arduino.h"
-#include "Pixy2.h"
+#include <Arduino.h>
+#include <Pixy2.h>
 
-const int sig_orange = 1;
-const int sig_yellow = 2;
-const int sig_blue = 3;
+class pixy2_info{
+	private:
+	  int sig_orange = 1;
+      int sig_yellow = 2;
+      int sig_blue = 3;
+      
+      int x_offset;
+      int y_offset;
+    
+    public:
+      pixy2_info();
+      void set_offset(int offset_x, int offset_y);
+      void attach_sig_num(int orange_sig, int yellow_sig, int blue_sig);
 
-int get_angle_orange(int x_offset,int y_offset);
-int get_angle_yellow(int x_offset,int y_offset);
-int get_angle_blue(int x_offset,int y_offset);
-/*int get_dist_orange(int x_offset,int y_offset);
-int get_dist_yellow(int x_offset,int y_offset);
-int get_dist_blue(int x_offset,int y_offset);*/
-int get_x_orange(int x_offset,int y_offset);
-int get_y_orange(int x_offset,int y_offset);
-int get_x_yellow(int x_offset,int y_offset);
-int get_y_yellow(int x_offset,int y_offset);
-int get_x_blue(int x_offset,int y_offset);
-int get_y_blue(int x_offset,int y_offset);
-
-void start_pixy2();
+	  int orange_angle();
+	  int orange_x();
+	  int orange_y();
+	  //int orange_dist();
+	  
+	  int yellow_angle();
+	  int yellow_x();
+	  int yellow_y();
+	  //int yellow_dist();
+	  
+	  int blue_angle();
+	  int blue_x();
+	  int blue_y();
+	  //int blue_dist();
+};
 
 #endif

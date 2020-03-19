@@ -1,3 +1,5 @@
+//version 1.0
+
 #include "IR_get_dist.h"
 #include "Arduino.h"
 

@@ -12,3 +12,4 @@ This is the repository that team member create the robot programs for RCJ 2019.
  - 2019/11/16 add new library "esc_control.h" and update main programs.
  - 2019/12/14 almost completed making main programs framework.
  - 2019/12/28 version up offence.ino : write about ball catch function. And update VNH_motor_driver libraly.
+ - 2020/03/19 The concept of class was introduce to some libraries.

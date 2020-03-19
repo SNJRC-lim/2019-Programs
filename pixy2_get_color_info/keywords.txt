@@ -6,14 +6,19 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-IR_dist	KEYWORD1
-IR_get_dist	KEYWORD1
+pixy2_info	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-attach_pin	KEYWORD2
-front	KEYWORD2
-right	KEYWORD2
-left	KEYWORD2
-back	KEYWORD2
+set_offset	KEYWORD2
+attach_sig_num	KEYWORD2
+orange_angle	KEYWORD2
+orange_x	KEYWORD2
+orange_y	KEYWORD2
+yellow_angle	KEYWORD2
+yellow_x	KEYWORD2
+yellow_y	KEYWORD2
+blue_angle	KEYWORD2
+blue_x	KEYWORD2
+blue_y	KEYWORD2

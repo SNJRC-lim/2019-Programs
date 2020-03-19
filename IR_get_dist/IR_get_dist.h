@@ -1,3 +1,5 @@
+//version 1.0
+
 #ifndef IR_get_dist_H
 #define IR_get_dist_H
 
