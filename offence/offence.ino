@@ -139,12 +139,12 @@ void loop() {
     ball_catch();
   }
 
-  if (get_angle_orange() == 810) {
+  if (get_angle_orange(x_offset,y_offset) == 810) {
     ball_catch();
   }
 
   else {
-    angle2 = angle / 100;
+    float angle2 = angle / 100;
     VNH_pwm(angle2, 40);
   }
    

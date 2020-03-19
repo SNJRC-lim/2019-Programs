@@ -1,0 +1,18 @@
+#######################################
+# Syntax Coloring Map VNH
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+IR_dist	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+attach_pin	KEYWORD2
+front	KEYWORD2
+right	KEYWORD2
+left	KEYWORD2
+back	KEYWORD2

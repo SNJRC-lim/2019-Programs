@@ -1,0 +1,20 @@
+#######################################
+# Syntax Coloring Map VNH
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+VNH	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+attach_pin	KEYWORD2
+motor_1	KEYWORD2
+motor_2	KEYWORD2
+motor_3	KEYWORD2
+motor_4	KEYWORD2
+pwm	KEYWORD2
+rotate	KEYWORD2

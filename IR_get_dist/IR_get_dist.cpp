@@ -1,29 +1,32 @@
-//version 0.0
+#include "IR_get_dist.h"
+#include "Arduino.h"
 
-#include <IR_get_dist.h>
+IR_dist::IR_dist(){}
 
-float get_dist1(){
-  float dist  = 26.549*pow(5.0*analogRead(A0)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A0)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A0)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A0)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A0)/1023,-1.2091);
-  float dist1 = dist / 5;
-  return dist1;
+void IR_dist::attach_pin(byte pin_front, byte pin_right, byte pin_left, byte pin_back){
+	front_pin = pin_front;
+	back_pin = pin_back;
+	right_pin = pin_right;
+	left_pin = pin_left;
 }
 
-float get_dist2(){
-  float dist  = 26.549*pow(5.0*analogRead(A1)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A1)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A1)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A1)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A1)/1023,-1.2091);
-  float dist2 = dist / 5;
-  return dist2;
+int IR_dist::front(){
+  int dist  = (26.549*pow(5.0*analogRead(front_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(front_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(front_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(front_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(front_pin)/1023,-1.2091)) * 20;
+  return dist;
 }
 
-float get_dist3(){
-  float dist  = 26.549*pow(5.0*analogRead(A2)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A2)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A2)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A2)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A2)/1023,-1.2091);
-  float dist3 = dist / 5;
-  return dist3;
+int IR_dist::right(){
+  int dist  = (26.549*pow(5.0*analogRead(right_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(right_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(right_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(right_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(right_pin)/1023,-1.2091)) * 20;
+  return dist;
 }
 
-float get_dist4(){
-  float dist  = 26.549*pow(5.0*analogRead(A3)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A3)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A3)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A3)/1023,-1.2091) + 26.549*pow(5.0*analogRead(A3)/1023,-1.2091);
-  float dist4 = dist / 5;
-  return dist4;
+int IR_dist::left(){
+  int dist  = (26.549*pow(5.0*analogRead(left_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(left_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(left_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(left_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(left_pin)/1023,-1.2091)) * 20;
+  return dist;
 }
 
+int IR_dist::back(){
+  int dist  = (26.549*pow(5.0*analogRead(back_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(back_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(back_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(back_pin)/1023,-1.2091) + 26.549*pow(5.0*analogRead(back_pin)/1023,-1.2091)) * 20;
+  return dist;
+}
 
