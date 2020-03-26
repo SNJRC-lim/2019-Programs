@@ -1,4 +1,4 @@
-//version 4.7
+//version 4.8
 
 ///library files///
 #include <FlexiTimer2.h>
@@ -49,6 +49,7 @@ const int sloenoid_FET = 47;
 const int ball_sensor = 49;
 
 //////
+int pasentage;
 
 void setup() {
   ///pin setup here///
@@ -97,6 +98,7 @@ void setup() {
   #endif 
 }
 
+
 void loop() {
  #ifdef DEBUG
   #ifdef DEBUG_Gyro_sensor
@@ -115,7 +117,6 @@ void loop() {
     Serial.println(angle_orange * 180/PI);
   #endif
  #endif
-
 
  angle_orange == get_angle_orange(); //set angle_orange
 
@@ -139,7 +140,7 @@ void loop() {
   }
 
   if (digitalRead(ball_sensor)==1){///robot has ball
-    if (digitalRead(ball_sensor)==1){　///double check
+    if (digitalRead(ball_sensor)==1){///double check
      kick_ball();
     }
   }
@@ -156,13 +157,14 @@ void loop() {
   }
 }
 
-void defence_goal(){//()
+
+void defence_goal(){// use for funcution 
   angle_orange = -1 * get_angle_orange();
-   //move until angle_orange is 17/36*PI-7/12*PI 
-  if ((0 <= angle_orange ) && (angle_orange < 17 * PI / 36)){
+   //move until angle_orange is 8*PI/18 - 10*PI/18
+  if ((0 <= angle_orange ) && (angle_orange < 8 * PI / 18)){
     angle = 0;
   }
-  else if ((7 * PI / 12 < angle_orange) && (angle_orange <= PI)){
+  else if ((10 * PI / 18 < angle_orange) && (angle_orange <= PI)){
     angle = PI;
   }
   
@@ -173,9 +175,13 @@ void defence_goal(){//()
   else if (((-PI <= angle_orange) && (angle_orange <= -3 * PI / 4))){
     angle = angle_orange + PI / 2;
   }
- 
-  VNH_pwm(angle,100);
+  
+  P_system();
+
+  VNH_pwm(angle_orange,pasentage);
+
 }
+
 
 void kick_ball(){//if can look enemy goal,kick ball 
 
@@ -256,3 +262,16 @@ void kick_ball(){//if can look enemy goal,kick ball
     FlexiTimer2::start();
   }
 }
+
+void P_system(){
+  if ((x_orange() > -100) || (x_orange() < 115)){
+    pasentage = 100;
+  }
+  if ((x_orange() > -60) || (x_orange() < 75)){
+    pasentage = 60;
+  }
+  if ((x_orange() > -40) || (x_orange() < 55)){
+    pasentage = 30;
+  }
+  
+} 
