@@ -91,8 +91,8 @@ void setup() {
   TCCR4B = (TCCR4B & 0b11111000) | 1;
 
   ///set timer interrupt///
-  FlexiTimer2::set(1, 1.0 / 7500, White_line);
-  FlexiTimer2::start();
+  /*FlexiTimer2::set(1, 1.0 / 7500, White_line);
+  FlexiTimer2::start();*/
 
   ///pixy setup///
   pixy2_info.set_offset(x_offset, y_offset);
@@ -188,7 +188,7 @@ void ball_catch() {
               angle_adjustment();
             }
 
-            angle_yellow = pixy2_info.yellow_angle();
+            /*angle_yellow = pixy2_info.yellow_angle();
 
             if ((4 / 9 * PI <= angle_yellow) && (angle_yellow <= 5 / 9 * PI)) {
               //esc_speed_down();
@@ -213,7 +213,7 @@ void ball_catch() {
 
             if ((314 / 3 <= angle_yellow) && (angle_yellow < 2 * 314 / 3)) {
               VNH.pwm(angle_yellow, 60);
-            }
+            }*/
           }
 
           if (goal == false) {
@@ -253,7 +253,7 @@ void ball_catch() {
               angle_adjustment();
             }
 
-            angle_blue = pixy2_info.blue_angle();
+            /*angle_blue = pixy2_info.blue_angle();
 
             if ((4 / 9 * PI <= angle_blue) && (angle_blue <= 5 / 9 * PI)) {
               //esc_speed_down();
@@ -279,7 +279,7 @@ void ball_catch() {
 
             if ((314 / 3 <= angle_blue) && (angle_blue < 2 * 314 / 3)) {
               VNH.pwm(angle_yellow, 60);
-            }
+            }*/
 
           }
           if ((digitalRead(ball_sensor) == 0) && (kicked == false)) {
